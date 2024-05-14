@@ -1,0 +1,99 @@
+{% extends 'web/layout.html' %}
+{% block body %}
+{% load static %}
+    <div class="doc_prof_cont">
+        <div class="doc_prof_box bx_s">
+            <div class="prof_sec_1 bx_s">
+                <div class="img_prof "><img src="{{doctor.image}}" class="bx_s"></div>
+                <div class="prof_txt_cont">
+                    <div class="name_prof"><span>Dr. {{doctor.name}}</span></div>
+                    <div class="specialities_prof">
+                        {% for s in doctor.serialize.speciality %}
+
+                            <div class="speciality_prof">{{s}}</div>
+
+                        {% endfor %}
+                        
+                    </div> 
+                    <div class="cita"><button onclick="makeDate('{{doctor.id}}')">Hacer cita</button></div>
+                    <div class="description_prof"><span>{{doctor.description}}</span></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="prof_sec_2">
+                <div class="box_prof bx_s">
+                    <h1>Clinicas:</h1><hr>
+                    {% for c in doctor.serialize.clinic %}
+                        <a href="{% url 'clinic' c %}"><div class="box_prof_clinic">{{c}}</div></a>
+                    {% endfor %}
+                </div>
+                <div class="box_prof bx_s">
+                    <h1>Seguros:</h1><hr>
+                    {% for e in ens %}
+                        <a href="{% url 'ensurance' e.id %}" title="{{e.name}}"><div class="box_prof_ens"><img  src="{{e.logo}}" height="50px"></div></a>
+                    {% endfor %}
+                </div>
+                <div class="box_prof bx_s">
+                    <h1>Horarios:</h1><hr>
+                    <div class="box_prof_cont">{{doctor.availability}}</div>
+                </div>
+                <div class="box_prof bx_s">
+                    <h1>Contactos:</h1><hr>
+                    <div>{{doctor.contact}}</div>
+                </div>
+            </div>
+            
+        </div>
+           <div tabindex="0" id="dateDiv" class="hide">
+                <div id="date_div_cont">
+                    <div id="close"><button onclick="closeDate()" class="buttonsito">X</button></div>
+                    <div style="display: flex; flex-wrap: wrap; margin-top: 10px; width: 100%; ">
+                        <div class="date_cont">
+                        <div class="calendar_header">
+                                <div id="month_html"></div>
+                                <div>
+                                    <div><button id='prev' onclick='changeMonth("prev", "{{doctor.id}}")'><p><i class="arrow left"></i></p></button></div>
+                                    <div><button id='next' onclick='changeMonth("next", "{{doctor.id}}")'><p><i class="arrow right"></i></p></button></div>
+                                </div> 
+                        </div>
+                        <div class="calendar_cont">
+                            <ul id="weekdays">
+                                <li>SUN</li>
+                                <li>MON</li>
+                                <li>TUE</li>
+                                <li>WED</li>
+                                <li>THU</li>
+                                <li>FRI</li>
+                                <li>SAT</li>
+                            </ul>
+                            <hr>
+                            <ul id="days">
+                            
+                            </ul>
+                            <div class="dayinfo">
+
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form_date" >
+                            <form action="{% url 'makedate' doctor.id%}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="date">
+                                <input type="hidden" name="clinic">
+                                <div id="info_collection">
+                                    <div style="height: 40%; width: 100%; flex-wrap: wrap; display: flex; justify-content: center;">
+                                        <div id="day"></div> 
+                                        <div class="time"><h1 id="time">Select a date</h1></div>
+                                    </div>  
+                                        <div id="sub_btn" style="display: none;"><input type="submit" value="Make the Date!" class="buttonsito"></input></div>
+                                </div>
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+           </div>
+        </div>
+    <script src="{% static 'js/profile.js' %}"></script>
+
+{% endblock %}

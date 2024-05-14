@@ -1,0 +1,9 @@
+{% extends 'web/layout.html' %}
+{% load static %}
+{% block body %}
+    <h1>{% for e in ensurance %}
+        {{e.id}}
+        {{e.username}}<br>
+        {% endfor %} </h1>  
+        {{ensurance}}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'web/layout.html' %}
+{% block body %}
+{% load static %}
+    <div class="myprof_body">
+        <div class="myprof_cont bx_s">
+            <div class="myprof_box">
+                <div class="myprof_im">
+                    <div><div class="img_myprof"><img src="{{u.profilePicture}}"  class="bx_s"></div></div>
+                    <div><h1>@{{user.username.capitalize}}</h1>  </div>    
+                    <div>   
+                        {% if u.ensurance %}
+                            {% for e in u.ensurance.all %}
+                                <a href="{% url 'ensurance' e.id %}" title="{{e.name}}">
+                                    <div class="box_prof_ens">
+                                        <img  src="{{e.logo}}" height="50px"><h5>{{e.name}}</h5>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                            <button style="color: rgb(0, 94, 255); font-weight: 700;">
+                                    <h4>Add +</h4>
+                            </button>
+                        {% else %}
+                            <button style="color: rgb(0, 94, 255); font-weight: 700;">
+                                    <h4>Add ensurance +</h4>
+                            </button>
+                        {% endif %}
+                    </div>     
+                </div>   
+                <div hidden>
+                    if qsycuanto quese yo cuanto
+                </div>
+                <br><br>
+                {% if dates %}
+                <h1>Upcoming dates:</h1>
+                <hr><br>
+                <br>
+                
+                    {% for d in dates %}
+                        <div class="upcoming_date bx_s">
+                            <!-- <div class="img_mydates"><img src="{{d.img}}" alt=""></div> -->
+                            <div style="padding-right: 40px; padding-left: 5px;">
+                                <div style="margin: 10px 0px;">
+                                    <h2>Upcoming date with <a href="">{{d.doctor}}</a></h2>
+                                </div>
+                                <div style="margin: 10px 0px;">
+                                    <h3>{{d.ren_date}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}   
+                {% endif %}
+                <br><br><br><br>
+                {% if favdoctors %}
+                <h1>Recent doctors:</h1>
+                <hr><br><br>
+                <div class="fav_doctors">
+                    
+                        {% for d in favdoctors %}
+                            <div class="fav_docs">
+                                <a href="{% url 'profile' d.id%}">
+                                    <div class="img_mydates"><img src="{{d.image}}" class="bx_s" alt=""></div>
+                                    <div><h2>Dr. {{d.name}}</h2></div>
+                                </a>
+                            </div>
+                            
+                        {% endfor %} 
+                    {% endif %}
+                </div>           
+                <br>
+            </div>    
+        </div>
+    </div>
+
+{% endblock %}

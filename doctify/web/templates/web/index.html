@@ -1,0 +1,15 @@
+{% extends 'web/layout.html' %}
+{% load static %}
+{% block body %}
+    <div class="indx_show">
+        <div class="bg_blacked">
+        <div class="indx_bg_img">
+            <div class="cont_align">
+                <div class="docty_name">Docty Plus</div>
+                <div class="docty_logo"><img src="{% static 'images/dclogo.png' %}" alt=""></div>
+                <div class="docty_sb"><a href="{% url 'search' %}"><button type="button" class="bt_findoc bx_s">Encuentra un doctor! {{pp}}</button></a></div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

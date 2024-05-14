@@ -1,0 +1,97 @@
+// RED FOR THE DESIRED TEXT
+.wrong{
+    display: flex;
+    max-width: 300px;
+    align-items: center;      
+    input{
+        box-shadow: 0px 0px 4px red;
+    }
+    h6{
+        color: red;
+    }
+}
+
+// MAKES THE SPACE FOR THE BODY OF THE DOCUMENT
+.signup_body{
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+
+// CREATES THE FORM CONTAINER
+.signup_cont{
+    width: 90%;
+    max-width: 900px;
+    min-height: 870px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+
+        input{
+            height: 40px;
+            width: 300px;
+            border-radius: 5px;
+            border: 0px;
+            padding: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            ::placeholder{
+                color: rgba(190, 114, 114, 0.156);
+                }
+            }  
+
+    }
+}
+
+// SETS THE QUALITIES OF THE TITLE
+.form_title{
+    padding: 35px;
+    span{
+        font-size: 50px;
+    }
+}
+
+// STRUCTURE FOR INPUT CONTAINERS
+.input_form{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    align-items: center;
+    padding: 15px;
+    margin: 5px 15px;
+    div{
+        max-width: 300px;
+        padding: 22px 0px ;
+    }
+    label{
+        display: flex;
+        align-items: left;
+        width: 300px;
+        font-size: 24px;
+        color: rgb(19, 19, 194);
+    }
+    input{
+        ::placeholder{
+            font-size: 24px !important;
+        }
+    }
+}
+
+// SUBMIT BUTTON 
+input[type=submit]{
+    background-color: blue;
+    color: white;
+    width: 450px !important;
+    height: 60px !important;
+    border-radius: 10px !important;
+}
+input[type=submit]:hover{
+    background-color: rgb(68, 68, 255);
+    transition: 0.8s;
+}

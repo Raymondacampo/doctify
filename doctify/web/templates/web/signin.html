@@ -1,0 +1,29 @@
+{% extends 'web/layout.html' %}
+{% block body %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'form_styles.scss' %}">
+{% endblock %}
+
+{% if message %}
+    <h1>{{message}}</h1>
+
+    <form action="{% url 'signin' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="user">
+        <input type="password" name="password" >
+        <input type="submit">
+    </form>
+{% else %}
+    <form action="{% url 'signin' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="user">
+        <input type="password" name="password" >
+        <input type="submit">
+    </form>
+{% endif %}
+<br>
+<h6>Dont have an account?</h6><a href="{% url 'signup' %}">Sign up!</a><br>
+<h6>Are you a doctor?</h6><a href="{% url 'doc_signup' %}">Sign up!</a>
+{% endblock %}

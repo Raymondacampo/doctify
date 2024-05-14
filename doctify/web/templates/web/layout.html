@@ -1,0 +1,35 @@
+{% load sass_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="{% sass_src 'style.scss' %}">
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div id="nav_bar" class="bx_s">
+            <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
+            {% if user.is_authenticated %}
+            <div>
+                <div><a href="{% url 'myuser' %}">My account</a></div><br>
+                <div><a href="{% url 'logout' %}">Log out</a></div>                
+            </div>
+                
+            {% else %}
+                <div><a href="{% url 'signin' %}">Sign In</a></div>
+            {% endif %}
+            
+        </div>
+    </header>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
