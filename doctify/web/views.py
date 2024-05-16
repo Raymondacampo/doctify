@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Speciality, Ensurance, Clinic, Doctor, Dates, ClientDates
+from .models import Speciality, Ensurance, Clinic, Doctor, Dates, ClientDates, User
 from django import forms
 from django.db import IntegrityError
 from django.http import JsonResponse
 import datetime
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 
@@ -23,7 +22,7 @@ ens_choices = [(e.id, e.name) for e in Ensurance.objects.all()]
 class createDocUser(forms.Form):
     doc_fname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your First Name', 'class':'bx_s'}))
     doc_lname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your Last Name', 'class':'bx_s'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'juanperez@email.com', 'class':'bx_s'}))    
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'juanperez@email.com', 'class':'bx_s', 'onkeyup':'reset_input_msg("email_div", "email_message")'}))    
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("password_div", "password_message")'}), min_length=8)
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("confirmation_div", "password_message")'}), min_length=8)
     phone = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'(555) 555-555', 'class':'bx_s', 'font-size':'24px'}))
@@ -81,12 +80,19 @@ def doc_signup(request):
             username = form.cleaned_data['username']
 
             if password != confirmation:
-                 return render(request, 'web/docsignup.html', {
+                return render(request, 'web/docsignup.html', {
                     'pmessage':'Passwords wont match',
                     'form':form
                 })
+
+            if clear('email', email) == True:
+                return render(request, 'web/docsignup.html', {
+                    'emessage':'Email already taken',
+                    'form':form
+                })
+
         try:
-            docUser = User.objects.create_user(username = username, first_name = fname, last_name = lname, email = email, password = password)
+            docUser = User.objects.create(username = username, first_name = fname, last_name = lname, email = email, password = password)
             login(request, docUser)
             return HttpResponseRedirect(reverse('myuser'))
             
@@ -98,6 +104,12 @@ def doc_signup(request):
             
     return render(request, 'web/docsignup.html', {
         'form': createDocUser()    })
+
+
+def clear(model_val, email):
+     if model_val == 'email':
+        if User.objects.filter(email=email).exists():
+            return True
 
 def signup(request):
     form = createUser(request.POST)

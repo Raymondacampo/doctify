@@ -18,6 +18,8 @@ class Ensurance(models.Model):
         }
 
 class User(AbstractUser):
+    profilePicture = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg')
+    email = models.EmailField(unique=True)
     pass
 
     

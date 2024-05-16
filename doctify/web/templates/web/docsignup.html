@@ -2,7 +2,7 @@
 {% load static %}
 {% load sass_tags %}
 {% block style %}
-<link rel="stylesheet" href="{% sass_src 'form_styles.scss' %}">
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
 {% endblock %}
 {% block body %}
     <div class="signup_body">
@@ -21,12 +21,21 @@
                         <label for="doc_lname">Last Name:</label>
                         {{ form.doc_lname }}
                     </div>
-
                     <div class="input_form">
-                        <label for="email">Email:</label>
-                        {{ form.email }}
+                        {% if emessage %}
+                        
+                            <div id="email_div" class="wrong">
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                                <h6 id="email_message">{{emessage}}</h6>
+                            </div>
+                        {% else %}
+                            <div>
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                            </div>
+                        {% endif %}
                     </div>
-
                     <div class="input_form">
                         <label for="phone">Phone:</label>
                         {{ form.phone }}

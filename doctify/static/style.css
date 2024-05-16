@@ -784,6 +784,7 @@ a:hover .box_prof_clinic {
 
 @media (max-width: 610px) {
   .upcoming_date {
-    min-width: 320px; } }
+    min-width: 320px;
+    pad: -moz-element(); } }
 
 /*# sourceMappingURL=style.css.map */

@@ -3,7 +3,7 @@
 {% load static %}
 {% load sass_tags %}
 {% block style %}
-<link rel="stylesheet" href="{% sass_src 'form_styles.scss' %}">
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
 {% endblock %}
 
 {% if message %}
@@ -24,6 +24,6 @@
     </form>
 {% endif %}
 <br>
-<h6>Dont have an account?</h6><a href="{% url 'signup' %}">Sign up!</a><br>
-<h6>Are you a doctor?</h6><a href="{% url 'doc_signup' %}">Sign up!</a>
+<h4>Dont have an account?</h4><a href="{% url 'signup' %}"><h3>Sign up!</h3></a><br>
+<h4>Are you a doctor?</h4><a href="{% url 'doc_signup' %}"><h3>Sign up!</h3></a>
 {% endblock %}
