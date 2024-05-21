@@ -8,7 +8,7 @@ from django.http import JsonResponse
 import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-
+from phonenumber_field.formfields import PhoneNumberField
 # Create your views here.
 
 
@@ -23,9 +23,9 @@ class createDocUser(forms.Form):
     doc_fname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your First Name', 'class':'bx_s'}))
     doc_lname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your Last Name', 'class':'bx_s'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'juanperez@email.com', 'class':'bx_s', 'onkeyup':'reset_input_msg("email_div", "email_message")'}))    
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("password_div", "password_message")'}), min_length=8)
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("confirmation_div", "password_message")'}), min_length=8)
-    phone = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'(555) 555-555', 'class':'bx_s', 'font-size':'24px'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Your Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("password_div", "password_message")'}), min_length=2)
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password', 'class':'bx_s', 'onkeyup':'reset_input_msg("confirmation_div", "password_message")'}), min_length=2)
+    phone = PhoneNumberField(region='DO', widget=forms.TextInput(attrs={'placeholder':'(809) 000-0000', 'class':'bx_s', 'font-size':'24px', 'onkeyup':'reset_input_msg("phone_div", "phone_message")'}))
     username = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your Username', 'class':'bx_s', 'onkeyup':'reset_input_msg("username_div", "username_message")'}))
     # npi = forms.CharField(max_length=10, min_length=10, widget=forms.TextInput(attrs={'placeholder':'NPI', 'class':'bx_s'}))
 
@@ -84,32 +84,49 @@ def doc_signup(request):
                     'pmessage':'Passwords wont match',
                     'form':form
                 })
+        else:
+            return render(request, 'web/docsignup.html', {
+                'phmessage':form.errors.items,
+                'form':form
+            })
 
-            if clear('email', email) == True:
+        try:
+            docUser = User.objects.create(username = username, first_name = fname, last_name = lname, email = email, phone =phone, password = password)
+            login(request, docUser)
+            return HttpResponseRedirect(reverse('myuser')) 
+        
+        except IntegrityError:
+            if clear('email', email):
                 return render(request, 'web/docsignup.html', {
                     'emessage':'Email already taken',
                     'form':form
                 })
-
-        try:
-            docUser = User.objects.create(username = username, first_name = fname, last_name = lname, email = email, password = password)
-            login(request, docUser)
-            return HttpResponseRedirect(reverse('myuser'))
-            
-        except IntegrityError:
-            return render(request, 'web/docsignup.html', {
+            if clear('phone', phone):
+                return render(request, 'web/docsignup.html', {
+                    'phmessage':'Phone number already taken',
+                    'form':form
+                })
+            if clear('username', username):
+                return render(request, 'web/docsignup.html', {
                     'umessage':'Username taken!',
                     'form':form
                 })
-            
+
     return render(request, 'web/docsignup.html', {
         'form': createDocUser()    })
 
 
-def clear(model_val, email):
-     if model_val == 'email':
-        if User.objects.filter(email=email).exists():
+def clear(model_val, att):
+    if model_val == 'email':
+        if User.objects.filter(email=att).exists():
             return True
+    elif model_val == 'phone':
+        if User.objects.filter(phone=att).exists():
+            return True
+    elif model_val == 'username':
+        if User.objects.filter(username=att).exists():
+            return True
+
 
 def signup(request):
     form = createUser(request.POST)

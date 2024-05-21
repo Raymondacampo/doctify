@@ -36,10 +36,34 @@
                             </div>
                         {% endif %}
                     </div>
+
                     <div class="input_form">
-                        <label for="phone">Phone:</label>
-                        {{ form.phone }}
+                    {% if phmessage %}
+                        <div id="phone_div" class="wrong">
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
+
+                            <h6 id="phone_message">{{phmessage}}</h6>
+                        </div>
+                    {% elif pherror %}
+                        <div id="phone_div" class="wrong">
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
+
+                            <h6 id="phone_message">
+                                {% for field, err in phmessage %}
+                                    {{err}}
+                                {% endfor %}
+                            </h6>
+                        </div>
+                    {% else %}
+                        <div>
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
+                        </div>
+                    {% endif %}
                     </div>
+
                     <div class="input_form">
                         {% if umessage %}
                             <div id="username_div" class="wrong">
@@ -85,6 +109,6 @@
             </form>
         </div>
     </div> 
-
+    {{form.as_div}}
     <script src="{% static 'js/form.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import datetime
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 class Ensurance(models.Model):
@@ -20,7 +21,7 @@ class Ensurance(models.Model):
 class User(AbstractUser):
     profilePicture = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg')
     email = models.EmailField(unique=True)
-    pass
+    phone = PhoneNumberField(null=False, blank=False, unique=True)   
 
     
 
