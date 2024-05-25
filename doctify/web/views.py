@@ -31,7 +31,10 @@ class createDocUser(forms.Form):
 
 def index(request):
     request.session['dateVal'] = []
-    return render(request, 'web/index.html')
+    speciality = Speciality.objects.all()
+    return render(request, 'web/index.html', {
+        'speciality': speciality
+    })
 
 def myuser(request):
     if request.user.is_authenticated:
@@ -86,7 +89,7 @@ def doc_signup(request):
                 })
         else:
             return render(request, 'web/docsignup.html', {
-                'phmessage':form.errors.items,
+                'pherror':form.errors.items,
                 'form':form
             })
 
@@ -364,3 +367,11 @@ def cDateArgs(docdates, doctor, nd, hours, min):
             p = len(datesDays) + 2
     
     return datesDays, takenDates, p
+
+def specialities(request):
+    specialities = Speciality.objects.all()
+    spe_list = []
+    for s in specialities:
+        s = s.serialize()
+        spe_list.append(s['name'])
+    return JsonResponse(spe_list, safe=False)

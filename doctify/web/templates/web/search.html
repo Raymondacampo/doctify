@@ -5,7 +5,10 @@
     <div class="sb_area">
         <form method="post">
         {% csrf_token %}
-            <div class="select_father bx_s">
+            <div id="select_father" class="select_father bx_s">
+                <div id="search_box"></div>
+            </div>
+           
                 <div class="shower bx_s">
                     <span>Filtros de busqueda</span>
                 </div>
@@ -75,5 +78,6 @@
 
 </section>
 
-    <script src="{% static 'js/index.js' %}"></script>
+    <!-- <script src="{% static 'js/index.js' %}"></script> -->
+    <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script>
 {% endblock %}

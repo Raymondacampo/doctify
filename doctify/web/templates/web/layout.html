@@ -10,21 +10,27 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+        </style>
     {% block style %}
     {% endblock %}
 </head>
 <body>
     <header>
-        <div id="nav_bar" class="bx_s">
-            <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
+        <div id="nav_bar" >
+            <div style="display: flex; align-items: center; width: 55%; font-weight: 600;">
+                <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
+                <div><a href="{% url 'index' %}"><span style="color: rgb(6, 6, 72); font-size: 58px; margin: 15px;">Doctify</span></a></div>
+            </div>
             {% if user.is_authenticated %}
-            <div>
+            <div class="nav_bar_txt">
                 <div><a href="{% url 'myuser' %}">My account</a></div><br>
                 <div><a href="{% url 'logout' %}">Log out</a></div>                
             </div>
                 
             {% else %}
-                <div><a href="{% url 'signin' %}">Sign In</a></div>
+                <div class="nav_bar_txt"><a href="{% url 'signin' %}">Sign In</a></div>
             {% endif %}
             
         </div>

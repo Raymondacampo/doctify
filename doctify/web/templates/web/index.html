@@ -1,15 +1,23 @@
 {% extends 'web/layout.html' %}
 {% load static %}
 {% block body %}
-    <div class="indx_show">
-        <div class="bg_blacked">
-        <div class="indx_bg_img">
-            <div class="cont_align">
-                <div class="docty_name">Docty Plus</div>
-                <div class="docty_logo"><img src="{% static 'images/dclogo.png' %}" alt=""></div>
-                <div class="docty_sb"><a href="{% url 'search' %}"><button type="button" class="bt_findoc bx_s">Encuentra un doctor! {{pp}}</button></a></div>
+    <div class="web_container">
+        
+        <div class="indx_txt_cont">
+            <span class="big_text">Si necesitas un doctor aqui lo encontraras!</span>
+        </div>
+
+        <div class="icons_cont">
+            <div class="icon i_bx_s"><img src="{% static 'images/doctorlogo.png' %}" alt=""></div>
+            <div class="index_search_cont">
+                <span class="index_go_span">Encuentra un doctor</span>
+                <div id="index_speciality_disp"></div>
+                <input type="submit" value="Go!" class="index_go_btn"></input>
             </div>
         </div>
-        </div>
     </div>
+    
+    <script src="{% static 'js/index.js' %}"></script>
+    <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script>
+
 {% endblock %}
