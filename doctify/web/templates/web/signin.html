@@ -5,25 +5,35 @@
 {% block style %}
 <link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
 {% endblock %}
-
-{% if message %}
-    <h1>{{message}}</h1>
-
-    <form action="{% url 'signin' %}" method="post">
+<div class="signup_body">
+    <div class="signup_cont bx_s">
+        <div class="form_title">
+            <span>Sign in!</span>
+        </div>
+        <form action="{% url 'signin' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="user">
-        <input type="password" name="password" >
-        <input type="submit">
-    </form>
-{% else %}
-    <form action="{% url 'signin' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="user">
-        <input type="password" name="password" >
-        <input type="submit">
-    </form>
-{% endif %}
-<br>
-<h4>Dont have an account?</h4><a href="{% url 'signup' %}"><h3>Sign up!</h3></a><br>
-<h4>Are you a doctor?</h4><a href="{% url 'doc_signup' %}"><h3>Sign up!</h3></a>
+        <div>
+            <div class="input_form">
+                <label for="user">User:</label>
+                <input type="text" name="user" class="bx_s">
+            </div>
+            <br>
+            <div class="input_form">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="bx_s">
+            </div>
+
+            <div class="submit_btn">
+                <input type="submit" value="Sign in!">
+            </div>      
+        </div>
+        </form>
+        <br>            <br>
+        <br>
+        <h4>Dont have an account?</h4><a href="{% url 'signup' %}"><h3>Sign up!</h3></a><br>
+        <h4>Are you a doctor?</h4><a href="{% url 'doc_signup' %}"><h3>Sign up!</h3></a>
+    </div>
+</div>
+
+<script type="text/babel" src="{% static 'js/signin.js' %}"></script>
 {% endblock %}

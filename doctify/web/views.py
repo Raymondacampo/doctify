@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from .models import Speciality, Ensurance, Clinic, Doctor, Dates, ClientDates, User
+# Create your views here.
+import os
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import Speciality, Ensurance, Clinic, Doctor, Dates, ClientDates, User, citiesList
 from django import forms
 from django.db import IntegrityError
 from django.http import JsonResponse
@@ -9,17 +10,16 @@ import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
-# Create your views here.
+from django.core.paginator import Paginator
+from geopy.geocoders import Nominatim
+import requests
+import json
+from django.views.decorators.csrf import csrf_exempt
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 
 class createUser(forms.Form):
-    user_name = forms.CharField(max_length=64)
-    password = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput(), min_length=8)
-    email = forms.EmailField()
-
-ens_choices = [(e.id, e.name) for e in Ensurance.objects.all()]
-class createDocUser(forms.Form):
     doc_fname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your First Name', 'class':'bx_s'}))
     doc_lname = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your Last Name', 'class':'bx_s'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'juanperez@email.com', 'class':'bx_s', 'onkeyup':'reset_input_msg("email_div", "email_message")'}))    
@@ -29,10 +29,13 @@ class createDocUser(forms.Form):
     username = forms.CharField(max_length=64, widget=forms.TextInput(attrs={'placeholder':'Your Username', 'class':'bx_s', 'onkeyup':'reset_input_msg("username_div", "username_message")'}))
     # npi = forms.CharField(max_length=10, min_length=10, widget=forms.TextInput(attrs={'placeholder':'NPI', 'class':'bx_s'}))
 
+# pages
+
 def index(request):
+    request.session['user_loc'] = []
     request.session['dateVal'] = []
     speciality = Speciality.objects.all()
-    return render(request, 'web/index.html', {
+    return render(request, 'web/prueba.html', {
         'speciality': speciality
     })
 
@@ -52,26 +55,24 @@ def myuser(request):
             })
             
     else:
-        return HttpResponseRedirect(reverse('signin'))
+        return redirect('signin')
 
 def signin(request):
     if request.method == 'POST':
-        user_n = request.POST['user']
-        passw = request.POST['password']
-        user = authenticate(username=user_n, password=passw)
-        if request.session['dateVal']:
+        data = json.loads(request.body)
+        user_name = data.get('user')
+        password = data.get('password')
+        user = authenticate(username=user_name, password=password)
+        if user:
             login(request, user)
-            return HttpResponseRedirect(reverse('makedate', args=[request.session['dateVal'][0]]))
-        if user != None:
-            login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+            return JsonResponse(True, safe=False)
         else:
-            return HttpResponseRedirect(reverse('signin'))
+            return JsonResponse([False, 'Usuario o contrasena incorrectos!'], safe=False)            
         
     return render(request, 'web/signin.html')
 
 def doc_signup(request):
-    form = createDocUser(request.POST)
+    form = createUser(request.POST)
     if request.method == 'POST':
         if form.is_valid():
             fname = form.cleaned_data['doc_fname']
@@ -95,8 +96,10 @@ def doc_signup(request):
 
         try:
             docUser = User.objects.create(username = username, first_name = fname, last_name = lname, email = email, phone =phone, password = password)
+            doctor = Doctor.objects.create(docuser = docUser, name= f'{fname} {lname}', contact = phone.national_number)
             login(request, docUser)
-            return HttpResponseRedirect(reverse('myuser')) 
+
+            return redirect('myuser')
         
         except IntegrityError:
             if clear('email', email):
@@ -116,20 +119,7 @@ def doc_signup(request):
                 })
 
     return render(request, 'web/docsignup.html', {
-        'form': createDocUser()    })
-
-
-def clear(model_val, att):
-    if model_val == 'email':
-        if User.objects.filter(email=att).exists():
-            return True
-    elif model_val == 'phone':
-        if User.objects.filter(phone=att).exists():
-            return True
-    elif model_val == 'username':
-        if User.objects.filter(username=att).exists():
-            return True
-
+        'form': createUser()    })
 
 def signup(request):
     form = createUser(request.POST)
@@ -157,35 +147,110 @@ def signup(request):
                 })
         if request.session['dateVal']:
             login(request, u)
-            return HttpResponseRedirect(reverse('makedate', args=[request.session['dateVal'][0]]))
+            return redirect('makedate', args=[request.session['dateVal'][0]])
         else:
             login(request, u)
-            return HttpResponseRedirect(reverse('index'))
+            return redirect('index')
     
     else:
         return render(request, 'web/signup.html', {
             'form': createUser()
         })
 
+
+def clear(model_val, att):
+    if model_val == 'email':
+        if User.objects.filter(email=att).exists():
+            return True
+    elif model_val == 'phone':
+        if User.objects.filter(phone=att).exists():
+            return True
+    elif model_val == 'username':
+        if User.objects.filter(username=att).exists():
+            return True
+
+
+# GOOGLE AUTH
+@csrf_exempt
+def sign_in(request):
+    return render(request, 'sign_in.html')
+
+
+@csrf_exempt
+def auth_receiver(request):
+    """
+    Google calls this URL after the user has signed in with their Google account.
+    """
+    print('Inside')
+    token = request.POST['credential']
+
+    try:
+        user_data = id_token.verify_oauth2_token(
+            token, requests.Request(), os.environ['GOOGLE_OAUTH_CLIENT_ID']
+        )
+    except ValueError:
+        return HttpResponse(status=403)
+
+    request.session['user_data'] = user_data
+
+    return redirect('sign_in')
+
+
+def sign_out(request):
+    del request.session['user_data']
+    return redirect('sign_in')
+
+
+
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return redirect('index')
 
 def search(request):
-    specialities = Speciality.objects.order_by('speciality')
-    ensurance = Ensurance.objects.all()
-    clinic = Clinic.objects.all()
-    return render(request, "web/search.html",{
-        'speciality':specialities,
-        'ensurance':ensurance,
-        'clinic':clinic
-    })
+    if request.method == 'POST':
+        request.session['speciality_val'] = request.GET.get('speciality')
+    else:
+        return render(request, "web/search.html")
+    
+def searchInfo(request):
+    if request.method == 'POST':
+        request.session['speciality_val'] = request.GET.get('speciality')
+        return JsonResponse(request.session['speciality_val'], safe=False)
+    else:
+        return JsonResponse(request.session['speciality_val'], safe=False)
+
+
+
+def locateUser(request):
+    if request.session['user_loc']:
+        return JsonResponse(request.session['user_loc'], safe=False)
+    
+    else:
+        latitude = request.GET.get('lat')
+        longitude = request.GET.get('lon')
+        coords = f'{latitude} , {longitude}'
+
+        geolocator = Nominatim(user_agent="doctify")
+        location = geolocator.reverse(coords)
+        address = location.raw['address']
+        request.session['user_loc'] = address['state']
+
+    return JsonResponse(request.session['user_loc'], safe=False)
+
+
+# functions   
 
 def profile(request, doctor_id):
+    request.session['docId'] = doctor_id
     doc = Doctor.objects.get(pk=doctor_id)
+    try:
+        docdates = Dates.objects.get(doctor=doc)
+    except:
+        docdates = None
     return render(request, "web/profile.html", {
         'doctor': doc,
-        'ens': doc.ensurance.all().values()
+        'ens': doc.ensurance.all().values(),
+        'docDates': docdates
         })
 
 def returnSearch(match, model):
@@ -199,55 +264,74 @@ def returnSearch(match, model):
     return(lista)
 
 def doctor(request):
-    speco = request.GET.get('speco')
-    enseco = request.GET.get('enseco')
-    clineco = request.GET.get('clineco')
+    speciality = request.GET.get('speciality')
+    if not speciality:
+        speciality = request.session['speciality_val']
+    else:
+        request.session['speciality_val'] = speciality
+
+
+    ensurance = request.GET.get('ensurance')
+    clinic = request.GET.get('clinic')
+    city = request.GET.get('city')
+    page = int(request.GET.get('page'))
     
-    if speco != 'speciality':
-        spec = Speciality.objects.get(pk = int(speco))
+    if speciality != 'All':
+        speciality = Speciality.objects.get(speciality = speciality)
     else:
-        spec = None
+        speciality = None
 
-    if enseco != 'ensurance':
-        ens = Ensurance.objects.get(pk = int(enseco))
+    if ensurance != 'All':
+        ensurance = Ensurance.objects.get(name = ensurance)
     else:
-        ens = None
+        ensurance = None
 
-    if clineco != 'clinic':
-        clin = Clinic.objects.get(pk = int(clineco))
+    if clinic != 'All':
+        clinic = Clinic.objects.get(name = clinic)
     else:
-        clin = None
+        clinic = None
 
-    pp =[]
+    if city == 'All':
+        city = None
 
-    if spec != None and ens != None and clin != None:
-        doctores = Doctor.objects.filter(speciality = spec, ensurance = ens, clinic = clin)
-    elif spec and ens:
-        doctores = Doctor.objects.filter(speciality = spec, ensurance = ens)    
-    elif spec and clin:
-        doctores = Doctor.objects.filter(speciality = spec, clinic = clin)
-    elif ens and clin:
-        doctores = Doctor.objects.filter(ensurance = ens, clinic = clin)
-    elif spec:
-        doctores = Doctor.objects.filter(speciality = spec)
-    elif ens:
-        doctores = Doctor.objects.filter(ensurance = ens)
-    elif clin:
-        doctores = Doctor.objects.filter(clinic = clin)
+    docList =[]
+
+    if speciality != None and ensurance != None and clinic != None and city != None:
+        doctores = Doctor.objects.filter(speciality = speciality, ensurance = ensurance, clinic = clinic)
+    elif speciality and ensurance:
+        doctores = Doctor.objects.filter(speciality = speciality, ensurance = ensurance)    
+    elif speciality and clinic:
+        doctores = Doctor.objects.filter(speciality = speciality, clinic = clinic)
+    elif ensurance and clinic:
+        doctores = Doctor.objects.filter(ensurance = ensurance, clinic = clinic)
+    elif speciality:
+        doctores = Doctor.objects.filter(speciality = speciality)
+    elif ensurance:
+        doctores = Doctor.objects.filter(ensurance = ensurance)
+    elif clinic:
+        doctores = Doctor.objects.filter(clinic = clinic)
     else:
         doctores = Doctor.objects.all()
 
+    p = Paginator(doctores, 10)
+    currentPage = p.page(page)
+    next = currentPage.has_next()
+    prev = currentPage.has_previous()
 
-    for doc in doctores:
+    for doc in currentPage.object_list:
         doc = doc.serialize()
-        pp.append(doc)
+        if city != None:
+            if city in doc['city']:
+                docList.append(doc)
+        else:
+            docList.append(doc)
 
-    return JsonResponse(pp, safe=False)
+    return JsonResponse([docList, p.num_pages, f'{currentPage}', next, prev], safe=False)
 
 def ensurance(request, ens_id):
-    ensi = Ensurance.objects.get(pk=int(ens_id))
+    ens_object = Ensurance.objects.get(pk=ens_id)
     return render(request, 'web/ensurance.html', {
-        'ensurance': ensi
+        'ensurance': ens_object
     })
 
 def clinic(request, clin_name):
@@ -256,7 +340,7 @@ def clinic(request, clin_name):
     })
 
 def daysOn(request):
-    user_id = request.GET.get('doctor')
+    user_id = request.session['docId']
     doctor = Doctor.objects.get(pk = user_id)
     horario = Dates.objects.filter(doctor = doctor)
     doc_schedule = []
@@ -269,7 +353,7 @@ def daysOn(request):
     else:
         return JsonResponse(None, safe=False)
     
-def docDates(request, doc_id):
+# def docDates(request, doc_id):
     doc = Doctor.objects.get(pk=doc_id)
     dates = ClientDates.objects.filter(doctor=doc)
     dates_list = []
@@ -279,11 +363,61 @@ def docDates(request, doc_id):
 
     return JsonResponse(dates_list, safe=False)
 
+def daySchedule(request):
+    date = request.GET.get('date')
+
+    doctor = Doctor.objects.get(pk=int(request.session['docId']))
+    takenDocDates = ClientDates.objects.filter(doctor=doctor, date=date)
+    dateObj = Dates.objects.get(doctor = doctor)
+
+    schedule = []
+    takenHours = []
+
+    if takenDocDates:
+        for date in takenDocDates:
+            takenHours.append(f'{date.serialize()["time"]}')
+
+        if takenHours:        
+            for i in dateObj.serialize()['hours']:
+                if i not in takenHours:
+                    schedule.append(i)
+    else:
+        for i in dateObj.serialize()['hours']:
+            schedule.append(i)
+
+    return JsonResponse([dateObj.serialize()['clinic'], schedule], safe=False)
+
 weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
+def makeDate(request):
+    date = request.GET.get('date')
+    time = request.GET.get('time')
+    clinic = request.GET.get('clinic')
+    clinic = Clinic.objects.get(name = clinic)
+    doc = Doctor.objects.get(pk=request.session['docId'])
+    takenDates = ClientDates.objects.filter(doctor=doc, date=date, time=time)
 
-def makeDate(request, doc_id):
-    doc = Doctor.objects.get(pk=doc_id)
+    if request.user.is_authenticated:
+        u = request.user
+        if takenDates:
+            return JsonResponse([False, f'This date is occupied'], safe=False)
+        else:
+            try:
+                newdate = ClientDates.objects.create(doctor=doc, clinic=clinic, date=date,time=time, client=u)
+                msgDate = f'Date with {doc} created!'
+                strDate = f'{newdate.serialize()["date"]}'
+                strTime = f'{newdate.serialize()["time"]}'
+
+                return JsonResponse([True, msgDate, strDate, strTime], safe=False)
+            except:
+                return JsonResponse([False, 'wak waaaak'], safe=False)
+    else:
+        return redirect('signin')
+
+    
+
+def makeDates(request):
+    doc = Doctor.objects.get(pk=request.session['docId'])
     docdates = Dates.objects.filter(doctor=doc)
     if request.method =='POST':
         date = request.POST['date']
@@ -339,8 +473,6 @@ def makeDate(request, doc_id):
             ClientDates.objects.create(doctor=doc, clinic=clinic, date=newdate, client=request.user)
             return HttpResponse(f'YES {newdate}')
 
-
-
 def cDateArgs(docdates, doctor, nd, hours, min):
     datesDays=[]
     takenDates = []
@@ -375,3 +507,26 @@ def specialities(request):
         s = s.serialize()
         spe_list.append(s['name'])
     return JsonResponse(spe_list, safe=False)
+
+def ensurances(request):
+    ensurances = Ensurance.objects.all()
+    ens_list = []
+    for e in ensurances:
+        e = e.serialize()
+        ens_list.append(e['name'])
+    return JsonResponse(ens_list, safe=False)
+
+def clinics(request):
+    
+    clinics = Clinic.objects.all()
+    cli_list = []
+    for s in clinics:
+        s = s.serialize()
+        cli_list.append(s['name'])
+    return JsonResponse(cli_list, safe=False)
+
+def cities(request):
+    citiesSet = []
+    for city in citiesList:
+        citiesSet.append(city[0])
+    return JsonResponse(citiesSet, safe=False)

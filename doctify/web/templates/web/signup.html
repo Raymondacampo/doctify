@@ -1,20 +1,113 @@
 {% extends 'web/layout.html' %}
-{% block body %}
 {% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="signup_body">
+        <div class="signup_cont bx_s">
+            <div class="form_title">
+                <span>Sign up here!</span>
+            </div>
+            <form action="{% url 'doc_signup' %}" method="post">
+            {%csrf_token %}
+                <div style="padding: 0;">
+                    <div class="input_form mx_w">
+                        <label for="doc_fname">First Name:</label>
+                        {{ form.doc_fname }}
+                    </div>
+                    <div class="input_form mx_w">
+                        <label for="doc_lname">Last Name:</label>
+                        {{ form.doc_lname }}
+                    </div>
+                    <div class="input_form mx_w">
+                        {% if emessage %}
+                        
+                            <div id="email_div" class="wrong mx_w">
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                                <h6 id="email_message">{{emessage}}</h6>
+                            </div>
+                        {% else %}
+                            <div class="mx_w">
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                            </div>
+                        {% endif %}
+                    </div>
 
-{% if message %}
-    <h1>{{message}}</h1>
-{% endif %}
+                    <div class="input_form mx_w">
+                    {% if phmessage %}
+                        <div id="phone_div" class="wrong">
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
 
-<form action="{% url 'signup' %}" method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit">
-    <!-- <input type="text" name="user" placeholder="Username">
-    <input type="text" name="mail" placeholder="Mail">
-    <input type="password" name="password" placeholder="Password">
-    <input type="password" name="password2" placeholder="Confirm Password">
-    <input type="submit"> -->
-</form>
+                            <h6 id="phone_message">{{phmessage}}</h6>
+                        </div>
+                    {% elif pherror %}
+                        <div id="phone_div" class="wrong">
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
 
+                            <h6 id="phone_message">
+                                {% for field, err in phmessage %}
+                                    {{err}}
+                                {% endfor %}
+                            </h6>
+                        </div>
+                    {% else %}
+                        <div>
+                            <label for="phone">Phone:</label>
+                            {{ form.phone }}
+                        </div>
+                    {% endif %}
+                    </div>
+
+                    <div class="input_form">
+                        {% if umessage %}
+                            <div id="username_div" class="wrong upc">
+                                <label for="username">Username:</label>
+                                {{ form.username }}
+                                <h6 id="username_message">{{umessage}}</h6>
+                            </div>
+                        {% else %}
+                        <div class="upc">
+                            <label for="username">Username:</label>
+                            {{ form.username }}
+                        </div>
+                        {% endif %}
+
+                        {% if pmessage %}
+                            <div id="password_div" class="wrong upc">
+                                <label for="password">Password:</label>
+                                {{ form.password }}
+                            </div>
+                            <div id="confirmation_div" class="wrong upc">
+                                <label for="password2">Confirm Password:</label>
+                                {{ form.password2 }}
+                                <h6 id="password_message">{{pmessage}}</h6>
+                            </div>
+                        {% else %}
+                            <div class="upc">
+                                <label for="password">Password:</label>
+                                {{ form.password }}
+                            </div>
+                            <div class="upc">
+                                <label for="password2">Confirm Password:</label>
+                                {{ form.password2 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <br>
+                    <div class="submit_btn">
+                        <input type="submit">
+                    </div>          
+                    
+                </div>
+            </form>
+        </div>
+    </div> 
+    <script src="{% static 'js/form.js' %}"></script>
 {% endblock %}

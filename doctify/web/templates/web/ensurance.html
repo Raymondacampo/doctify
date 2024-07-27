@@ -1,9 +1,10 @@
 {% extends 'web/layout.html' %}
 {% load static %}
 {% block body %}
-    <h1>{% for e in ensurance %}
-        {{e.id}}
-        {{e.username}}<br>
-        {% endfor %} </h1>  
-        {{ensurance}}
+<h2>Universit‌é &#xe1; de Moncton</h2>
+<h1>{% for e in ensurance %}
+    <h5>{{e}}</h5>
+    {% endfor %}
+</h1>
+
 {% endblock %}

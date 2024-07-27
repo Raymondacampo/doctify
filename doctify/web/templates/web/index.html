@@ -1,23 +1,31 @@
 {% extends 'web/layout.html' %}
+{% load sass_tags %}
 {% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/index.scss' %}">
+{% endblock %}
 {% block body %}
     <div class="web_container">
         
         <div class="indx_txt_cont">
-            <span class="big_text">Si necesitas un doctor aqui lo encontraras!</span>
+            <span class="big_text">{{loc}}</span>
         </div>
 
         <div class="icons_cont">
             <div class="icon i_bx_s"><img src="{% static 'images/doctorlogo.png' %}" alt=""></div>
-            <div class="index_search_cont">
-                <span class="index_go_span">Encuentra un doctor</span>
-                <div id="index_speciality_disp"></div>
-                <input type="submit" value="Go!" class="index_go_btn"></input>
-            </div>
+            <form action="{% url 'search' %}" method="post">
+                {% csrf_token %}
+                <div id="indx_search_cont" class="indx_search_cont">    
+                    <span class="index_go_span">Encuentra un doctor</span>
+
+                    <div id="indx_speciality_cont" class="index_speciality_disp"></div>
+
+                    <a href="{% url 'search' %}"  id="go_btn" class="index_go_btn">Go!</a>
+                </div>
+            </form>
         </div>
     </div>
     
-    <script src="{% static 'js/index.js' %}"></script>
     <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script>
 
 {% endblock %}

@@ -13,31 +13,31 @@
             <form action="{% url 'doc_signup' %}" method="post">
             {%csrf_token %}
                 <div style="padding: 0;">
-                    <div class="input_form">
+                    <div class="input_form mx_w">
                         <label for="doc_fname">First Name:</label>
                         {{ form.doc_fname }}
                     </div>
-                    <div class="input_form">
+                    <div class="input_form mx_w">
                         <label for="doc_lname">Last Name:</label>
                         {{ form.doc_lname }}
                     </div>
-                    <div class="input_form">
+                    <div class="input_form mx_w">
                         {% if emessage %}
                         
-                            <div id="email_div" class="wrong">
+                            <div id="email_div" class="wrong mx_w">
                                 <label for="email">Email:</label>
                                 {{ form.email }}
                                 <h6 id="email_message">{{emessage}}</h6>
                             </div>
                         {% else %}
-                            <div>
+                            <div class="mx_w">
                                 <label for="email">Email:</label>
                                 {{ form.email }}
                             </div>
                         {% endif %}
                     </div>
 
-                    <div class="input_form">
+                    <div class="input_form mx_w">
                     {% if phmessage %}
                         <div id="phone_div" class="wrong">
                             <label for="phone">Phone:</label>
@@ -66,34 +66,34 @@
 
                     <div class="input_form">
                         {% if umessage %}
-                            <div id="username_div" class="wrong">
+                            <div id="username_div" class="wrong upc">
                                 <label for="username">Username:</label>
                                 {{ form.username }}
                                 <h6 id="username_message">{{umessage}}</h6>
                             </div>
                         {% else %}
-                        <div>
+                        <div class="upc">
                             <label for="username">Username:</label>
                             {{ form.username }}
                         </div>
                         {% endif %}
 
                         {% if pmessage %}
-                            <div id="password_div" class="wrong">
+                            <div id="password_div" class="wrong upc">
                                 <label for="password">Password:</label>
                                 {{ form.password }}
                             </div>
-                            <div id="confirmation_div" class="wrong">
+                            <div id="confirmation_div" class="wrong upc">
                                 <label for="password2">Confirm Password:</label>
                                 {{ form.password2 }}
                                 <h6 id="password_message">{{pmessage}}</h6>
                             </div>
                         {% else %}
-                            <div >
+                            <div class="upc">
                                 <label for="password">Password:</label>
                                 {{ form.password }}
                             </div>
-                            <div >
+                            <div class="upc">
                                 <label for="password2">Confirm Password:</label>
                                 {{ form.password2 }}
                             </div>
@@ -109,6 +109,5 @@
             </form>
         </div>
     </div> 
-    {{form.as_div}}
     <script src="{% static 'js/form.js' %}"></script>
 {% endblock %}

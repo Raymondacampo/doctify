@@ -1,83 +1,17 @@
 {% extends 'web/layout.html' %}
-{% block body %}
 {% load static %}
-<section>
-    <div class="sb_area">
-        <form method="post">
-        {% csrf_token %}
-            <div id="select_father" class="select_father bx_s">
-                <div id="search_box"></div>
-            </div>
-           
-                <div class="shower bx_s">
-                    <span>Filtros de busqueda</span>
-                </div>
-                <div class="select_flex">
-                    <!-- SPECIALITIES -->
-                    <div  class="select_container" >
-                        <div class="align_h">
-                            <h2>Especialidad</h2>
-                            <input type="button" autocomplete="off" class="select_sb bt na" id="speciality_bt" onclick ="show('speciality')" value="Elegir especialidad"></input>
-                        </div>
-                        <div id="speciality_disp" class="spe_disp">
-                            <div class="shadow">
-                                <div><input type="textbox" autocomplete="off" class="select_sb tb" id="speciality_tb"  onkeyup="displayChoices('speciality')"  value="Elegir especialidad"></div>
-                                <div class="spe_cont" id="listspeciality" >
-                                    {% for s in speciality %}
-                                    <button type="button" id="speciality_button" onclick="displayDoc('speciality', '{{s.id}}', '{{s.speciality}}')">{{s.speciality}}</button>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                        <!-- ENSURANCE -->
-                    <div  class="select_container">
-                        <div class="align_h">
-                            <h2>Seguro</h2>
-                        <input type="button" autocomplete="off" class="select_sb bt na" id="ensurance_bt" onclick="show('ensurance')" value="Elegir seguro"></input>
-                        </div>
-                        <div id="ensurance_disp" class="spe_disp">
-                            <div class="shadow">
-                                <div><input type="textbox" autocomplete="off" class="select_sb tb" id="ensurance_tb"  onkeyup="displayChoices('ensurance')"  value="Elegir seguro"></div>
-                                <div class="spe_cont" id="listensurance">
-                                        <button type="button" id="ensurance_button" onclick="displayDoc('ensurance', 'ensurance', 'Sin seguro')">Sin seguro</button>
-                                        {% for e in ensurance %}
-                                        <button type="button" class="hoverbut" id="ensurance_button" onclick="displayDoc('ensurance', '{{e.id}}', '{{e.name}}, {{e.plan}}')">{{e.name}}, {{e.plan}}</button>
-                                        {% endfor %}
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-
-                        <!-- CLINIC -->
-                    <div  class="select_container">
-                        <div class="align_h">
-                            <h2>Clinica</h2>
-                            <input type="button"  autocomplete="off" class="select_sb bt na" id="clinic_bt" onclick="show('clinic')" value="Elegir centro"></input>
-                        </div>
-                        <div id="clinic_disp" class="spe_disp">
-                            <div class="shadow">
-                                <div><input type="textbox" autocomplete="off" class="select_sb tb" id="clinic_tb"  onkeyup="displayChoices('clinic')"  value="Elegir clinica"></div>
-                                <div class="spe_cont" id="listclinic">
-                                        {% for c in clinic %}
-                                        <button type="button" id="clinic_button" onclick="displayDoc('clinic', '{{c.id}}', '{{c.name}}')">{{c.name}}</button>
-                                        {% endfor %}
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </form>
-        <div id="doctors_container" class="bx_s">
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/search.scss' %}">
+{% endblock %}
+{% block body %}
+<div id="searches">
+    <div class="bg" >
+        <div class="everything" >
+            <div id="filters" class="filters"></div>
         </div>
-    </div>
+    </div>    
+</div>
+<script type="text/babel" src="{% static 'js/search_react.js' %}"></script>
 
-</section>
-
-    <!-- <script src="{% static 'js/index.js' %}"></script> -->
-    <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,10 @@
 {% extends 'web/layout.html' %}
 {% block body %}
 {% load static %}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/profile.scss' %}">
+{% endblock %}
     <div class="doc_prof_cont">
         <div class="doc_prof_box bx_s">
             <div class="prof_sec_1 bx_s">
@@ -15,33 +19,49 @@
                         {% endfor %}
                         
                     </div> 
-                    <div class="cita"><button onclick="makeDate('{{doctor.id}}')">Hacer cita</button></div>
+
+                    {% if docDates %}
+                    <div id="date_btn_cont"></div>    
+                    {% endif %}
+                    
                     <div class="description_prof"><span>{{doctor.description}}</span></div>
                 </div>
             </div>
             <br>
             <br>
-            <div class="prof_sec_2">
-                <div class="box_prof bx_s">
-                    <h1>Clinicas:</h1><hr>
-                    {% for c in doctor.serialize.clinic %}
-                        <a href="{% url 'clinic' c %}"><div class="box_prof_clinic">{{c}}</div></a>
-                    {% endfor %}
-                </div>
-                <div class="box_prof bx_s">
-                    <h1>Seguros:</h1><hr>
-                    {% for e in ens %}
-                        <a href="{% url 'ensurance' e.id %}" title="{{e.name}}"><div class="box_prof_ens"><img  src="{{e.logo}}" height="50px"></div></a>
-                    {% endfor %}
-                </div>
-                <div class="box_prof bx_s">
-                    <h1>Horarios:</h1><hr>
-                    <div class="box_prof_cont">{{doctor.availability}}</div>
-                </div>
-                <div class="box_prof bx_s">
-                    <h1>Contactos:</h1><hr>
-                    <div>{{doctor.contact}}</div>
-                </div>
+            <div id="sec2" class="prof_sec_2">
+                {% if doctor.serialize.clinic %}
+                    <div class="box_prof bx_s">
+                        <h3>Clinicas:</h3><hr>
+                        {% for c in doctor.serialize.clinic %}
+                            <div class="box_prof_clinic"><a href="{% url 'clinic' c %}">{{c}}</a></div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if ens %}
+                    <div class="box_prof bx_s">
+                        <h3>Seguros:</h3><hr>
+                        {% for e in ens %}
+                            <div class="box_prof_ens"><a href="{% url 'ensurance' e.id %}" title="{{e.name}}"><img  src="{{e.logo}}" height="50px"></a></div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if doctor.availability %}
+                    <div class="box_prof bx_s">
+                        <h3>Horarios:</h3><hr>
+                        <div class="box_prof_cont">
+                            {% for a in doctor.availability %}
+                                <h2>{{a}}</h2>
+                            {% endfor %}
+                        </div>
+                    </div>  
+                {% endif %}
+                {% if doctor.contact %}
+                    <div class="box_prof bx_s">
+                        <h3>Contactos:</h3><hr>
+                        <div>{{doctor.contact}}</div>
+                    </div>
+                {% endif %}
             </div>
             
         </div>
@@ -94,6 +114,6 @@
                 </div>
            </div>
         </div>
-    <script src="{% static 'js/profile.js' %}"></script>
+    <script type="text/babel" src="{% static 'js/profilereact.js' %}"></script>
 
 {% endblock %}

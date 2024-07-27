@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -19,23 +19,37 @@
 <body>
     <header>
         <div id="nav_bar" >
-            <div style="display: flex; align-items: center; width: 55%; font-weight: 600;">
+            <div class="logo_container">
                 <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
-                <div><a href="{% url 'index' %}"><span style="color: rgb(6, 6, 72); font-size: 58px; margin: 15px;">Doctify</span></a></div>
+                <div class="nav_name"><a href="{% url 'index' %}"><span>Doctify</span></a></div>
             </div>
-            {% if user.is_authenticated %}
-            <div class="nav_bar_txt">
-                <div><a href="{% url 'myuser' %}">My account</a></div><br>
-                <div><a href="{% url 'logout' %}">Log out</a></div>                
-            </div>
-                
-            {% else %}
-                <div class="nav_bar_txt"><a href="{% url 'signin' %}">Sign In</a></div>
-            {% endif %}
             
+            <div id="signin_div">
+                {% if user.is_authenticated %}
+                    <div class="nav_bar_txt">
+                        <div><button><a href="{% url 'myuser' %}">My account</a></button></div><br>
+                        <div><button><a href="{% url 'logout' %}">Log out</a></button></div>                
+                    </div>
+                {% else %}
+                <form method="post" action="{% url 'signin' %}"></form>
+                    <div class="nav_bar_txt">
+                        <button id="signinbtn">Sign In</button>
+                    </div>
+                {% endif %}   
+            </div>
+            <div class="navbarbtn_cont">
+                <div id="nav_bar_btn" ></div>
+            </div>
+            
+
         </div>
     </header>
+    
+        <div id="signin" ></div>
+    </form>
     {% block body %}
     {% endblock %}
+    <script type="text/babel" src="{% static 'js/signinbtn.js' %}"></script>
+    <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
 </body>
 </html>
