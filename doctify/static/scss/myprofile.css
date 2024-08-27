@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background-color: white;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto; }
+  .container .profile_picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto; }
+    .container .profile_picture img {
+      height: 200px;
+      border-radius: 100px; }
+  .container .ensurance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; }
+    .container .ensurance img {
+      height: 30px; }
+
+/*# sourceMappingURL=myprofile.css.map */

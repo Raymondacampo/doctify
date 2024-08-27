@@ -1,0 +1,321 @@
+* {
+  margin: 0px;
+  padding: 0px; }
+
+a {
+  text-decoration: none;
+  color: black; }
+
+body {
+  font-family: sans-serif;
+  font-weight: 500;
+  background-color: rgba(194, 205, 255, 0.13); }
+
+.show {
+  display: block; }
+
+.hide {
+  display: none; }
+
+button {
+  all: unset;
+  cursor: pointer;
+  text-align: center; }
+
+input[type="submit"]:hover {
+  cursor: pointer; }
+
+.bx_s {
+  box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.275); }
+
+.inv {
+  display: none; }
+
+.arrow {
+  margin-left: 5px;
+  margin-bottom: 2px;
+  border: solid #23237e;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 7px; }
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg); }
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); }
+
+#nav_bar {
+  display: flex;
+  align-items: center;
+  height: 10dvh;
+  min-height: 90px; }
+  #nav_bar .logo_container {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin: auto; }
+  #nav_bar #signin_div {
+    margin: auto;
+    z-index: 1000; }
+    #nav_bar #signin_div .nav_bar_txt {
+      display: flex;
+      align-items: center; }
+      #nav_bar #signin_div .nav_bar_txt button {
+        font-weight: 600;
+        margin: 0px 10px;
+        padding: 12px;
+        background-color: #23237e;
+        color: white;
+        border-radius: 15px; }
+      #nav_bar #signin_div .nav_bar_txt a {
+        color: white; }
+        #nav_bar #signin_div .nav_bar_txt a img {
+          border-radius: 50px;
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.282); }
+  #nav_bar .nav_name a span {
+    color: #060648;
+    font-size: 40px;
+    margin: 10px; }
+  #nav_bar .nav_logo {
+    height: 65px;
+    width: 65px; }
+    #nav_bar .nav_logo img {
+      height: 65px;
+      filter: brightness(75%); }
+    #nav_bar .nav_logo img:hover {
+      height: 68px;
+      transition: 0.5s; }
+
+.signin_div {
+  position: absolute;
+  height: 100dvh;
+  width: 100dvw;
+  top: 0px;
+  left: 0px;
+  background: rgba(255, 255, 255, 0.065);
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+  animation-name: show_signin;
+  animation-duration: 0.8s; }
+  .signin_div .signin {
+    width: clamp(300px, 85dvw, 450px);
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin: auto;
+    animation-name: lowing_div;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards; }
+    .signin_div .signin .close {
+      display: flex;
+      justify-content: flex-end; }
+    .signin_div .signin h1 {
+      text-align: center; }
+    .signin_div .signin a {
+      font-size: 15px;
+      color: darkblue;
+      font-weight: 600; }
+    .signin_div .signin .input_form {
+      margin: auto;
+      width: 60%;
+      margin-top: 20px;
+      font-size: 22px;
+      color: #060648; }
+      .signin_div .signin .input_form label {
+        font-weight: 600; }
+      .signin_div .signin .input_form input {
+        height: 30px;
+        font-size: 18px;
+        width: 100%;
+        border: none;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.267);
+        border-radius: 5px;
+        padding: 5px; }
+      .signin_div .signin .input_form input::placeholder {
+        font-size: 16px; }
+    .signin_div .signin .submit_btn {
+      width: 225px;
+      margin: auto;
+      margin-top: 40px; }
+      .signin_div .signin .submit_btn input {
+        border: none;
+        margin: auto;
+        padding: 10px;
+        border-radius: 15px;
+        background-color: #23237e;
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+        width: 100%; }
+
+.messages {
+  display: flex;
+  justify-content: center; }
+  .messages span {
+    list-style: none;
+    color: red;
+    font-weight: 600;
+    text-align: center;
+    font-size: 15px; }
+
+.extra_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; }
+  .extra_container button {
+    padding: 5px; }
+
+.google_form {
+  width: clamp(225px, 15dvw, 200px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fafafa;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.195); }
+
+.google_form:hover {
+  transition: 1s;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.403); }
+
+.password_reset_div {
+  margin: 20px;
+  width: clamp(320px, 400px, 400px);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fbfbfb;
+  padding: 25px;
+  margin-top: 20px; }
+  .password_reset_div ul li {
+    list-style: none;
+    color: red;
+    font-weight: 600;
+    text-align: center;
+    font-size: 15px; }
+  .password_reset_div p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    text-align: center; }
+    .password_reset_div p label {
+      font-size: 22px;
+      margin-right: 5px; }
+    .password_reset_div p input {
+      height: 4dvh;
+      border-radius: 5px;
+      width: clamp(250px, 10dvw, 300px);
+      border: none;
+      box-shadow: 1px 1px 5px rgba(6, 6, 6, 0.232);
+      padding: 5px;
+      font-size: 16px; }
+    .password_reset_div p input[type=checkbox] {
+      width: auto !important;
+      height: auto !important; }
+    .password_reset_div p button {
+      padding: 15px;
+      background-color: #23237e;
+      color: white;
+      border-radius: 15px;
+      font-size: 18px; }
+    .password_reset_div p a {
+      font-size: 15px;
+      color: darkblue;
+      font-weight: 600; }
+
+.password_reset_done_div {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center; }
+
+@keyframes lowing_div {
+  0% {
+    margin-top: -50dvh; }
+  100% {
+    margin-top: 25dvh; } }
+
+@keyframes show_signin {
+  0% {
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px); }
+  100% {
+    background: rgba(255, 255, 255, 0.065);
+    backdrop-filter: blur(5px); } }
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s; }
+
+.change {
+  cursor: pointer; }
+
+/* Rotate first bar */
+.change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg); }
+
+/* Fade out the second bar */
+.change .bar2 {
+  opacity: 0; }
+
+/* Rotate last bar */
+.change .bar3 {
+  transform: translate(0, -11px) rotate(45deg); }
+
+@media (max-width: 900px) {
+  #nav_bar {
+    height: 10dvh; }
+  .input_form {
+    width: 100% !important; }
+  #signin_div {
+    position: absolute;
+    top: 88px;
+    width: 100%;
+    height: 90dvh;
+    background-color: rgba(0, 0, 0, 0.241);
+    backdrop-filter: blur(5px);
+    text-align: center; }
+    #signin_div .nav_bar_txt {
+      background-color: #eef1ff;
+      z-index: 2;
+      display: flex;
+      flex-direction: column; }
+      #signin_div .nav_bar_txt button {
+        animation-name: displaymenubutton;
+        animation-duration: 0.5s;
+        background-color: inherit !important;
+        color: black !important;
+        padding: 50px !important; }
+  @keyframes displaymenubutton {
+    0% {
+      font-size: 4px; }
+    100% {
+      font-size: 16px; } }
+    #signin_div button {
+      padding: 50px; }
+    #signin_div a {
+      padding: 50px; }
+  .navbarbtn_cont {
+    margin: auto; }
+    .navbarbtn_cont #nav_bar_btn {
+      display: inline-block !important;
+      cursor: pointer; }
+  .index_go_btn {
+    width: 20% !important; }
+  .big_text {
+    font-size: 44px; }
+  .btn_list {
+    height: 100%; } }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,31 @@
+city,lat,lng,country,iso2,admin_name,capital,population,population_proper
+Santiago,19.4572,-70.6889,Dominican Republic,DO,Cibao Norte,admin,1343423,1343423
+Santo Domingo,18.4667,-69.9500,Dominican Republic,DO,Ozama,primary,1128678,1128678
+Santo Domingo Este,18.4855,-69.8734,Dominican Republic,DO,Ozama,admin,948855,948855
+Puerto Plata,19.8000,-70.6833,Dominican Republic,DO,Cibao Norte,minor,318419,318419
+Los Alcarrizos,18.5167,-70.0167,Dominican Republic,DO,Ozama,,272776,272776
+Higüey,18.6167,-68.7000,Dominican Republic,DO,Yuma,minor,251243,251243
+San Cristóbal,18.4167,-70.1056,Dominican Republic,DO,Valdesia,admin,232769,232769
+La Vega,19.2200,-70.5300,Dominican Republic,DO,Cibao Sur,admin,220279,220279
+San Pedro de Macorís,18.4500,-69.3000,Dominican Republic,DO,Higuamo,admin,195307,195307
+San Francisco de Macorís,19.3000,-70.2500,Dominican Republic,DO,Cibao Nordeste,admin,188118,188118
+Bávaro,18.7167,-68.4500,Dominican Republic,DO,Yuma,,150000,150000
+Baní,18.2900,-70.3300,Dominican Republic,DO,Valdesia,minor,145595,145595
+Boca Chica,18.4539,-69.6064,Dominican Republic,DO,Ozama,,142019,142019
+La Romana,18.4300,-68.9700,Dominican Republic,DO,Yuma,admin,139671,139671
+Pantanal,18.5333,-68.3667,Dominican Republic,DO,Yuma,,138919,138919
+San Juan,18.8100,-71.2300,Dominican Republic,DO,El Valle,admin,132177,132177
+Gurabo al Medio,19.4739,-70.6727,Dominican Republic,DO,Cibao Norte,,126668,126668
+Bonao,18.9500,-70.4100,Dominican Republic,DO,Cibao Sur,minor,125338,125338
+Bajos de Haina,18.4167,-70.0333,Dominican Republic,DO,Valdesia,,124193,124193
+Los Minas,18.5000,-69.9833,Dominican Republic,DO,Ozama,,104846,104846
+Barahona,18.2000,-71.1000,Dominican Republic,DO,Enriquillo,admin,83619,83619
+Mao,19.5667,-71.0833,Dominican Republic,DO,Cibao Noroeste,admin,76863,76863
+Consuelito,18.5600,-69.3000,Dominican Republic,DO,Higuamo,,60000,60000
+San Luis,18.5500,-69.7000,Dominican Republic,DO,Ozama,,56933,56933
+Tamboril,19.4800,-70.6000,Dominican Republic,DO,Cibao Norte,,51695,51695
+Puñal,19.4000,-70.6167,Dominican Republic,DO,Cibao Norte,,46516,46516
+Villa Bisonó,19.5600,-70.8700,Dominican Republic,DO,Cibao Norte,,42092,42092
+San Gregorio de Nigua,18.3833,-70.0833,Dominican Republic,DO,Valdesia,,30268,30268
+Nizao,18.2441,-70.1984,Dominican Republic,DO,Valdesia,,27028,27028
+Licey al Medio,19.4300,-70.6200,Dominican Republic,DO,Cibao Norte,,25539,25539

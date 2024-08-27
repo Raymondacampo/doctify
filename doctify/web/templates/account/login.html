@@ -1,0 +1,26 @@
+{% extends 'web/layout.html' %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block body %}
+
+<div class="password_reset_div bx_s">
+    <h1>Sign in</h1>
+        {% element form form=form method="post" action=login_url tags="entrance,login" %}
+                {% slot body %}
+                    {% csrf_token %}
+                        {% element fields form=form unlabeled=True %}
+                        {% endelement %}
+                {% endslot %}
+                
+                {% slot actions %}
+                <p>
+                    {% element button type="submit" tags="prominent,login" %}
+                        {% trans "Sign In" %}
+                    {% endelement %}
+                </p>
+                {% endslot %}
+                
+        {% endelement %}
+</div>
+{% endblock %}
