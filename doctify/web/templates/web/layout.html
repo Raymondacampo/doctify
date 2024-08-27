@@ -13,22 +13,25 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
         </style>
+        <script src="https://accounts.google.com/gsi/client" async></script>
     {% block style %}
     {% endblock %}
 </head>
 <body>
     <header>
-        <div id="nav_bar" >
+        <div id="nav_bar">
             <div class="logo_container">
                 <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
                 <div class="nav_name"><a href="{% url 'index' %}"><span>Doctify</span></a></div>
             </div>
             
-            <div id="signin_div">
+            <div id="signin_div" style="display: none;">
                 {% if user.is_authenticated %}
                     <div class="nav_bar_txt">
-                        <div><button><a href="{% url 'myuser' %}">My account</a></button></div><br>
-                        <div><button><a href="{% url 'logout' %}">Log out</a></button></div>                
+                        <div><a href="{% url 'myuser' %}"><img src="{{ user.image }}" height="50px"></a></div><br>
+                        <a href="{% url 'logout' %}" method="post">
+                            <div><button type="submit">Log out</button></div>  
+                        </a>              
                     </div>
                 {% else %}
                 <form method="post" action="{% url 'signin' %}"></form>
@@ -45,10 +48,11 @@
         </div>
     </header>
     
-        <div id="signin" ></div>
+        <div id="signin">{% csrf_token %}</div>
     </form>
     {% block body %}
     {% endblock %}
+    
     <script type="text/babel" src="{% static 'js/signinbtn.js' %}"></script>
     <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
 </body>

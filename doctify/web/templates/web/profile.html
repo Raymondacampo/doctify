@@ -1,119 +1,92 @@
 {% extends 'web/layout.html' %}
-{% block body %}
 {% load static %}
 {% load sass_tags %}
 {% block style %}
     <link rel="stylesheet" href="{% sass_src 'scss/profile.scss' %}">
 {% endblock %}
-    <div class="doc_prof_cont">
-        <div class="doc_prof_box bx_s">
-            <div class="prof_sec_1 bx_s">
-                <div class="img_prof "><img src="{{doctor.image}}" class="bx_s"></div>
-                <div class="prof_txt_cont">
-                    <div class="name_prof"><span>Dr. {{doctor.name}}</span></div>
-                    <div class="specialities_prof">
-                        {% for s in doctor.serialize.speciality %}
-
-                            <div class="speciality_prof">{{s}}</div>
-
-                        {% endfor %}
-                        
-                    </div> 
-
-                    {% if docDates %}
-                    <div id="date_btn_cont"></div>    
-                    {% endif %}
-                    
-                    <div class="description_prof"><span>{{doctor.description}}</span></div>
-                </div>
+{% block body %}
+    <div class="profile_container">
+        <div class="doc_info_1">
+            <div class="image_div">
+                <img src="{{doctor.image}}" alt="">
             </div>
-            <br>
-            <br>
-            <div id="sec2" class="prof_sec_2">
-                {% if doctor.serialize.clinic %}
-                    <div class="box_prof bx_s">
-                        <h3>Clinicas:</h3><hr>
-                        {% for c in doctor.serialize.clinic %}
-                            <div class="box_prof_clinic"><a href="{% url 'clinic' c %}">{{c}}</a></div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                {% if ens %}
-                    <div class="box_prof bx_s">
-                        <h3>Seguros:</h3><hr>
-                        {% for e in ens %}
-                            <div class="box_prof_ens"><a href="{% url 'ensurance' e.id %}" title="{{e.name}}"><img  src="{{e.logo}}" height="50px"></a></div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                {% if doctor.availability %}
-                    <div class="box_prof bx_s">
-                        <h3>Horarios:</h3><hr>
-                        <div class="box_prof_cont">
-                            {% for a in doctor.availability %}
-                                <h2>{{a}}</h2>
+            <div class="info_div">
+                <h2>{{doctor.name}}</h2> 
+                <div class="aligment">
+                    <div class="aligment_div" >
+                        <div class="specialities">
+                            {% for s in doctor.speciality %}
+                                <span>{{s}}</span>
                             {% endfor %}
                         </div>
-                    </div>  
-                {% endif %}
-                {% if doctor.contact %}
-                    <div class="box_prof bx_s">
-                        <h3>Contactos:</h3><hr>
-                        <div>{{doctor.contact}}</div>
+                        <div class="cities">
+                            {% for c in doctor.city%}
+                                <div class="city">{{c}}<div class='pin'></div></div>
+                            {% endfor %}                        
+                        </div>                          
                     </div>
-                {% endif %}
-            </div>
-            
-        </div>
-           <div tabindex="0" id="dateDiv" class="hide">
-                <div id="date_div_cont">
-                    <div id="close"><button onclick="closeDate()" class="buttonsito">X</button></div>
-                    <div style="display: flex; flex-wrap: wrap; margin-top: 10px; width: 100%; ">
-                        <div class="date_cont">
-                        <div class="calendar_header">
-                                <div id="month_html"></div>
-                                <div>
-                                    <div><button id='prev' onclick='changeMonth("prev", "{{doctor.id}}")'><p><i class="arrow left"></i></p></button></div>
-                                    <div><button id='next' onclick='changeMonth("next", "{{doctor.id}}")'><p><i class="arrow right"></i></p></button></div>
-                                </div> 
-                        </div>
-                        <div class="calendar_cont">
-                            <ul id="weekdays">
-                                <li>SUN</li>
-                                <li>MON</li>
-                                <li>TUE</li>
-                                <li>WED</li>
-                                <li>THU</li>
-                                <li>FRI</li>
-                                <li>SAT</li>
-                            </ul>
-                            <hr>
-                            <ul id="days">
-                            
-                            </ul>
-                            <div class="dayinfo">
-
-                            </div>
-                        </div>
-                        </div>
-                        <div class="form_date" >
-                            <form action="{% url 'makedate' doctor.id%}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="date">
-                                <input type="hidden" name="clinic">
-                                <div id="info_collection">
-                                    <div style="height: 40%; width: 100%; flex-wrap: wrap; display: flex; justify-content: center;">
-                                        <div id="day"></div> 
-                                        <div class="time"><h1 id="time">Select a date</h1></div>
-                                    </div>  
-                                        <div id="sub_btn" style="display: none;"><input type="submit" value="Make the Date!" class="buttonsito"></input></div>
-                                </div>
-                            </form>
+                  
+                </div>               
+                <hr>
+                <div class="info">
+                    <div class="contact">  
+                        {% if docDates %}
+                            <div id="date_btn_cont"></div> 
+                        {% endif %}
+                        <div style="display: flex; gap: 10px;">
+                            <div class="number">&#9990; {{doctor.number}}</div>
+                            <div class="chat"><a href="https://wa.me/18098660266"><img src="{% static 'images/whatsapp-logo-icon.webp' %}" height="40px">Whatsapp</a></div>
                         </div> 
+                        
                     </div>
+                        
                 </div>
-           </div>
+            </div>
+            </div>
+        <div class="doc_info_2">
+            <div class="doc_info_left">
+                {% if ens %}
+                <div class="ensurances_div">
+                    <h2>Seguros</h2>
+                    <hr>
+                    <div class="ensurances">
+                        {% for e in ens %}
+                            {% if e.logo %}
+                                <div class="ensurance"><a href="{% url 'ensurancebyid' e.id %}" title="{{e.name}}"><img src="{{e.logo}}" height="50px"><span>{{e.name}}</span></a></div>
+                            {% else %}
+                                <div class="ensurance"><a href="{% url 'ensurancebyid' e.id %}" title="{{e.name}}"><h4>{{e.name}}</h4></a></div>
+                            {% endif %}
+                        {% endfor %}                        
+                    </div>
+                </div>      
+                {% endif %}
+
+                <div class="description_div">
+                    <div><h2>Descripcion del doctor</h2><hr></div>
+                    <div class="desc"><p id="doc_description">{{doctor.description}}</p></div>
+
+                </div>   
+       
+            </div>
+            <div class="doc_info_right">
+                    <h2>Clinicas</h2>
+                    <hr>
+                    <div class="clinics">
+                        {% for c in clinics %}
+                        <div class="clinic">
+                            <div style="display: flex; gap: 5px;"><img src="{% static 'images/clinic_icon.png' %}" height="18px"></img><h3>{{c.name}} </h3></div>
+                            <span>{{c.phone}}</span>
+                            {% if c.map %}
+                                <iframe src="{{c.map}}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            {% endif %}                            
+                        </div>
+
+                        {% endfor %}
+                    </div>
+            </div>
         </div>
+    </div>
+        
     <script type="text/babel" src="{% static 'js/profilereact.js' %}"></script>
 
 {% endblock %}

@@ -48,9 +48,22 @@ class Ensurance(models.Model):
 class User(AbstractUser):
     profilePicture = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg')
     email = models.EmailField(unique=True)
-    phone = PhoneNumberField(null=False, blank=False, unique=True)   
+    phone = PhoneNumberField(null=True, blank=True, unique=True)   
+    image = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg', blank=True)
+    ensurance = models.ManyToManyField(Ensurance)
 
-    
+    def serialize(self):
+        return{
+            'profile_picture': self.profilePicture,
+            'email': self.email,     
+            'phone': self.phone,
+            'image': self.image,
+            'ensurance': self.ensurance.all()            
+        }
+
+            
+        
+
 
 
 class Speciality(models.Model):
@@ -71,7 +84,8 @@ class Clinic(models.Model):
     adress = models.CharField(max_length=500)
     ensurance = models.ManyToManyField(Ensurance, blank=True, related_name="clinics")
     contact = models.CharField(max_length=100)
-
+    map = models.CharField(max_length=500, default='hola')
+    phone = PhoneNumberField(null=True, blank=True) 
     def __str__(self):
         return f"{self.name}"
     
@@ -86,6 +100,7 @@ class Clinic(models.Model):
 class Doctor(models.Model):
     docuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='doctor')
     name = models.CharField(max_length=64, default='popo')
+    gender = models.CharField(choices=(('male', 'male'), ('female', 'female')), default='male', max_length=6)
     speciality = models.ManyToManyField(Speciality, blank=True, related_name="doctors")
     clinic = models.ManyToManyField(Clinic, blank=True,  related_name="doctors")
     availability = models.CharField(max_length=500, blank=True)
@@ -93,25 +108,37 @@ class Doctor(models.Model):
     ensurance = models.ManyToManyField(Ensurance, blank=True, related_name='doctors')
     city = MultiSelectField(choices=citiesList, max_choices=3, max_length=64, default='Santo Domingo')
     image = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg', blank=True)
-    description = models.CharField(max_length=400, blank=True)
+    description = models.CharField(max_length=1000, blank=True)
 
     def __str__(self):
         return f"{self.name}"
     
 
+        
     def serialize(self):
+        def get_gender():
+            if self.gender == 'male':
+                return f'Dr. {self.name}'
+            else:
+                return f'Dra. {self.name}'
         return{
             'id':self.id,
-            'name':self.name,
-            'speciality':[f' {s.speciality} ' for s in self.speciality.all()],
+            'name': get_gender(),
+            'gender': self.gender,
+            'speciality':[s.speciality for s in self.speciality.all()],
             'image':self.image,
             'clinic':[c.name for c in self.clinic.all()],
             'ensurance':[e.name for e in self.ensurance.all()],
             'city': [c for c in self.city],
             'logo':[e.logo for e in self.ensurance.all()],
             'description': self.description,
-            'link': f'/{self.id}/profile'
+            'link': f'/{self.id}/profile',
+            'number': f'{self.docuser.phone}',
+            'description_length': len(self.description),
+            'map': [c.map for c in self.clinic.all()],
+            'ensurance_logo': [e.logo for e in self.ensurance.all()]
         }
+
     
 daysToPick = (
     (0, 'Sunday'),

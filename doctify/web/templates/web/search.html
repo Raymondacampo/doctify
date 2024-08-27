@@ -3,15 +3,9 @@
 {% load sass_tags %}
 {% block style %}
     <link rel="stylesheet" href="{% sass_src 'scss/search.scss' %}">
+    <link rel="stylesheet" href="{% sass_src 'scss/index.scss' %}">
 {% endblock %}
 {% block body %}
-<div id="searches">
-    <div class="bg" >
-        <div class="everything" >
-            <div id="filters" class="filters"></div>
-        </div>
-    </div>    
-</div>
-<script type="text/babel" src="{% static 'js/search_react.js' %}"></script>
-
+<div id="searches" class="searches"></div>
+<script type="text/babel" src="{% static 'js/search.js' %}"></script>
 {% endblock %}

@@ -1,20 +1,43 @@
 {% extends 'web/layout.html' %}
-{% block body %}
 {% load static %}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/myprofile.scss' %}">
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="profile_picture"><img src="{{u.profile_picture}}" ><h2>@{{user.username.capitalize}}</h2></div>
+        <div class="ensurance">
+            {% if u.ensurance %}
+                {% for e in u.ensurance.all %}
+                    <div class="box_prof_ens">
+                        <img  src="{{e.logo}}" height="50px">
+                    </div>
+                {% endfor %}
+                <button style="color: rgb(0, 162, 255); font-weight: 700;">
+                        <h4>Add +</h4>
+                </button>
+            {% else %}
+                <button style="color: rgb(0, 94, 255); font-weight: 700;">
+                        <h4>Add ensurance +</h4>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+<!-- 
     <div class="myprof_body">
         <div class="myprof_cont bx_s">
             <div class="myprof_box">
                 <div class="myprof_im">
                     <div><div class="img_myprof"><img src="{{u.profilePicture}}"  class="bx_s"></div></div>
-                    <div><h1>@{{user.username.capitalize}}</h1>  </div>    
+                    <div>  </div>    
                     <div>   
                         {% if u.ensurance %}
                             {% for e in u.ensurance.all %}
-                                <a href="{% url 'ensurance' e.id %}" title="{{e.name}}">
-                                    <div class="box_prof_ens">
-                                        <img  src="{{e.logo}}" height="50px"><h5>{{e.name}}</h5>
-                                    </div>
-                                </a>
+                                <div class="box_prof_ens">
+                                    <img  src="{{e.logo}}" height="50px"><h5>{{e.name}}</h5>
+                                </div>
                             {% endfor %}
                             <button style="color: rgb(0, 94, 255); font-weight: 700;">
                                     <h4>Add +</h4>
@@ -26,6 +49,10 @@
                         {% endif %}
                     </div>     
                 </div>   
+                <div>
+                    
+                    change username
+                </div>
                 <div hidden>
                     if qsycuanto quese yo cuanto
                 </div>
@@ -70,6 +97,6 @@
                 <br>
             </div>    
         </div>
-    </div>
+    </div> -->
 
 {% endblock %}

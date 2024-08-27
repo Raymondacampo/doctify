@@ -1,7 +1,6 @@
 const {useEffect} = React;  
 const {useRef} = React;  
-let currVal = 'Busca la especialidad que deseas...';
-let selection;
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -17,105 +16,130 @@ function getCookie(name) {
     }
     return cookieValue;
 };
-function App(stat){
+function App(){
+    // CREATES EACH ONE OF THE SEARCHBARS 
+    function SearchBars(type){
+        let divRef = useRef();
+        let listRef = useRef();
 
-    let btnref = useRef();
+        let [searchStarted, setSearchStarted] = React.useState(false)
+        let [sbValue, setSbValue] = React.useState(type.name)
+        let [tempValue, setTemp] = React.useState()
 
-    // FUNC FUNC FUNC
-    function Items_button(val){
-        val = val.val;
-        return(
-            <button id='selection' value={val} name='selection' className='search_btn' type='button' onMouseDown={() => {show()}}> {val}</button>
-        )
-    }
+        let [submitValues, setSubmitValues] = React.useState({
+            speciality: null,
+            city: null
+        })
 
-    // FUNC FUNC FUNC
-    function Items_list(data){
-        let temporaryList = data.temporaryList;
-        let lista = data.lista;
-        return(<div key={stat} className='option_cont' >
-                    <div className='items_txtbx'><input type='text' autoFocus onKeyUp={() => {ejecucion(event, lista)}}></input></div>
-                    <div className='option_list'>{temporaryList.map((l) => <button type='button' key={l} onClick={() => {choosedOption(l)}}className='item_btn'>{l}</button>)}</div>
-                </div>                
-        )}
+        let [list, setList] = React.useState({
+            temporary: [],
+            permanent: []
+        })
 
-
-    useEffect(() => {
-        let handler = (e) => {
-            navigator.geolocation.getCurrentPosition(success, error);
-        
-            const error = () => {
-                console.log('hola');
+        // get UserLocation
+        function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(success)
+            } else { 
+              let locationMessage = "Geolocation is not supported by this browser.";
             }
-
-            async function success(position){
-                const currentCity = await fetch(`locateUser?lat=${position.coords.latitude}&lon=${position.coords.longitude}`).then(response => response.json());
-            }
-
-            if(!btnref.current.contains(e.target)){
-               cambioBoton({
-                boton1: <Items_button val={currVal}/>
-               });
-            };
-            
-        };
-        document.addEventListener('mousedown', handler);
-        
-    }, []);
-
-
-    const [boton, cambioBoton] = React.useState({
-        boton1: <Items_button  val={currVal}/>
-        });
-
-    // FUNCTION SHOW LIST OF SPECIALITIES
-    async function show(){
-        let list;
-        if(stat.name == 'specialities'){
-            const items_cont = await fetch('specialities').then(response => response.json());
-            list = items_cont;
-            };
-            cambioBoton({
-                boton1: <Items_list lista={list} temporaryList={list}/>
-            });
-        };
-    
-        // FUNCTION TO SET THE SELECTED SPECIALITY
-        function choosedOption(t){
-            fetch(`searchInfo?speciality=${t}`, {
-                method: 'POST',
-                headers: {'X-CSRFToken': csrftoken}
-            });
-            currVal = t;
-            selection = t;
-            cambioBoton({
-                boton1: <Items_button val={t}/>
-            });
+          }
+        //   RUNS WHEN USER LOCATION
+        async function success(position){
+            const currentCity = await fetch(`locateUser?lat=${position.coords.latitude}&lon=${position.coords.longitude}`).then(response => response.json());
+            setSbValue(currentCity)
+            console.log(currentCity)
         }
 
-        // FUNC FUNC FUNC
-        function ejecucion(event, dataList){
-            let list = [];
-            if((event.target.value).length > 0){
-                let e = event.target.value;
-                dataList.map((p) => {if(p.toLowerCase().includes(e.toLowerCase())){
-                    list.push(p)}
-                });
-            cambioBoton({
-                boton1: <Items_list lista={dataList} temporaryList={list}/>
-            }) ;
-            }else{
-                show();
-            }};
+        // AUTOSETS THE CURRENT CITY VALUE
+        // DETECTS CLICK EVENT
+        useEffect(() => {  
+            // CITY VALUE
+            if(type.name =='city' && navigator.geolocation){
+                getLocation();
+            }
+            // CLICK EVENT
+            let handler = (e) => {
+                if (!divRef.current.contains(e.target)){
+                    listRef.current.className = 'closedListDiv'
+                    setTemp('')
+                    setSearchStarted(false)
 
+                }else {
+                    setTemp('')
+                    getList();
+                    setSearchStarted(true)  
+                    listRef.current.className = 'listDiv'
+                }
+            };
 
+            // GET THE LIST OF OPTIONS
+            async function getList(){
+                const resultList = await fetch(`${type.name}`).then(response => response.json())
+                setList({
+                    temporary: resultList,
+                    permanent: resultList
+                })
+            }
 
+            document.addEventListener('click', handler);
+        }, []);
+
+        // SEARCH WHILE TYPING
+        function keyup(event){
+            setTemp(event.target.value)
+            let functionList = []
+            for(let i = 0; i < list.permanent.length; i++){
+                if(list.permanent[i].toLowerCase().includes(event.target.value.toLowerCase())){
+                    functionList.push(list.permanent[i])
+                }
+            }
+
+            setList({
+                ...list,
+                temporary: functionList
+            })
+        }
+
+        // STOAGES THE DESIRED DATA WHEN CLICKED
+        function choosed(q){
+            fetch(`/search`,
+            {
+                method: 'POST',
+                headers: {'X-CSRFToken': csrftoken},
+                body: JSON.stringify({
+                    spec: [type.name, q]
+                 })
+            })
+            setSearchStarted(false)
+            setSbValue(q)
+            setTemp('')
+            
+        }
+
+        // RENDERS
+        return(
+            <div ref={divRef}>
+                <input type='text' placeholder={sbValue == 'speciality' ? 'Especialidad' : sbValue} value={tempValue} name={type.name} autoComplete='off' onChange ={keyup} id='searchBarer' className={searchStarted ? 'sb_border_on i_bx_s' : 'sb_border_off i_bx_s'}></input>
+                <div className='closedListDiv' ref={listRef}>
+                    {searchStarted && (list.temporary.length != 0 ? <ul>{list.temporary.map((l) => <li><button type='submit' onClick={() =>choosed(l)}>{l}</button></li>)}</ul> : <ul><li className='noResultList'>No results</li></ul>)}
+                </div>
+            </div>
+        )
+
+    }             
+    
     return(
-        <div ref={btnref} className='btn_list indx_search_list'>
-            {boton.boton1}
+        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '10px'}}>
+            <div className='sbDiv'>
+                <SearchBars name='speciality'/>
+                <SearchBars name='city'/>
+            </div>
+            <div class="search_btn">
+                <a href="search"><button type="button" className="i_bx_s">Buscar doctor!</button></a>
+            </div>
         </div>
-
     )
 }
     
-ReactDOM.render(<App name='specialities'/>, document.querySelector('#indx_speciality_cont'));
+ReactDOM.render(<App/>, document.querySelector('#indx_search_cont'));
