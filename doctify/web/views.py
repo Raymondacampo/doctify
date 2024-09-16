@@ -45,6 +45,28 @@ def index(request):
         'speciality': speciality
     })
 
+def redirect_page(request):
+    if not request.session['curr_page']:
+        request.session['curr_page'] = 'index' 
+
+    return redirect(request.session['curr_page'])
+
+# USER PAGES
+
+def dates(request):
+    dates = ClientDates.objects.filter(client = request.user)
+    return render(request, 'myaccount/dates.html',{
+        'dates': dates
+    })
+
+def recent_doctors(request):
+        return render(request, 'myaccount/recent_doctors.html')
+
+
+def configurate(request):
+        return render(request, 'myaccount/configuration.html')
+
+
 @login_required(login_url='/accounts/login/')
 def myuser(request):
     if request.user.is_authenticated:
@@ -65,12 +87,50 @@ def myuser(request):
     else:
         return redirect('signin')
 
-def redirect_page(request):
-    if not request.session['curr_page']:
-        request.session['curr_page'] = 'index' 
+@login_required(login_url='/accounts/login/')
+def add_ensurance(request, ens_id):
+    user = request.user
+    try:
+        ens = Ensurance.objects.get(pk=ens_id)
+        user.ensurance.add(ens)
+        return redirect(myuser)
 
-    return redirect(request.session['curr_page'])
+    except:
+        return redirect(myuser)
+    
+@login_required(login_url='/accounts/login/')
+def remove_ensurance(request, ens_id):
+    user = request.user
+    try:
+        ens = Ensurance.objects.get(pk=ens_id)
+        user.ensurance.remove(ens)
+        return redirect(myuser)
 
+    except:
+        return redirect(myuser)
+
+@login_required(login_url='/accounts/login/')
+def mydates(request):
+    dates = ClientDates.objects.filter(client = request.user)
+    activelist = []
+    unactivelist = []
+    for d in dates:
+        d = d.serialize()
+        if d['isactive']:
+            activelist.append(d)
+        else:
+            unactivelist.append(d)
+
+    return JsonResponse([activelist, unactivelist], safe=False)
+
+@login_required(login_url='/accounts/login/')
+def favdoctors(request):
+    docs = ClientDates.objects.filter(user = request.user)
+    return JsonResponse('docs', safe=False)
+
+
+
+# ACCOUNT CREATIONS
 def signin(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -187,6 +247,8 @@ def clear(model_val, att):
             return True
 
 
+# use pages
+
 def search(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -248,6 +310,8 @@ def profile(request, doctor_id):
         'clinics': doc.clinic.all().values(),
         'docDates': docdates
         })
+
+
 
 def returnSearch(match, model):
     lista = []
@@ -350,7 +414,7 @@ def doctor(request):
 def ensurance(request, ens_id):
     ens_object = Ensurance.objects.get(pk=ens_id)
     return render(request, 'web/ensurance.html', {
-        'ensurance': ens_object
+        'ensurance': ens_object.serialize()
     })
 
 def clinic(request, clin_name):
@@ -433,7 +497,10 @@ def makeDate(request):
     else:
         return redirect('signin')
 
-    
+def canceldate(request, date_id):
+    date = ClientDates.objects.get(pk=int(date_id)) 
+    date.delete()
+    return redirect(dates)
 
 def makeDates(request):
     doc = Doctor.objects.get(pk=request.session['docId'])
@@ -529,11 +596,26 @@ def specialities(request):
 
 def ensurances(request):
     ensurances = Ensurance.objects.all()
-    ens_list = ['All']
-    for e in ensurances:
-        e = e.serialize()
-        ens_list.append(e['name'])
-    return JsonResponse(ens_list, safe=False)
+
+    if request.GET.get('type'):
+        ens_list = []
+        my_ens_list = []
+        for e in ensurances:
+            if e not in request.user.ensurance.all(): 
+                e = e.serialize()
+                ens_list.append(e)
+            else:
+                e = e.serialize()
+                my_ens_list.append(e)
+        return JsonResponse([ens_list, my_ens_list], safe=False)
+    else:
+        
+        ens_list = ['All']
+        for e in ensurances:
+            e = e.serialize()
+            ens_list.append(e['name'])
+        
+        return JsonResponse(ens_list, safe=False)
 
 def clinics(request):
     

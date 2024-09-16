@@ -171,18 +171,17 @@
           flex-wrap: wrap;
           gap: 10px; }
           .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 0px 10px;
             display: flex;
             justify-content: center;
             align-items: center; }
             .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance img {
-              height: 30px; }
-            .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance a {
-              display: flex;
-              flex-direction: column;
-              align-items: center; }
-              .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance a span {
-                font-size: 12px; }
+              height: 50px; }
+            .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance span {
+              font-size: 12px; }
     .profile_container .doc_info_2 .doc_info_right {
       width: 35%; }
       .profile_container .doc_info_2 .doc_info_right .clinics {
@@ -421,8 +420,8 @@ a:hover .box_prof_clinic {
   width: 100dvw;
   top: 0px;
   left: 0px;
-  background: rgba(255, 255, 255, 0.065);
-  z-index: 2;
+  background-color: rgba(117, 117, 117, 0.238);
+  z-index: 1000;
   backdrop-filter: blur(5px); }
 
 .dates_div {

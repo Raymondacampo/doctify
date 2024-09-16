@@ -220,17 +220,16 @@ $mobileWidth: 320px;
                     flex-wrap: wrap;
                     gap: 10px;
                     .ensurance{
-                        img{
-                            height: 30px;
-                        }
-                        a{
                             display: flex;
                             flex-direction: column;
-                            align-items: center;
-                            span{
-                                font-size: 12px;
-                            }
+                            align-items: center;                        
+                        img{
+                            height: 50px;
                         }
+                        span{
+                            font-size: 12px;
+                        }
+                        
                         padding: 0px 10px;
                         display: flex;
                         justify-content: center;
@@ -560,8 +559,8 @@ a:hover{
     width: 100dvw;
     top: 0px;
     left: 0px;
-    background: rgba(255, 255, 255, 0.065);
-    z-index: 2;
+    background-color: rgba(117, 117, 117, 0.238);
+    z-index: 1000;
     backdrop-filter: blur(5px);
 }
 

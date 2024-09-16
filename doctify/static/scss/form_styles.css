@@ -68,6 +68,8 @@
     color: #1313c2; }
   .input_form input ::placeholder {
     font-size: 24px !important; }
+  .input_form a {
+    font-size: 14px !important; }
 
 .mx_w {
   max-width: 300px; }

@@ -24,7 +24,7 @@ function App(){
 
         let [searchStarted, setSearchStarted] = React.useState(false)
         let [sbValue, setSbValue] = React.useState(type.name)
-        let [tempValue, setTemp] = React.useState()
+        let [tempValue, setTemp] = React.useState(type.name)
 
         let [submitValues, setSubmitValues] = React.useState({
             speciality: null,
@@ -120,7 +120,7 @@ function App(){
         // RENDERS
         return(
             <div ref={divRef}>
-                <input type='text' placeholder={sbValue == 'speciality' ? 'Especialidad' : sbValue} value={tempValue} name={type.name} autoComplete='off' onChange ={keyup} id='searchBarer' className={searchStarted ? 'sb_border_on i_bx_s' : 'sb_border_off i_bx_s'}></input>
+                <input type='text' placeholder={sbValue == 'speciality' ? 'Especialidad' : sbValue} value={tempValue} name={type.name} autoComplete='off' onChange ={keyup} className={searchStarted ? 'sb_border_on i_bx_s' : 'sb_border_off i_bx_s'}></input>
                 <div className='closedListDiv' ref={listRef}>
                     {searchStarted && (list.temporary.length != 0 ? <ul>{list.temporary.map((l) => <li><button type='submit' onClick={() =>choosed(l)}>{l}</button></li>)}</ul> : <ul><li className='noResultList'>No results</li></ul>)}
                 </div>
@@ -135,7 +135,7 @@ function App(){
                 <SearchBars name='speciality'/>
                 <SearchBars name='city'/>
             </div>
-            <div class="search_btn">
+            <div className="search_btn">
                 <a href="search"><button type="button" className="i_bx_s">Buscar doctor!</button></a>
             </div>
         </div>

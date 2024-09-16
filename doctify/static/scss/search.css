@@ -173,7 +173,7 @@
                 .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances .ensurances h4 {
                   color: #23237e; }
                 .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances .ensurances img {
-                  height: 30px; }
+                  height: 50px; }
             .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .specialities {
               display: flex;
               gap: 0px 5px; }
@@ -307,7 +307,7 @@
   align-items: center;
   display: flex;
   position: sticky;
-  margin: auto;
+  margin: 0px auto;
   letter-spacing: 0.7px;
   color: #959595;
   font-weight: 600;

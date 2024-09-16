@@ -35,7 +35,7 @@
                         {% endif %}
                         <div style="display: flex; gap: 10px;">
                             <div class="number">&#9990; {{doctor.number}}</div>
-                            <div class="chat"><a href="https://wa.me/18098660266"><img src="{% static 'images/whatsapp-logo-icon.webp' %}" height="40px">Whatsapp</a></div>
+                            <div class="chat"><a href="https://wa.me/{{doctor.number}}"><img src="{% static 'images/whatsapp-logo-icon.webp' %}" height="40px">Whatsapp</a></div>
                         </div> 
                         
                     </div>
@@ -52,9 +52,9 @@
                     <div class="ensurances">
                         {% for e in ens %}
                             {% if e.logo %}
-                                <div class="ensurance"><a href="{% url 'ensurancebyid' e.id %}" title="{{e.name}}"><img src="{{e.logo}}" height="50px"><span>{{e.name}}</span></a></div>
+                                <div class="ensurance" title="{{e.name}}"><img src="{{e.logo}}" height="50px"><span>{{e.name}}</span></div>
                             {% else %}
-                                <div class="ensurance"><a href="{% url 'ensurancebyid' e.id %}" title="{{e.name}}"><h4>{{e.name}}</h4></a></div>
+                                <div class="ensurance" title="{{e.name}}"><h4>{{e.name}}</h4></div>
                             {% endif %}
                         {% endfor %}                        
                     </div>

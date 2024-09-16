@@ -24,19 +24,18 @@
                 <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
                 <div class="nav_name"><a href="{% url 'index' %}"><span>Doctify</span></a></div>
             </div>
-            
-            <div id="signin_div" style="display: none;">
+
+            <div id="signin_div">
                 {% if user.is_authenticated %}
                     <div class="nav_bar_txt">
-                        <div><a href="{% url 'myuser' %}"><img src="{{ user.image }}" height="50px"></a></div><br>
-                        <a href="{% url 'logout' %}" method="post">
-                            <div><button type="submit">Log out</button></div>  
-                        </a>              
+                        <div id="profile_list">
+                        </div>
                     </div>
                 {% else %}
                 <form method="post" action="{% url 'signin' %}"></form>
                     <div class="nav_bar_txt">
                         <button id="signinbtn">Sign In</button>
+
                     </div>
                 {% endif %}   
             </div>
@@ -47,13 +46,16 @@
 
         </div>
     </header>
-    
-        <div id="signin">{% csrf_token %}</div>
+
+    <div id="signin"></div>
     </form>
     {% block body %}
     {% endblock %}
     
-    <script type="text/babel" src="{% static 'js/signinbtn.js' %}"></script>
-    <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
+    {% if user.is_authenticated %}
+        <script type="text/babel" src="{% static 'js/profilelist.js' %}"></script>
+    {% else %}
+        <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
+    {% endif %}
 </body>
 </html>

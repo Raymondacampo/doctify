@@ -1,26 +1,323 @@
 .container {
+  min-height: 80dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
   background-color: white;
   width: 100%;
   max-width: 1200px;
-  margin: auto; }
+  margin: auto;
+  margin-top: 20px;
+  padding: 40px 0px 30px 0px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.113);
+  border-radius: 10px; }
   .container .profile_picture {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto; }
+    margin: 0px auto; }
     .container .profile_picture img {
       height: 200px;
       border-radius: 100px; }
-  .container .ensurance {
+  .container button {
+    color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-weight: 600; }
+  .container a {
+    color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-weight: 600; }
+  .container .ensurance_cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px; }
-    .container .ensurance img {
-      height: 30px; }
+    .container .ensurance_cont div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px; }
+    .container .ensurance_cont .box_prof_ens {
+      height: 80px;
+      width: 80px; }
+      .container .ensurance_cont .box_prof_ens img {
+        height: 100%;
+        width: 100%; }
+    .container .ensurance_cont .ensurance_options {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(117, 117, 117, 0.238);
+      backdrop-filter: blur(5px); }
+      .container .ensurance_cont .ensurance_options .ensurance_list {
+        position: relative;
+        width: 95%;
+        max-width: 1000px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 5px 10px 20px 10px;
+        animation-name: down_cont;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        border-radius: 15px; }
+        .container .ensurance_cont .ensurance_options .ensurance_list .myensurances {
+          gap: 10px; }
+          .container .ensurance_cont .ensurance_options .ensurance_list .myensurances .action {
+            display: flex;
+            flex-direction: column;
+            align-items: center; }
+            .container .ensurance_cont .ensurance_options .ensurance_list .myensurances .action button:disabled {
+              background-color: rgba(128, 128, 128, 0.407);
+              cursor: default; }
+        .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances {
+          gap: 10px;
+          width: 100%; }
+        .container .ensurance_cont .ensurance_options .ensurance_list form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 10px; }
+        .container .ensurance_cont .ensurance_options .ensurance_list div {
+          display: flex; }
+        .container .ensurance_cont .ensurance_options .ensurance_list .ensurances {
+          max-height: 500px;
+          border-radius: 15px;
+          padding: 20px 5px;
+          gap: 30px;
+          justify-content: center;
+          margin: auto;
+          align-items: center; }
+          .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            max-height: 400px;
+            overflow-y: overlay;
+            justify-content: center; }
+            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li {
+              display: flex;
+              flex-direction: column;
+              font-size: 12px;
+              font-weight: 600;
+              align-items: center;
+              padding: 10px 20px; }
+              .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li div {
+                display: flex;
+                flex-direction: column;
+                align-items: center; }
+              .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li img {
+                height: 80px;
+                width: 80px;
+                border-radius: 200px;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.088); }
+            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li:hover {
+              cursor: pointer; }
+            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul .unselected {
+              border: 2px solid white; }
+            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul .selected {
+              border: 2px solid #19baff;
+              box-shadow: 1px 1px 5px #19baff; }
+        .container .ensurance_cont .ensurance_options .ensurance_list .s {
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.082); }
+        .container .ensurance_cont .ensurance_options .ensurance_list .add_ens {
+          gap: 10px;
+          display: flex;
+          align-items: center; }
+          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens span {
+            font-weight: 600;
+            font-size: 18px; }
+          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens button {
+            background-color: navy;
+            color: white;
+            padding: 15px 45px;
+            border-radius: 15px; }
+          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens button:disabled {
+            background-color: rgba(60, 60, 146, 0.364);
+            cursor: default; }
+  .container .butrtons {
+    margin: auto;
+    gap: 60px; }
+    .container .butrtons div {
+      gap: 30px; }
+      .container .butrtons div button {
+        width: 150px;
+        background-color: white;
+        color: black;
+        border-radius: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.158);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 12px 100px; }
+        .container .butrtons div button img {
+          height: 25px; }
+      .container .butrtons div .logout_btn {
+        background-color: navy;
+        color: white;
+        font-weight: 600; }
+      .container .butrtons div .logout_btn:hover {
+        background-color: rgba(0, 0, 128, 0.771); }
+      .container .butrtons div a:hover {
+        background-color: rgba(243, 243, 243, 0.466); }
+
+.confirm_remove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  background-color: rgba(117, 117, 117, 0.65);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0; }
+  .confirm_remove .accept {
+    padding: 12px 45px; }
+  .confirm_remove .cancel {
+    padding: 12px 45px; }
+  .confirm_remove .confirm_remove_div {
+    padding: 10px 10px 20px 10px;
+    position: absolute;
+    width: clamp(300px, 90%, 500px);
+    background-color: white;
+    border-radius: 10px; }
+    .confirm_remove .confirm_remove_div form {
+      width: 100%; }
+  .confirm_remove .cr_info {
+    margin-bottom: 15px; }
+    .confirm_remove .cr_info img {
+      height: 100px;
+      width: 100px; }
+
+.close_div {
+  display: flex;
+  width: 100%;
+  justify-content: end !important; }
+  .close_div div {
+    padding: 0px; }
+  .close_div button {
+    padding: 5px 5px 0px 0px; }
+
+#mydates {
+  background-color: white; }
+
+.mydates {
+  width: 100%;
+  max-width: 600px;
+  margin: 15px auto; }
+  .mydates h2 {
+    margin-left: 10px; }
+  .mydates hr {
+    margin-bottom: 20px; }
+  .mydates .dates_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px; }
+  .mydates .date {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
+    padding: 8px 15px; }
+    .mydates .date div {
+      width: 100%;
+      margin-bottom: 10px; }
+    .mydates .date span {
+      margin-bottom: 5px;
+      width: 100%; }
+
+.big {
+  font-size: 22px; }
+
+.med {
+  font-size: 14px; }
+
+.active {
+  background-color: white; }
+
+.unactive {
+  background-color: whitesmoke; }
+
+.marked {
+  background-color: #c6c6c6 !important; }
+
+.absolutly, .container .ensurance_cont .ensurance_options, .favdoctors_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.353);
+  z-index: 1040; }
+  .absolutly ul, .container .ensurance_cont .ensurance_options ul, .favdoctors_container ul {
+    list-style: none; }
+
+.cont, .favdoctors_container .favdoctors {
+  background-color: white;
+  width: clamp(320px, 100%, 400px);
+  padding: 5px; }
+  .cont form, .favdoctors_container .favdoctors form {
+    padding: 15px;
+    margin-top: 5px;
+    gap: 15px; }
+  .cont button[type=submit], .favdoctors_container .favdoctors button[type=submit] {
+    margin: auto; }
+
+.bb, .cont, .favdoctors_container .favdoctors {
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.124); }
+
+.cancel {
+  background-color: rgba(222, 0, 0, 0.887);
+  margin: auto;
+  padding: 8px 30px;
+  color: white;
+  border-radius: 5px; }
+
+.cancel:hover {
+  background-color: #cb2f2f; }
+
+.accept {
+  background-color: #00007d; }
+
+.col, .container .ensurance_cont .ensurance_options .ensurance_list .myensurances, .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances, .container .ensurance_cont .ensurance_options .ensurance_list .ensurances, .container .butrtons, .container .butrtons div, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .mydates .date div, .cont form, .favdoctors_container .favdoctors form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+@media (max-width: 900px) {
+  .butrtons a {
+    padding: 15px 70px !important; }
+  .ensurance_list {
+    width: 90%; } }
+
+@media (max-width: 560px) {
+  .date {
+    width: 85% !important; }
+  .sec2 {
+    margin: auto !important; }
+  .ensurance_list {
+    padding: 0px !important; }
+  .butrtons div {
+    flex-direction: column;
+    align-items: center; }
+  .myensurances {
+    gap: 5px; }
+  .ensurance img {
+    height: 70px !important;
+    width: 70px !important; } }
 
 /*# sourceMappingURL=myprofile.css.map */

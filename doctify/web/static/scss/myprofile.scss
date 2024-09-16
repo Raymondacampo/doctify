@@ -1,30 +1,456 @@
+
 .container{
+    min-height: 80dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
     background-color: white;
     width: 100%;
     max-width: 1200px;
     margin: auto;
+    margin-top: 20px;
+    padding: 40px 0px 30px 0px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.113);
+    border-radius: 10px;
+
     .profile_picture{
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: auto;
+        margin: 0px auto;
         img{
             height: 200px;
             border-radius: 100px;
 
         }
     }
-    .ensurance{
+    button{
+        color: white;
+        border-radius: 10px;
+        padding: 15px 20px;
+        font-weight: 600;                         
+    }
+    a{
+        color: white;
+        border-radius: 10px;
+        padding: 15px 20px;
+        font-weight: 600;   
+    }
+    .ensurance_cont{
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 5px;
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .box_prof_ens{
+            height: 80px;
+            width: 80px;
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .ensurance_options{
+            @extend .absolutly;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: rgba(117, 117, 117, 0.238);
+            backdrop-filter: blur(5px);
+            .ensurance_list{
+                position: relative;
+                width: 95%;
+                max-width: 1000px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 5px 10px 20px 10px;
+                animation-name: down_cont;
+                animation-duration: 0.8s;
+                animation-fill-mode: forwards;
+                border-radius: 15px;
+                .myensurances{
+                    @extend .col;
+                    gap: 10px;
+                    .action{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+
+                        button:disabled{
+                            background-color: rgba(128, 128, 128, 0.407);
+                            cursor: default
+                        }
+                    }
+                }
+
+                .add_ensurances{
+                    @extend .col;
+                    gap: 10px;
+                    width: 100%;
+
+                }
+
+                form{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                div{
+                    display: flex;
+                }
+
+                .ensurances{
+                    max-height: 500px;
+                    @extend .col;
+                    border-radius: 15px;
+                    padding: 20px 5px;
+                    gap: 30px;
+                    justify-content: center;
+                    margin: auto;
+                    align-items: center;
+                    ul{
+                        list-style: none;
+                        display: flex;
+                        flex-wrap: wrap;
+                        max-height: 400px;
+                        overflow-y: overlay;
+                        justify-content: center;
+                        li{
+                            display: flex;
+                            flex-direction: column;
+                            font-size: 12px;
+                            font-weight: 600;
+                            align-items: center;
+                            padding:10px 20px;
+                            div{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                            }
+                            img{
+                                height: 80px;
+                                width: 80px;
+                                border-radius: 200px;
+                                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.088);
+                            }
+                        }
+                        li:hover{
+                            cursor: pointer;
+                        }
+                        .unselected{
+                            border: 2px solid rgb(255, 255, 255);
+                        }
+                        .selected{
+                            border: 2px solid rgb(25, 186, 255);
+                            box-shadow: 1px 1px 5px rgb(25, 186, 255);
+                        }
+
+                    }
+                }
+                .s{
+                    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.082);
+
+                }
+                .add_ens{
+                    // @extend .col;
+                    gap: 10px;
+                    display :flex ;
+                    align-items: center;
+                    span{
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+                    button{
+                        background-color: navy;
+                        color: white;
+                        padding: 15px 45px;
+                        border-radius: 15px;                             
+                    }
+                    button:disabled{
+                        background-color: rgba(60, 60, 146, 0.364);
+                        cursor: default;
+                    }
+
+                }
+        }
+
+        }        
+    }
+
+
+
+    .butrtons{
+        @extend .col;
+        margin: auto;
+        gap: 60px;
+
+        div{
+            @extend .col;
+            gap: 30px;
+
+            button{   
+                width: 150px;             
+                background-color: white;
+                color: black;
+                border-radius: 15px;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.158);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                padding: 12px 100px;
+                img{
+                    height: 25px;
+                }
+            }
+            .logout_btn{
+                background-color: navy;
+                color: white;
+                font-weight: 600;
+            }
+            .logout_btn:hover{
+                background-color: rgba(0, 0, 128, 0.771);
+            }
+            a:hover{
+                background-color: rgba(243, 243, 243, 0.466);
+            }
+        }
+    }
+}
+
+.confirm_remove{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    background-color: rgba(117, 117, 117, 0.65);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    .accept{
+        padding: 12px 45px
+    }
+    .cancel{
+        padding: 12px 45px
+    }
+    .confirm_remove_div{
+        
+        padding: 10px 10px 20px 10px;
+        position: absolute;
+        width: clamp(300px, 90%, 500px);
+        background-color: white;
+        border-radius: 10px;
+        form{
+            width: 100%;
+            @extend .col;
+        }
+    }
+    .cr_info{
+        @extend .col;
+        margin-bottom: 15px;
         img{
-            height: 30px;
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
+
+.close_div{
+    display: flex;
+    width: 100%;
+    justify-content: end !important;
+    div{
+        padding: 0px;
+
+    }
+    button{
+        padding: 5px 5px 0px 0px;
+    }
+}
+.favdoctors_container{
+    @extend .absolutly;
+    .favdoctors{
+        @extend .cont;
+    }
+}
+#mydates{
+    background-color: white;
+}
+.mydates{
+    width: 100%;
+    max-width: 600px;
+    margin: 15px auto;
+    h2{
+        margin-left: 10px;
+    }
+    hr{
+        margin-bottom: 20px;
+    }
+    .dates_container{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 70px
+    }
+    .date{
+        width: 90%;
+        margin: auto;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
+        padding: 8px 15px;
+        div{
+            width: 100%;
+            margin-bottom: 10px;
+            @extend .col;
+        }
+
+        span{
+            margin-bottom: 5px;
+            width: 100%;
+        }
+    }
+}
+
+.big{
+    font-size: 22px;
+}
+
+.med{
+    font-size: 14px;
+}
+
+.active{
+    background-color: white;
+}
+
+.unactive{
+    background-color: whitesmoke;
+}
+
+.marked{
+    background-color: rgb(198, 198, 198) !important;
+}
+
+// EXTENSIONS
+.absolutly{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right:0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.353);
+    z-index: 1040;
+    ul{
+        list-style: none;
+    }
+}
+
+.cont{
+    background-color: white;
+    width: clamp(320px, 100%, 400px);
+    padding: 5px;
+    @extend .bb;
+    form{
+        padding: 15px;
+        margin-top: 5px;
+        @extend .col;
+        gap: 15px;
+    }
+    button[type=submit]{
+        margin: auto;
+    }
+}
+
+.bb{
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.124);
+}
+
+.cancel{
+    background-color: rgba(222, 0, 0, 0.887);
+    margin: auto;
+    padding: 8px 30px;
+    color: white;
+    border-radius: 5px;
+}
+.cancel:hover{
+    background-color: rgb(203, 47, 47);
+}
+.accept{
+    background-color: rgb(0, 0, 125);
+}
+
+// @keyframes down_cont{
+//     0% {top: -100;}
+//     100% {top: 0;}
+// }
+
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media(max-width:900px){
+    .butrtons{
+        a{
+            padding: 15px 70px !important;
+        }
+    }
+    .ensurance_list{
+        width: 90%;
+        
+    }
+
+}
+
+@media(max-width:560px){
+    .date{
+        width: 85% !important;
+    }
+    .sec2{
+        margin: auto !important;
+
+    }
+
+    .ensurance_list{
+        padding: 0px !important;
+    }
+
+    .butrtons{
+        div{
+            flex-direction: column;
+            align-items: center;            
+        }
+
+    }
+    .myensurances{
+        gap: 5px;
+    }
+
+    .ensurance{
+        img{
+            height: 70px !important;
+            width: 70px !important;
         }
     }
 }

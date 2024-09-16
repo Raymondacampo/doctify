@@ -50,7 +50,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     phone = PhoneNumberField(null=True, blank=True, unique=True)   
     image = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg', blank=True)
-    ensurance = models.ManyToManyField(Ensurance)
+    ensurance = models.ManyToManyField(Ensurance, related_name='ensurances')
 
     def serialize(self):
         return{
@@ -58,7 +58,7 @@ class User(AbstractUser):
             'email': self.email,     
             'phone': self.phone,
             'image': self.image,
-            'ensurance': self.ensurance.all()            
+            'ensurance': [e for e in self.ensurance.all()]          
         }
 
             
@@ -196,11 +196,27 @@ class ClientDates(models.Model):
         return f'{self.client} date with {self.doctor} on {self.date} {self.time}'
 
     def serialize(self):
+        def thetime(time):
+            hours, minutes = time.split(':')
+            hours = int(hours)
+            timevalue = ''
+            if hours == 12:
+                timevalue = f'{hours}:{minutes} PM'
+            elif hours == 0:
+                timevalue = f'12:{minutes} AM'
+            elif hours > 12:
+                hours = hours - 12
+                timevalue = f'{hours}:{minutes} PM'
+            else:
+                timevalue = f'{hours}:{minutes} AM'
+            return timevalue
         return {
-            'doctor': self.doctor,
+            'id':self.id,
+            'doctor': self.doctor.serialize(),
             'clinic':self.clinic.name,
-            'client': self.client,
+            'client': self.client.username,
             'date': self.date,
-            'time': self.time 
+            'time': thetime(self.time),
+            'isactive': self.isActive
         }
     

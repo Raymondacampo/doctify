@@ -23,7 +23,7 @@ function App(){
     let [formButton, setFormButton] = React.useState(false) 
     
     const container = document.querySelector('#signin');
-    const login_form = document.querySelector('#login_form');
+
 
     // IF SIGNIN BUTTON IS CLICKED OPEN OR CLOSE DIV
     container.className = formButton ? 'signin_div': '';
@@ -33,11 +33,11 @@ function App(){
     useEffect(() => {
         let handler = () =>{
             setFormButton(true)
+            return() =>  document.querySelector('#signinbtn').removeEventListener('click', handler)
             }
             
         document.querySelector('#signinbtn').addEventListener('click', handler)
     },[])
-
 
     // HANDLES WITH THE SUBMITFORM BUTTON
     function handleSubmit(e){
