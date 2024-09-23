@@ -30,12 +30,11 @@
                     <div class="nav_bar_txt">
                         <div id="profile_list">
                         </div>
+                        
                     </div>
                 {% else %}
-                <form method="post" action="{% url 'signin' %}"></form>
                     <div class="nav_bar_txt">
-                        <button id="signinbtn">Sign In</button>
-
+                        <a href="/accounts/login/">Sign In</a>
                     </div>
                 {% endif %}   
             </div>

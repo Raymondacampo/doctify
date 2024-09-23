@@ -1,26 +1,78 @@
 {% extends 'web/layout.html' %}
+{% block body %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
 {% load i18n %}
 {% load allauth account %}
-
-{% block body %}
-
-<div class="password_reset_div bx_s">
-    <h1>Sign in</h1>
-        {% element form form=form method="post" action=login_url tags="entrance,login" %}
-                {% slot body %}
+<div class="sign_body">
+    <div class="sign_cont bx_s">
+        {% if not SOCIALACCOUNT_ONLY %}
+            <div class="form_title">
+                {% element h1 %}
+                    {% trans "Sign In" %}
+                {% endelement %}
+                <p>{% blocktranslate %}If you have not created an account yet, then please <a href="{{signup_url }}">sign up</a> first.{% endblocktranslate %}</p>
+            </div>
+            <div class="extra_container">
+                <form action="/accounts/google/login/?process=login" method="post">
                     {% csrf_token %}
+                        <button type="submit" >
+                            <div class='google_form'>
+                                <img src='/static/images/google.png'>
+                                <span>Continuar con Google</span>
+                            </div> 
+                        </button>
+                    </form>                 
+            </div>
+            <div class="form_inputs_container">
+                {% url 'account_login' as login_url %}
+                {% element form form=form method="post" action=login_url tags="entrance,login" %}
+                    {% slot body %}
+                    <div class="dede">
+                        {% csrf_token %}
                         {% element fields form=form unlabeled=True %}
                         {% endelement %}
-                {% endslot %}
-                
-                {% slot actions %}
-                <p>
-                    {% element button type="submit" tags="prominent,login" %}
-                        {% trans "Sign In" %}
+                        {{ redirect_field }}                        
+                    </div>
+
+                    {% endslot %}
+                    {% slot actions %}
+                        {% element button type="submit" tags="prominent,login" %}
+                            {% trans "Sign In" %}
+                        {% endelement %}
+                    {% endslot %}
+                {% endelement %}
+            {% endif %}                
+            </div>
+
+        {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+            {% element hr %}
+            {% endelement %}
+            {% element button_group vertical=True %}
+                {% if PASSKEY_LOGIN_ENABLED %}
+                    {% element button type="submit" form="mfa_login" id="passkey_login" tags="prominent,login,outline,primary" %}
+                        {% trans "Sign in with a passkey" %}
                     {% endelement %}
-                </p>
-                {% endslot %}
-                
-        {% endelement %}
+                {% endif %}
+                {% if LOGIN_BY_CODE_ENABLED %}
+                    {% element button href=request_login_code_url tags="prominent,login,outline,primary" %}
+                        {% trans "Mail me a sign-in code" %}
+                    {% endelement %}
+                {% endif %}
+            {% endelement %}
+        {% endif %}
+
+        {% block extra_body %}
+            {{ block.super }}
+            {% if PASSKEY_LOGIN_ENABLED %}
+                {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+            {% endif %}
+        {% endblock %}         
+    </div>
+   
 </div>
+
 {% endblock %}

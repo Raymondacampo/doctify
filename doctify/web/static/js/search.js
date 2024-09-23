@@ -1,6 +1,21 @@
 const {useEffect} = React;  
 const {useRef} = React;  
-
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+let csrftoken = getCookie('csrftoken')
 function App(){
 
     let divRef = useRef()
@@ -86,10 +101,11 @@ function App(){
 
         document.addEventListener('mousedown', handler);
         window.addEventListener('resize', handleResize)
+        window.addEventListener('scroll', handleScroll)
     }, []);
     // DEALS WITH HE RESIZE
     function handleResize(){
-        if(window.innerWidth <= 900){
+        if(window.innerWidth <= 1400){
             setShowFilters(false);
             setShowBig(true)
         }else{
@@ -111,6 +127,11 @@ function App(){
             ensurance: ensuranceStartedValue,
             clinic: clinicStartedValue
         })  
+    }
+
+    function handleScroll(){
+        console.log(document.querySelector('#mob_filters').screenY)
+        return() => removeEventListener('scroll', handleScroll)
     }
 
     // DOCTOR RENDERING FUNCTION
@@ -146,7 +167,6 @@ function App(){
                                         </div>
                                         <div className='locations'>
                                             <div style={{display: 'flex', gap: '8px'}}>{d.city.map((c) => <div className='city'>{c}<div className='pin'></div></div>)}</div>
-                                            <div className='clinics'>{d.clinic.map((cli) => <div className='clinic'><img src='static/images/clinic_icon.png' ></img>{cli}</div>)}</div>
                                         </div>
                                         
                                     </div>
@@ -301,7 +321,7 @@ function App(){
 
 
     return(
-        <div className='searches_container'>
+        <div className={showBig && showFilters ? 'searches_container top': 'searches_container'}>
             {showFilters ?
                 <div className='filters_background'>
                     <div className='filters'>
@@ -372,7 +392,7 @@ function App(){
                     </div>             
                 </div>
             :
-                <div className='mobile_filter_div'>
+                <div className='mobile_filter_div' id='mob_filters'>
                     <button type='button' onClick={() => setShowFilters(true)}>Filters</button>
                     <div className='filters_data'>{search}</div>
                 </div>

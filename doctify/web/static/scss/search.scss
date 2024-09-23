@@ -10,22 +10,18 @@
     .searches_container{
         display: inherit;
         width: 100%;
+        max-width: 1100px;
         justify-content: center;
         justify-content: space-between;
         gap: 20px;
-        padding: 20px clamp(10px, 3%, 45px);
+        padding: 20px clamp(10px, 6%, 120px) 20px 10px;
 
         // FILTERS
         .filters{
-            z-index: 0;
             display: flex;
             flex-direction: column;
-            position: sticky;
-            width: 115%;
             min-width: 280px;
-            top: 40px;
             background-color: white;
-            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); 
             border-radius: 10px; 
             max-width: 400px;
             .filters_title{
@@ -35,14 +31,14 @@
                 align-items: center;
                 justify-content: center;
                 
-                padding: 30px;
+                padding: 25px;
                 height: 15px;
                 border-radius: 10px 10px 40px 0px ;
                 z-index: 4;
                 .change{
                     
                     div{
-                        background-color: white;
+                        background-color: white !important;
                     }
                 }
             }
@@ -84,11 +80,11 @@
                                 position: absolute;
                                 width: 100%;
                                 overflow-y: scroll;
+                                overflow-x: hidden;
                                 border-radius: 0px 0px 0px 5px;
                                 animation-name: display_list;
                                 animation-duration: 0.5s;
                                 animation-fill-mode: forwards;
-                                overflow-x: hidden;
                                 z-index: 100;
                                 box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.04);
                                 ul{
@@ -121,10 +117,9 @@
                             input[type=text]{
                                 width: 100%;
                                 height: 15px;
-                                padding: 10px;
-                                border: none;
+                                padding: 10px 10px;
+                                border: 1px solid rgb(212, 212, 212);
                                 border-radius: 5px;
-                                box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
                                 text-align: center;
                                 font-size: 16px;
                                 z-index: 1;
@@ -275,7 +270,7 @@
                             }
                             p{
                                 max-height: 90px;
-                                -webkit-line-clamp: 4;
+                                -webkit-line-clamp: 3;
                                 line-clamp: 4;
                                 overflow: hidden;
                                 display: -webkit-box;
@@ -360,7 +355,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            a{
+            a, button{
                 text-align: center;
                 margin: auto;
                 padding: 8px 0px;
@@ -378,6 +373,11 @@
 
 }
 
+.top{
+    top: 0;
+    overflow-y: hidden;
+    max-height: 100dvh;
+}
 
 .pin {
     width: 12.5px ;
@@ -403,7 +403,6 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    position: sticky;
     margin: 0px auto;
     letter-spacing: 0.7px;
     color: rgb(149, 149, 149);
@@ -417,16 +416,25 @@
     backdrop-filter: blur(50px);
 }
 
-@media(max-width:900px){
+@media(max-width:1400px){
     .searches{
-        height: 90dvh;
+        display: block;
+        height: 100%;
     }
     .searches_container{
+        max-width: none !important;
+        margin: auto;
         padding: 0px !important;
         flex-direction: column;
         gap: 10px !important;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
         .mobile_filter_div{
-            background-color: rgba(194, 205, 255, 0.13);
+            position: sticky;
+            top: 0px;
+            width: 90%;
+            background-color: rgb(247, 248, 255);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -443,22 +451,22 @@
 
         }
         .filters_background{
-            top: 0;
-            height: 100%;
+            padding-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: scroll;
+            height: 100dvh;
             width: 100% !important;
             background-color: black;
-            position: absolute !important;
+            position: fixed !important;
             z-index: 2 !important;
             background-color: rgba(0, 0, 0, 0.307);
             backdrop-filter: blur(4px);
             .filters{
                 width: 90%;
-                margin: auto auto;
-                top: 90px;
                 max-width: 700px;
-                input[type=text]{
-                    padding: 12.5px !important;
-                }
+                position: static;
                 .filters_title{
                     justify-content: space-between;
                     border-radius: 10px 10px 0px 0px;
@@ -469,6 +477,8 @@
         .doctors{
             width: 100% !important;
             height: 100% !important;
+            max-width: 1000px !important;
+            margin: auto;
             .doctor_container{
                 margin: auto;
                 height: 98%;
@@ -482,10 +492,13 @@
 
 }
 
+
+
 @media(max-width:500px){
     .filters_data{
         font-size: 14px !important;
     }
+
     .doctors{
         width: 100% !important;
         .doctor_container{
@@ -510,9 +523,7 @@
                         margin-bottom: 5px;
                         .name_ensurances{
                             flex-direction: column !important;
-                            img{
-                                height: 20px !important;
-                            }
+
                         }
                         .locations{
                             justify-content: center;

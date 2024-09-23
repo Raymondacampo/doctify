@@ -37,7 +37,7 @@ input[type="submit"]:hover{
 }
 
 .bx_s{
-    box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.275); 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15); 
  }
 
 .inv{
@@ -114,13 +114,17 @@ input[type="submit"]:hover{
                 height: 100%;
                 .child{
                     height: 100%;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: 0.4px;
+                    
                 }
             }
             .profile_list_div{
                 position: absolute;
                 right: 1px;
-                margin-top: 12px;
-                div{
+                margin-top: 270px;
+                .contents{
                     background-color: white !important;
                     border-radius: 5px;
                     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.259);
@@ -137,19 +141,29 @@ input[type="submit"]:hover{
                         height: 1px;
                         background-color: rgb(237, 237, 237);
                     }
-                        a{
-                            padding: 15px;
-                            letter-spacing: 0.5px;
-                        }
+                    a{
+                        padding: 15px;
+                        letter-spacing: 0.5px;
+                    }
+                    
+                    a:hover{
+                        background-color: rgb(244, 244, 244);
+                    }  
                         
-                        a:hover{
-                            background-color: rgb(244, 244, 244);
-                            cursor: pointer;
-                        }                        
+                    .close_nav{
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 5px 20px;
+                        .profile_icon{
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                        }
+                    }
 
                 }
 
-                div:before{
+                .contents:before{
                     content: '';
                     position: absolute;
                     top: -18px;
@@ -158,7 +172,7 @@ input[type="submit"]:hover{
                     border-bottom-color: rgb(255, 255, 255);
                 }
             }
-            button{
+            button, a{
                 height: 100%;
                 padding: 0px 15px;
                 color: #23237e;
@@ -176,6 +190,9 @@ input[type="submit"]:hover{
                     border-radius: 50px;
                     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.282);
                 }
+            }
+            button:hover, a:hover{
+                background-color: rgb(232, 232, 232);
             }
         }
     }
@@ -209,8 +226,10 @@ input[type="submit"]:hover{
     0% {opacity: 0;}
     100%{opacity: 100%;}
 }
+
 .selected{
-    background-color: rgb(196, 196, 196);
+    background-color: rgb(232, 232, 232);
+
 }
 
 // AUTHENTICATION CONTENT
@@ -221,7 +240,7 @@ input[type="submit"]:hover{
     width: 100dvw;
     top: 0px;
     left: 0px;
-    background: rgba(255, 255, 255, 0.065);
+    background: rgba(189, 189, 189, 0.5);
     z-index: 10000;
     backdrop-filter: blur(5px);
     animation-name: show_signin;
@@ -290,6 +309,8 @@ input[type="submit"]:hover{
 
 }
 
+
+
 .messages{
     display: flex;
     justify-content: center;
@@ -302,30 +323,9 @@ input[type="submit"]:hover{
     }
 }
 
-.extra_container{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    button{
-        padding: 5px;
-    }
-}
 
-.google_form{
-    width: clamp(225px, 15dvw, 200px);
-    display: flex;
-    align-items: center; 
-    justify-content: space-around; 
-    background-color: rgb(250, 250, 250);
-    padding: 5px;
-    border-radius: 20px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.195);
-}
 
-.google_form:hover{
-    transition: 1s;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.403);
-}
+
 
 .password_reset_div{
     margin: 20px;
@@ -402,61 +402,38 @@ input[type="submit"]:hover{
 
 @keyframes show_signin{
     0% {background: rgba(255, 255, 255, 0); backdrop-filter: blur(0px);}
-    100% {background: rgba(255, 255, 255, 0.065); backdrop-filter: blur(5px);}
+    100% {background: rgba(189, 189, 189, 0.5); backdrop-filter: blur(5px);}
 }
 
 .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: 0.4s;
+    width: 35px !important;
+    height: 5px !important;
+    background-color: #333 !important;
+    margin: 6px 0 !important;
+    transition: 0.4s!important;
   }
   
   .change{
-    cursor: pointer;
+    cursor: pointer !important;
     display: block !important;
   }
 
   /* Rotate first bar */
   .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
+    transform: translate(0, 11px) rotate(-45deg) !important;
   }
   
   /* Fade out the second bar */
-  .change .bar2 {opacity: 0;}
+  .change .bar2 {opacity: 0 !important; }
   
   /* Rotate last bar */
   .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
+    transform: translate(0, -11px) rotate(45deg) !important;
   }
 
-// MEDIA SIZE CHANGES
-
-// @media(max-width:600px){
-//     .nav_name{
-//         a{
-//             span{
-//                 font-size: 42px !important;
-//             }
-//         }
-//     }
-//     .nav_logo{
-//         height: 65px !important;
-//         width: 65px !important;
-//         img{
-//            height: 65px !important; 
-//         }
-        
-//     }
-// }
 
 @media(max-width:900px){
     
-    #nav_bar{
-        height: 10dvh;
-    }
-
     .input_form{
         width: 100% !important;
     }
@@ -469,9 +446,12 @@ input[type="submit"]:hover{
         width: 100%;
         top: 0px;
         margin-top: 0px !important;
-        div{
+        .contents{
             height: 100%;
             width: 100% !important;
+        }
+        button, a{
+            height: auto !important;
         }
     }
     
@@ -490,4 +470,18 @@ input[type="submit"]:hover{
     }
 
 
+}
+
+@media(max-width: 560px){
+    .nav_logo{
+        height: 35px !important;
+        width: 35px !important;
+    }
+    .nav_name{
+        span{
+            font-size: 24px !important;    
+            margin: 5px !important;    
+        }
+        
+    }
 }

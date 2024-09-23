@@ -26,7 +26,7 @@ input[type="submit"]:hover {
   cursor: pointer; }
 
 .bx_s {
-  box-shadow: 1px 0px 4px rgba(0, 0, 0, 0.275); }
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15); }
 
 .inv {
   display: none; }
@@ -60,7 +60,7 @@ input[type="submit"]:hover {
   stroke: #4691f6;
   stroke-width: 2; }
 
-.col, #nav_bar #signin_div .nav_bar_txt .profile_list_div div {
+.col, #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents {
   display: flex;
   flex-direction: column; }
 
@@ -86,12 +86,15 @@ input[type="submit"]:hover {
       #nav_bar #signin_div .nav_bar_txt #profile_list {
         height: 100%; }
         #nav_bar #signin_div .nav_bar_txt #profile_list .child {
-          height: 100%; }
+          height: 100%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.4px; }
       #nav_bar #signin_div .nav_bar_txt .profile_list_div {
         position: absolute;
         right: 1px;
-        margin-top: 12px; }
-        #nav_bar #signin_div .nav_bar_txt .profile_list_div div {
+        margin-top: 270px; }
+        #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents {
           background-color: white !important;
           border-radius: 5px;
           box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.259);
@@ -101,37 +104,46 @@ input[type="submit"]:hover {
           animation-name: fade_in;
           animation-duration: 0.5s;
           animation-fill-mode: forwards; }
-          #nav_bar #signin_div .nav_bar_txt .profile_list_div div hr {
+          #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents hr {
             margin: 5px 0px;
             border: none;
             height: 1px;
             background-color: #ededed; }
-          #nav_bar #signin_div .nav_bar_txt .profile_list_div div a {
+          #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents a {
             padding: 15px;
             letter-spacing: 0.5px; }
-          #nav_bar #signin_div .nav_bar_txt .profile_list_div div a:hover {
-            background-color: #f4f4f4;
-            cursor: pointer; }
-        #nav_bar #signin_div .nav_bar_txt .profile_list_div div:before {
+          #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents a:hover {
+            background-color: #f4f4f4; }
+          #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents .close_nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 20px; }
+            #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents .close_nav .profile_icon {
+              display: flex;
+              align-items: center;
+              gap: 5px; }
+        #nav_bar #signin_div .nav_bar_txt .profile_list_div .contents:before {
           content: '';
           position: absolute;
           top: -18px;
           left: 135px;
           border: 10px solid transparent;
           border-bottom-color: white; }
-      #nav_bar #signin_div .nav_bar_txt button {
+      #nav_bar #signin_div .nav_bar_txt button, #nav_bar #signin_div .nav_bar_txt a {
         height: 100%;
         padding: 0px 15px;
         color: #23237e;
         display: flex;
         align-items: center;
         gap: 5px; }
-        #nav_bar #signin_div .nav_bar_txt button span {
+        #nav_bar #signin_div .nav_bar_txt button span, #nav_bar #signin_div .nav_bar_txt a span {
           position: relative;
           top: 2px; }
       #nav_bar #signin_div .nav_bar_txt a img {
         border-radius: 50px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.282); }
+      #nav_bar #signin_div .nav_bar_txt button:hover, #nav_bar #signin_div .nav_bar_txt a:hover {
+        background-color: #e8e8e8; }
   #nav_bar .nav_name a span {
     color: #060648;
     font-size: 30px;
@@ -150,7 +162,7 @@ input[type="submit"]:hover {
     opacity: 100%; } }
 
 .selected {
-  background-color: #c4c4c4; }
+  background-color: #e8e8e8; }
 
 .signin_div {
   position: absolute;
@@ -158,7 +170,7 @@ input[type="submit"]:hover {
   width: 100dvw;
   top: 0px;
   left: 0px;
-  background: rgba(255, 255, 255, 0.065);
+  background: rgba(189, 189, 189, 0.5);
   z-index: 10000;
   backdrop-filter: blur(5px);
   animation-name: show_signin;
@@ -223,27 +235,6 @@ input[type="submit"]:hover {
     font-weight: 600;
     text-align: center;
     font-size: 15px; }
-
-.extra_container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px; }
-  .extra_container button {
-    padding: 5px; }
-
-.google_form {
-  width: clamp(225px, 15dvw, 200px);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #fafafa;
-  padding: 5px;
-  border-radius: 20px;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.195); }
-
-.google_form:hover {
-  transition: 1s;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.403); }
 
 .password_reset_div {
   margin: 20px;
@@ -311,35 +302,33 @@ input[type="submit"]:hover {
     background: rgba(255, 255, 255, 0);
     backdrop-filter: blur(0px); }
   100% {
-    background: rgba(255, 255, 255, 0.065);
+    background: rgba(189, 189, 189, 0.5);
     backdrop-filter: blur(5px); } }
 
 .bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: #333;
-  margin: 6px 0;
-  transition: 0.4s; }
+  width: 35px !important;
+  height: 5px !important;
+  background-color: #333 !important;
+  margin: 6px 0 !important;
+  transition: 0.4s !important; }
 
 .change {
-  cursor: pointer;
+  cursor: pointer !important;
   display: block !important; }
 
 /* Rotate first bar */
 .change .bar1 {
-  transform: translate(0, 11px) rotate(-45deg); }
+  transform: translate(0, 11px) rotate(-45deg) !important; }
 
 /* Fade out the second bar */
 .change .bar2 {
-  opacity: 0; }
+  opacity: 0 !important; }
 
 /* Rotate last bar */
 .change .bar3 {
-  transform: translate(0, -11px) rotate(45deg); }
+  transform: translate(0, -11px) rotate(45deg) !important; }
 
 @media (max-width: 900px) {
-  #nav_bar {
-    height: 10dvh; }
   .input_form {
     width: 100% !important; }
   .nav_bar_txt {
@@ -349,14 +338,24 @@ input[type="submit"]:hover {
     width: 100%;
     top: 0px;
     margin-top: 0px !important; }
-    .profile_list_div div {
+    .profile_list_div .contents {
       height: 100%;
       width: 100% !important; }
+    .profile_list_div button, .profile_list_div a {
+      height: auto !important; }
   .index_go_btn {
     width: 20% !important; }
   .big_text {
     font-size: 44px; }
   .btn_list {
     height: 100%; } }
+
+@media (max-width: 560px) {
+  .nav_logo {
+    height: 35px !important;
+    width: 35px !important; }
+  .nav_name span {
+    font-size: 24px !important;
+    margin: 5px !important; } }
 
 /*# sourceMappingURL=style.css.map */

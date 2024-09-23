@@ -9,20 +9,16 @@
   .searches .searches_container {
     display: inherit;
     width: 100%;
+    max-width: 1100px;
     justify-content: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 20px clamp(10px, 3%, 45px); }
+    padding: 20px clamp(10px, 6%, 120px) 20px 10px; }
     .searches .searches_container .filters {
-      z-index: 0;
       display: flex;
       flex-direction: column;
-      position: sticky;
-      width: 115%;
       min-width: 280px;
-      top: 40px;
       background-color: white;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       max-width: 400px; }
       .searches .searches_container .filters .filters_title {
@@ -31,12 +27,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 30px;
+        padding: 25px;
         height: 15px;
         border-radius: 10px 10px 40px 0px;
         z-index: 4; }
         .searches .searches_container .filters .filters_title .change div {
-          background-color: white; }
+          background-color: white !important; }
       .searches .searches_container .filters .filters_container {
         height: 100%;
         min-height: 100%;
@@ -71,11 +67,11 @@
                 position: absolute;
                 width: 100%;
                 overflow-y: scroll;
+                overflow-x: hidden;
                 border-radius: 0px 0px 0px 5px;
                 animation-name: display_list;
                 animation-duration: 0.5s;
                 animation-fill-mode: forwards;
-                overflow-x: hidden;
                 z-index: 100;
                 box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.04); }
                 .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv ul {
@@ -103,10 +99,9 @@
               .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text] {
                 width: 100%;
                 height: 15px;
-                padding: 10px;
-                border: none;
+                padding: 10px 10px;
+                border: 1px solid #d4d4d4;
                 border-radius: 5px;
-                box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
                 text-align: center;
                 font-size: 16px;
                 z-index: 1;
@@ -212,7 +207,7 @@
               color: #717171; }
             .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt p {
               max-height: 90px;
-              -webkit-line-clamp: 4;
+              -webkit-line-clamp: 3;
               line-clamp: 4;
               overflow: hidden;
               display: -webkit-box;
@@ -271,7 +266,7 @@
       width: 100%;
       display: flex;
       justify-content: center; }
-      .searches .searches_container .doc_btn a {
+      .searches .searches_container .doc_btn a, .searches .searches_container .doc_btn button {
         text-align: center;
         margin: auto;
         padding: 8px 0px;
@@ -282,6 +277,11 @@
         border-radius: 20px; }
       .searches .searches_container .doc_btn button:hover {
         background: linear-gradient(225deg, rgba(132, 158, 180, 0.841) 0%, rgba(36, 21, 133, 0.831) 100%); }
+
+.top {
+  top: 0;
+  overflow-y: hidden;
+  max-height: 100dvh; }
 
 .pin {
   width: 12.5px;
@@ -306,7 +306,6 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  position: sticky;
   margin: 0px auto;
   letter-spacing: 0.7px;
   color: #959595;
@@ -319,15 +318,24 @@
   background-color: rgba(159, 205, 255, 0.211);
   backdrop-filter: blur(50px); }
 
-@media (max-width: 900px) {
+@media (max-width: 1400px) {
   .searches {
-    height: 90dvh; }
+    display: block;
+    height: 100%; }
   .searches_container {
+    max-width: none !important;
+    margin: auto;
     padding: 0px !important;
     flex-direction: column;
-    gap: 10px !important; }
+    gap: 10px !important;
+    position: absolute;
+    z-index: 1000;
+    background-color: white; }
     .searches_container .mobile_filter_div {
-      background-color: rgba(194, 205, 255, 0.13);
+      position: sticky;
+      top: 0px;
+      width: 90%;
+      background-color: #f7f8ff;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -340,27 +348,30 @@
         border-radius: 15px;
         background-color: white; }
     .searches_container .filters_background {
-      top: 0;
-      height: 100%;
+      padding-top: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: scroll;
+      height: 100dvh;
       width: 100% !important;
       background-color: black;
-      position: absolute !important;
+      position: fixed !important;
       z-index: 2 !important;
       background-color: rgba(0, 0, 0, 0.307);
       backdrop-filter: blur(4px); }
       .searches_container .filters_background .filters {
         width: 90%;
-        margin: auto auto;
-        top: 90px;
-        max-width: 700px; }
-        .searches_container .filters_background .filters input[type=text] {
-          padding: 12.5px !important; }
+        max-width: 700px;
+        position: static; }
         .searches_container .filters_background .filters .filters_title {
           justify-content: space-between;
           border-radius: 10px 10px 0px 0px; }
     .searches_container .doctors {
       width: 100% !important;
-      height: 100% !important; }
+      height: 100% !important;
+      max-width: 1000px !important;
+      margin: auto; }
       .searches_container .doctors .doctor_container {
         margin: auto;
         height: 98%; }
@@ -392,8 +403,6 @@
             margin-bottom: 5px; }
             .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances {
               flex-direction: column !important; }
-              .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances img {
-                height: 20px !important; }
             .doctors .doctor_container .doctor .doc_info .doc_txt .locations {
               justify-content: center; }
               .doctors .doctor_container .doctor .doc_info .doc_txt .locations .clinics {

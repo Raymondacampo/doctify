@@ -208,14 +208,15 @@
     padding: 5px 5px 0px 0px; }
 
 #mydates {
-  background-color: white; }
+  background-color: rgba(255, 255, 255, 0.626);
+  padding-top: 1px;
+  width: 100%; }
 
 .mydates {
-  width: 100%;
-  max-width: 600px;
-  margin: 15px auto; }
-  .mydates h2 {
-    margin-left: 10px; }
+  width: 60%;
+  max-width: 1100px;
+  margin: 15px auto;
+  min-height: 50dvh; }
   .mydates hr {
     margin-bottom: 20px; }
   .mydates .dates_container {
@@ -224,7 +225,8 @@
     margin-bottom: 70px; }
   .mydates .date {
     width: 90%;
-    margin: auto;
+    max-width: 400px;
+    margin-left: 10px;
     margin-bottom: 15px;
     border-radius: 10px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
@@ -236,17 +238,109 @@
       margin-bottom: 5px;
       width: 100%; }
 
+.no_dates {
+  justify-content: center;
+  gap: 10px;
+  min-height: 40dvh;
+  width: 100%; }
+  .no_dates h1 {
+    text-align: center; }
+  .no_dates div {
+    gap: 25px; }
+    .no_dates div a {
+      background-color: navy;
+      color: white;
+      padding: 12.5px 50px;
+      border-radius: 5px; }
+
+.recent_doctors {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.626);
+  padding-top: 15px; }
+  .recent_doctors .recent_doctors_div {
+    width: 60%;
+    max-width: 900px;
+    margin: auto; }
+  .recent_doctors hr {
+    margin-top: 10px; }
+  .recent_doctors .doctors_container {
+    padding: 25px 15px;
+    gap: 15px; }
+    .recent_doctors .doctors_container .doctor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.151);
+      padding: 10px 15px;
+      border-radius: 10px;
+      width: 90%; }
+      .recent_doctors .doctors_container .doctor a {
+        white-space: nowrap; }
+      .recent_doctors .doctors_container .doctor div {
+        align-items: center;
+        display: flex; }
+      .recent_doctors .doctors_container .doctor img {
+        height: 90px;
+        width: 90px;
+        margin-right: 15px;
+        border-radius: 70px; }
+      .recent_doctors .doctors_container .doctor .btns_div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end; }
+        .recent_doctors .doctors_container .doctor .btns_div .profile_link {
+          padding: 9px 15px;
+          background-color: navy;
+          color: white;
+          border-radius: 5px; }
+        .recent_doctors .doctors_container .doctor .btns_div .delete_btn {
+          padding: 9px 15px;
+          background-color: red;
+          color: white;
+          border-radius: 5px; }
+
+.title p {
+  margin: 10px 0px; }
+
+.title hr {
+  border: none;
+  height: 4px;
+  width: 60px;
+  background-color: rgba(5, 7, 107, 0.755); }
+
+.ttl {
+  display: inline-block;
+  margin: auto; }
+  .ttl hr {
+    width: 85%;
+    border: none;
+    height: 4px;
+    margin-left: 10px; }
+
+.bigger {
+  font-size: 26px; }
+
 .big {
   font-size: 22px; }
 
 .med {
+  font-size: 18px; }
+
+.small {
   font-size: 14px; }
 
-.active {
+.active_div {
   background-color: white; }
 
-.unactive {
+.unactive_div {
   background-color: whitesmoke; }
+
+.active_hr {
+  background-color: #158223; }
+
+.active_hr {
+  background-color: #158223; }
 
 .marked {
   background-color: #c6c6c6 !important; }
@@ -293,18 +387,39 @@
 .accept {
   background-color: #00007d; }
 
-.col, .container .ensurance_cont .ensurance_options .ensurance_list .myensurances, .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances, .container .ensurance_cont .ensurance_options .ensurance_list .ensurances, .container .butrtons, .container .butrtons div, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .mydates .date div, .cont form, .favdoctors_container .favdoctors form {
+.col, .container .ensurance_cont .ensurance_options .ensurance_list .myensurances, .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances, .container .ensurance_cont .ensurance_options .ensurance_list .ensurances, .container .butrtons, .container .butrtons div, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .mydates .date div, .no_dates, .no_dates div, .recent_doctors .doctors_container, .cont form, .favdoctors_container .favdoctors form {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
 @media (max-width: 900px) {
+  .doctors_container {
+    padding: 25px 5px !important; }
+  .recent_doctors_div {
+    width: 95% !important; }
+  .title {
+    padding: 0px 30px !important; }
+    .title h1 {
+      margin-left: 10px; }
   .butrtons a {
     padding: 15px 70px !important; }
   .ensurance_list {
-    width: 90%; } }
+    width: 90%; }
+  .mydates {
+    width: 100%;
+    max-width: 600px; } }
 
 @media (max-width: 560px) {
+  .title {
+    padding: 0px 5px !important; }
+  .doctor {
+    width: 95% !important;
+    flex-wrap: wrap; }
+    .doctor img {
+      height: 80px !important;
+      width: 80px !important; }
+  .btns_div {
+    flex-direction: column; }
   .date {
     width: 85% !important; }
   .sec2 {
