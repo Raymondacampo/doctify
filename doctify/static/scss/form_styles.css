@@ -43,7 +43,7 @@
 
 .extra_container {
   width: 100%;
-  margin-bottom: 50px; }
+  margin-bottom: 30px; }
   .extra_container form {
     width: 100%; }
   .extra_container button {
@@ -71,7 +71,8 @@
   padding: 35px; }
   .form_title p {
     font-size: 14px;
-    letter-spacing: 0.5px; }
+    letter-spacing: 0.5px;
+    margin-bottom: 10px; }
   .form_title a {
     font-size: 16px; }
 
@@ -177,7 +178,15 @@ input[type=submit]:hover {
         width: 5%;
         height: auto; }
 
+.valid {
+  color: green; }
+
+.invalid {
+  color: red; }
+
 @media (max-width: 800px) {
+  .form_title {
+    padding: 35px 15px; }
   .google_form {
     width: 65% !important; }
   .signup_cont {

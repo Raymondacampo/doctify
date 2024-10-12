@@ -93,6 +93,7 @@ input[type="submit"]:hover{
     display: flex;
     align-items: center;
     height: 8dvh;   
+    min-height: 70px;
     .logo_container{
         display: flex; 
         align-items: center; 
@@ -123,7 +124,7 @@ input[type="submit"]:hover{
             .profile_list_div{
                 position: absolute;
                 right: 1px;
-                margin-top: 270px;
+                margin-top: 320px;
                 .contents{
                     background-color: white !important;
                     border-radius: 5px;
@@ -392,6 +393,14 @@ input[type="submit"]:hover{
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    gap: 15px;
+    button[type=submit]{
+        padding: 15px;
+        background-color: #23237e;
+        color: white;
+        border-radius: 15px;
+        font-size: 18px;
+    }
 }
 
 // OPEN SIGNIN DIV ANIMATIONS
@@ -406,7 +415,7 @@ input[type="submit"]:hover{
 }
 
 .bar1, .bar2, .bar3 {
-    width: 35px !important;
+    width: 30px !important;
     height: 5px !important;
     background-color: #333 !important;
     margin: 6px 0 !important;

@@ -12,11 +12,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='user',
-            name='phone',
-            field=phonenumber_field.modelfields.PhoneNumberField(default='000', max_length=128, region=None, unique=True),
-        ),
+
         migrations.AlterField(
             model_name='clientdates',
             name='date',

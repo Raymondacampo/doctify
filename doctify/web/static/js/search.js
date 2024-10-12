@@ -84,6 +84,8 @@ function App(){
 
 
     useEffect(() => {
+        console.log('hola')
+        getDoc();
         handleResize();
         phStartedValues();
         setCheckbox({
@@ -92,16 +94,19 @@ function App(){
             currentGender: 'both'
         });
         let handler = (e) => {
-            if(!divRef.current.contains(e.target)){
-                setShow({show:false})
-                document.querySelectorAll('input').forEach((t) => t.value = '')
+            if(divRef.current){
+                if(!divRef.current.contains(e.target)){
+                    setShow({show:false})
+                    document.querySelectorAll('input').forEach((t) => t.value = '')
+                }                
             }
+
+            return() => document.removeEventListener('mousedown', handler);
         }
 
 
         document.addEventListener('mousedown', handler);
         window.addEventListener('resize', handleResize)
-        window.addEventListener('scroll', handleScroll)
     }, []);
     // DEALS WITH HE RESIZE
     function handleResize(){
@@ -129,11 +134,6 @@ function App(){
         })  
     }
 
-    function handleScroll(){
-        console.log(document.querySelector('#mob_filters').screenY)
-        return() => removeEventListener('scroll', handleScroll)
-    }
-
     // DOCTOR RENDERING FUNCTION
     async function getDoc(gender){
         if(!gender){gender = checkbox.currentGender}
@@ -144,7 +144,6 @@ function App(){
             prev: result[2],
             next: result[3]
         })
-        console.log(result[0])
         if(result[0].length > 0){
             setDoctors(
                 <div className='doctor_render'>
@@ -160,13 +159,13 @@ function App(){
                                     <div>
                                         <div className='name_ensurances'>
                                             <div><h2><a href={`${d.id}/profile`}>{d.name}</a></h2></div>         
-                                            <div className='ensurances'>{d.ensurance_logo.length <= 3 ? d.ensurance_logo.map((e) => <img src={e} ></img>) : <h4>4+ Seguros</h4>}</div>                             
+                                            <div className='ensurances'>{d.ensurancesLogo.length <= 3 ? d.ensurancesLogo.map((e) => <img src={e} ></img>) : <h4>4+ Seguros</h4>}</div>                             
                                         </div>
                                         <div className='specialities'>
-                                            {d.speciality.map((s) => {s})}
+                                            {d.specialities.map((s) => {s})}
                                         </div>
                                         <div className='locations'>
-                                            <div style={{display: 'flex', gap: '8px'}}>{d.city.map((c) => <div className='city'>{c}<div className='pin'></div></div>)}</div>
+                                            <div style={{display: 'flex', gap: '8px'}}>{d.cities.map((c) => <div className='city'>{c}<div className='pin'></div></div>)}</div>
                                         </div>
                                         
                                     </div>

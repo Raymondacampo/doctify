@@ -48,9 +48,11 @@ class Ensurance(models.Model):
 class User(AbstractUser):
     profilePicture = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg')
     email = models.EmailField(unique=True)
+    phone = PhoneNumberField(blank=True)
     image = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg', blank=True)
     ensurance = models.ManyToManyField(Ensurance, related_name='ensurances')
     recent_doctors = models.ManyToManyField('Doctor')
+    is_doctor = models.BooleanField(default=False)
     def serialize(self):
         return{
             'profile_picture': self.profilePicture,
@@ -98,20 +100,17 @@ class Clinic(models.Model):
 class Doctor(models.Model):
     docuser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor')
     name = models.CharField(max_length=64, default='popo')
-    age = models.IntegerField()
     gender = models.CharField(choices=(('male', 'male'), ('female', 'female')), default='male', max_length=6)
-    specialities = models.ManyToManyField(Speciality, related_name="doctors")
+    specialities = models.ManyToManyField(Speciality, related_name="doctors", blank=True)
     clinics = models.ManyToManyField(Clinic, blank=True, related_name="doctors")
-    ensurances = models.ManyToManyField(Ensurance, related_name='doctors')
+    ensurances = models.ManyToManyField(Ensurance, related_name='doctors', blank=True)
     cities = MultiSelectField(choices=citiesList, max_choices=3, max_length=64, default='Santo Domingo')
-    image = models.URLField(default='https://i.imgflip.com/6yvpkj.jpg', blank=True)
     description = models.CharField(max_length=1000, blank=True)
-    experience = models.IntegerField()
+    renderizable = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"
     
-
         
     def serialize(self):
         def get_gender():
@@ -122,32 +121,24 @@ class Doctor(models.Model):
         return{
             'id':self.id,
             'name': get_gender(),
-            'age': self.age,
             'gender': self.gender,
-            'specialities':[s.specialities for s in self.specialities.all()],
+            'specialities':[s.speciality for s in self.specialities.all()],
             'clinics':[c.name for c in self.clinics.all()],
             'ensurances':[e.name for e in self.ensurances.all()],
             'cities': [c for c in self.cities],
-            'image':self.image,
+            'image':self.docuser.profilePicture,
             'description': self.description,
-            'experience': self.experience,
-            'contact': self.contacts,
-            'ensurancesLogo':[e.logo for e in self.ensurance.all()],
+            'ensurancesLogo':[e.logo for e in self.ensurances.all()],
             'profileLink': f'/{self.id}/profile',
             'descriptionLength': len(self.description),
-            'clinicMap': [c.map for c in self.clinics.all()],
-            'ensuranceLogo': [e.logo for e in self.ensurances.all()]
+            'clinicMap': [c.map for c in self.clinics.all()]
         }
     
-# class DoctorContacts(models.Model):
-#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='contacts')
-#     phone1 = PhoneNumberField(unique=True, null=True)
-#     phone2 = PhoneNumberField(unique=True, null=True)
-#     phone3 = PhoneNumberField(unique=True, null=True)
-#     phone4 = PhoneNumberField(unique=True, null=True)
-#     phone5 = PhoneNumberField(unique=True, null=True)
-#     instagram = models.URLField(null=True)
-#     facebook = models.URLField(null=True)
+class DoctorContacts(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='contacts')
+    phone1 = PhoneNumberField(unique=True, null=True)
+    instagram = models.URLField(null=True)
+    facebook = models.URLField(null=True)
     
 
 daysToPick = (
@@ -157,7 +148,8 @@ daysToPick = (
     (3, 'Wednesday'),
     (4, 'Thursday'),
     (5, 'Friday'),
-    (6, 'Saturday')
+    (6, 'Saturday'),
+    ('web', 'days')
 )
 
 def toMil(val):
@@ -171,7 +163,8 @@ for i in range(24):
 modalidades = [
     ('Presencial', 'Presencial'),
     ('Virtual', 'Virtual'),
-    ('Ambas', 'Ambas')
+    ('Ambas', 'Ambas'),
+    ('web', 'days')
 ]
 
 minToPick = [
@@ -180,59 +173,59 @@ minToPick = [
     ]
     
     
-# class DoctorDate(models.Model):
-#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='dates')
-#     clinica = models.ForeignKey(Clinic, on_delete=models.CASCADE, default=0,related_name='dates')
-#     especialidad = models.ForeignKey(Speciality, on_delete=models.CASCADE, default=0,related_name='dates')
-#     precio = models.IntegerField()
-#     days = MultiSelectField(choices=daysToPick, max_length=300)
-#     horas = MultiSelectField(choices=hoursToPick, max_length=300)
-#     modalidad = models.CharField(choices=modalidades, max_length=300)
-#     def __str__(self):
-#         return f'{self.doctor} Schedule in {self.clinica}'
+class DoctorDate(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='dates')
+    clinica = models.ForeignKey(Clinic, on_delete=models.CASCADE, default=0,related_name='dates')
+    especialidad = models.ForeignKey(Speciality, on_delete=models.CASCADE, default=0,related_name='dates')
+    precio = models.IntegerField()
+    days = MultiSelectField(choices=daysToPick, max_length=300)
+    horas = MultiSelectField(choices=hoursToPick, max_length=300)
+    modalidad = models.CharField(choices=modalidades, max_length=300)
+    def __str__(self):
+        return f'{self.doctor} Schedule in {self.clinica}'
     
-#     def serialize(self):
-#         return {
-#             'doctor': self.doctor.name,
-#             'clinic': self.clinica.name,
-#             'days': [int(d) for d in self.days],
-#             'hours': [h for h in self.horas],
-#             'strhours': [str(h) for h in self.horas]
-#         }
+    def serialize(self):
+        return {
+            'doctor': self.doctor.name,
+            'clinic': self.clinica.name,
+            'days': [int(d) for d in self.days],
+            'hours': [h for h in self.horas],
+            'strhours': [str(h) for h in self.horas]
+        }
 
-# class ClientDate(models.Model):
-#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, default=1, related_name='clientDates')
-#     clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, default=1, related_name='clientDates')
-#     date = models.DateField()
-#     time = models.CharField(max_length=5, default='00:00')
-#     client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='clientDates')
-#     isActive = models.BooleanField(default=True)
+class ClientDate(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, default=1, related_name='clientDates')
+    clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, default=1, related_name='clientDates')
+    date = models.DateField()
+    time = models.CharField(max_length=5, default='00:00')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='clientDates')
+    isActive = models.BooleanField(default=True)
 
-#     def __str__(self):
-#         return f'{self.client} date with {self.doctor} on {self.date} {self.time}'
+    def __str__(self):
+        return f'{self.client} date with {self.doctor} on {self.date} {self.time}'
 
-#     def serialize(self):
-#         def thetime(time):
-#             hours, minutes = time.split(':')
-#             hours = int(hours)
-#             timevalue = ''
-#             if hours == 12:
-#                 timevalue = f'{hours}:{minutes} PM'
-#             elif hours == 0:
-#                 timevalue = f'12:{minutes} AM'
-#             elif hours > 12:
-#                 hours = hours - 12
-#                 timevalue = f'{hours}:{minutes} PM'
-#             else:
-#                 timevalue = f'{hours}:{minutes} AM'
-#             return timevalue
-#         return {
-#             'id':self.id,
-#             'doctor': self.doctor.serialize(),
-#             'clinic':self.clinic.name,
-#             'client': self.client.username,
-#             'date': self.date,
-#             'time': thetime(self.time),
-#             'isactive': self.isActive
-#         }
+    def serialize(self):
+        def thetime(time):
+            hours, minutes = time.split(':')
+            hours = int(hours)
+            timevalue = ''
+            if hours == 12:
+                timevalue = f'{hours}:{minutes} PM'
+            elif hours == 0:
+                timevalue = f'12:{minutes} AM'
+            elif hours > 12:
+                hours = hours - 12
+                timevalue = f'{hours}:{minutes} PM'
+            else:
+                timevalue = f'{hours}:{minutes} AM'
+            return timevalue
+        return {
+            'id':self.id,
+            'doctor': self.doctor.serialize(),
+            'clinic':self.clinic.name,
+            'client': self.client.username,
+            'date': self.date,
+            'time': thetime(self.time),
+            'isactive': self.isActive
+        }
     

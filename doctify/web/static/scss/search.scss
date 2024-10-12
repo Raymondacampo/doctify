@@ -141,12 +141,8 @@
                             }
                                 }                        
                     }
-
-                }   
-            
+                }               
                 }
-
-            
         }            
     
 
@@ -165,6 +161,7 @@
             // DOCOTR RESULTS
 
             .doctor_container{
+                height: 100%;
                 display: flex;
                 flex-direction: column;
                 width: 100%;
@@ -427,8 +424,6 @@
         padding: 0px !important;
         flex-direction: column;
         gap: 10px !important;
-        position: absolute;
-        z-index: 1000;
         background-color: white;
         .mobile_filter_div{
             position: sticky;

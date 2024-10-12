@@ -26,12 +26,17 @@ urlpatterns = [
     path('city', views.cities, name='cities'),
     path('getvalue/<str:type>', views.getValue, name='getvalue'),
 
+    # My account renders
     path('myaccount/dates', views.dates, name='dates'),
-    path('myaccount/recent_doctors', views.recent_doctors, name='recent_doctors'),
-    path('myaccount/configurate', views.configurate, name='configurate'),
+    path('myaccount/recent', views.recent, name='recent'),
+    path('myaccount/configurate', views.profile_configurate, name='configurate'),
+    path('myaccount/personal_info', views.personal_info, name='personal'),
+    path('myaccount/doctor_profile', views.doctor_profile, name='doc_prof'),
 
     # My account functions
     path("myaccount/mydates", views.mydates, name='mydates'),
     path('myaccount/canceldate/<int:date_id>', views.canceldate, name='canceldate'),
+    path('myaccount/user_info', views.user_info, name='user_info'),
 
+    path('accounts/doctor_signup', views.doctor_signup, name='doctor_signup'),
 ]

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'sass_processor',
     'web',
+    'debug_toolbar',
     "phonenumber_field",
     'django.contrib.admin',
     
@@ -62,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -86,6 +87,7 @@ TEMPLATES = [
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
+        'EMAIL_AUTHENTICATION': True,
         'SCOPE': [
             'profile',
             'email',
@@ -94,6 +96,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
+        'FETCH_USERINFO': True
     }
 }
 
@@ -149,6 +152,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+INTERNAL_IPS = [
+    # Permite la depuración en IPs locales
+    '127.0.0.1',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -178,9 +185,20 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'raymondacamposandoval@gmail.com'
 EMAIL_HOST_PASSWORD = 'crcu hjmv ntee ayez'
 
+SOCIALACCOUNT_ADAPTER = 'populate_user'
+SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
+SOCIALACCOUNT_LOGIN_ON_GET=True
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'web.views.request.session["curr_page"]'
+SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 
-ACCOUNT_AUTHENTICATION_METHOD ='email'
+ACCOUNT_AUTHENTICATION_METHOD ='username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = 'True'
+ACCOUNT_FORMS={
+    'signup':'web.forms.CustomUser'
+}
+
+SECURE_REFERRER_POLICY= "strict-origin-when-cross-origin"

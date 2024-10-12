@@ -1,171 +1,114 @@
-.container {
-  min-height: 80dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  background-color: white;
+.body_container {
   width: 100%;
-  max-width: 1200px;
-  margin: auto;
-  margin-top: 20px;
-  padding: 40px 0px 30px 0px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.113);
-  border-radius: 10px; }
-  .container .profile_picture {
+  background-color: #fdfdfd; }
+  .body_container .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px auto; }
-    .container .profile_picture img {
-      height: 200px;
-      border-radius: 100px; }
-  .container button {
-    color: white;
+    gap: 5px;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 40px 0px 50px 0px;
     border-radius: 10px;
-    padding: 15px 20px;
-    font-weight: 600; }
-  .container a {
-    color: white;
-    border-radius: 10px;
-    padding: 15px 20px;
-    font-weight: 600; }
-  .container .ensurance_cont {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px; }
-    .container .ensurance_cont div {
+    gap: 30px; }
+    .body_container .container h4 {
+      color: #0c0c68; }
+    .body_container .container .profile_picture {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0px auto;
+      gap: 10px; }
+      .body_container .container .profile_picture img {
+        height: 100px;
+        border-radius: 100px; }
+    .body_container .container .options_container {
+      width: 90%;
+      gap: 3%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px; }
-    .container .ensurance_cont .box_prof_ens {
-      height: 80px;
-      width: 80px; }
-      .container .ensurance_cont .box_prof_ens img {
-        height: 100%;
-        width: 100%; }
-    .container .ensurance_cont .ensurance_options {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(117, 117, 117, 0.238);
-      backdrop-filter: blur(5px); }
-      .container .ensurance_cont .ensurance_options .ensurance_list {
-        position: relative;
-        width: 95%;
-        max-width: 1000px;
-        background-color: white;
+      justify-content: center; }
+      .body_container .container .options_container .link_title {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 20px;
-        padding: 5px 10px 20px 10px;
-        animation-name: down_cont;
-        animation-duration: 0.8s;
-        animation-fill-mode: forwards;
-        border-radius: 15px; }
-        .container .ensurance_cont .ensurance_options .ensurance_list .myensurances {
-          gap: 10px; }
-          .container .ensurance_cont .ensurance_options .ensurance_list .myensurances .action {
-            display: flex;
-            flex-direction: column;
-            align-items: center; }
-            .container .ensurance_cont .ensurance_options .ensurance_list .myensurances .action button:disabled {
-              background-color: rgba(128, 128, 128, 0.407);
-              cursor: default; }
-        .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances {
-          gap: 10px;
-          width: 100%; }
-        .container .ensurance_cont .ensurance_options .ensurance_list form {
-          width: 100%;
+        gap: 5px; }
+        .body_container .container .options_container .link_title svg {
+          display: block;
+          height: 20px;
+          position: relative;
+          top: -2px; }
+      .body_container .container .options_container a {
+        width: 40%;
+        min-width: 320px; }
+        .body_container .container .options_container a .link_cont {
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.142);
+          border: 2px solid #b3b3b3;
+          background-color: white;
+          border-radius: 5px;
+          margin-top: 6%;
+          height: 80px;
+          padding: 10px;
           display: flex;
           flex-direction: column;
-          gap: 10px; }
-        .container .ensurance_cont .ensurance_options .ensurance_list div {
-          display: flex; }
-        .container .ensurance_cont .ensurance_options .ensurance_list .ensurances {
-          max-height: 500px;
-          border-radius: 15px;
-          padding: 20px 5px;
-          gap: 30px;
-          justify-content: center;
-          margin: auto;
-          align-items: center; }
-          .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            max-height: 400px;
-            overflow-y: overlay;
-            justify-content: center; }
-            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li {
-              display: flex;
-              flex-direction: column;
-              font-size: 12px;
-              font-weight: 600;
-              align-items: center;
-              padding: 10px 20px; }
-              .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li div {
-                display: flex;
-                flex-direction: column;
-                align-items: center; }
-              .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li img {
-                height: 80px;
-                width: 80px;
-                border-radius: 200px;
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.088); }
-            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul li:hover {
-              cursor: pointer; }
-            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul .unselected {
-              border: 2px solid white; }
-            .container .ensurance_cont .ensurance_options .ensurance_list .ensurances ul .selected {
-              border: 2px solid #19baff;
-              box-shadow: 1px 1px 5px #19baff; }
-        .container .ensurance_cont .ensurance_options .ensurance_list .s {
-          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.082); }
-        .container .ensurance_cont .ensurance_options .ensurance_list .add_ens {
           gap: 10px;
-          display: flex;
-          align-items: center; }
-          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens span {
-            font-weight: 600;
-            font-size: 18px; }
-          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens button {
-            background-color: navy;
-            color: white;
-            padding: 15px 45px;
-            border-radius: 15px; }
-          .container .ensurance_cont .ensurance_options .ensurance_list .add_ens button:disabled {
-            background-color: rgba(60, 60, 146, 0.364);
-            cursor: default; }
-  .container .butrtons {
+          letter-spacing: 0.5px; }
+        .body_container .container .options_container a div:hover {
+          background-color: rgba(205, 233, 255, 0.565); }
+    .body_container .container .down_btns {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px; }
+      .body_container .container .down_btns a {
+        padding: 15px 30px;
+        border-radius: 5px; }
+      .body_container .container .down_btns .lo_btn {
+        background-color: #000098;
+        color: white; }
+      .body_container .container .down_btns .lo_btn:hover {
+        background-color: navy; }
+
+.info_body {
+  width: 100%;
+  background-color: #fdfdfd;
+  padding: 30px 0px; }
+  .info_body .info_container {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    width: 100%;
+    max-width: 900px;
     margin: auto;
-    gap: 60px; }
-    .container .butrtons div {
-      gap: 30px; }
-      .container .butrtons div button {
-        width: 150px;
-        background-color: white;
-        color: black;
-        border-radius: 15px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.158);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        padding: 12px 100px; }
-        .container .butrtons div button img {
-          height: 25px; }
-      .container .butrtons div .logout_btn {
-        background-color: navy;
-        color: white;
-        font-weight: 600; }
-      .container .butrtons div .logout_btn:hover {
-        background-color: rgba(0, 0, 128, 0.771); }
-      .container .butrtons div a:hover {
-        background-color: rgba(243, 243, 243, 0.466); }
+    padding: 0px 10px; }
+    .info_body .info_container .profile_list {
+      min-width: 160px; }
+      .info_body .info_container .profile_list ul {
+        list-style: none; }
+        .info_body .info_container .profile_list ul li {
+          padding: 25px 10px;
+          letter-spacing: 0.5px; }
+        .info_body .info_container .profile_list ul .selected_list {
+          border-bottom: 2px solid navy; }
+        .info_body .info_container .profile_list ul li:hover {
+          background-color: #f8f8f8; }
+    .info_body .info_container .profile_form_body {
+      width: 100%; }
+      .info_body .info_container .profile_form_body .profile_form_content {
+        max-width: 620px;
+        margin-top: 30px; }
+        .info_body .info_container .profile_form_body .profile_form_content .display_data_div {
+          padding: 20px 0px;
+          display: flex;
+          gap: 25%;
+          width: 100%;
+          border-top: 1px solid #b3b3b3; }
+          .info_body .info_container .profile_form_body .profile_form_content .display_data_div p {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis; }
+          .info_body .info_container .profile_form_body .profile_form_content .display_data_div a {
+            color: #0c87ce; }
 
 .confirm_remove {
   display: flex;
@@ -207,60 +150,10 @@
   .close_div button {
     padding: 5px 5px 0px 0px; }
 
-#mydates {
-  background-color: rgba(255, 255, 255, 0.626);
-  padding-top: 1px;
-  width: 100%; }
-
-.mydates {
-  width: 60%;
-  max-width: 1100px;
-  margin: 15px auto;
-  min-height: 50dvh; }
-  .mydates hr {
-    margin-bottom: 20px; }
-  .mydates .dates_container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 70px; }
-  .mydates .date {
-    width: 90%;
-    max-width: 400px;
-    margin-left: 10px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
-    padding: 8px 15px; }
-    .mydates .date div {
-      width: 100%;
-      margin-bottom: 10px; }
-    .mydates .date span {
-      margin-bottom: 5px;
-      width: 100%; }
-
-.no_dates {
-  justify-content: center;
-  gap: 10px;
-  min-height: 40dvh;
-  width: 100%; }
-  .no_dates h1 {
-    text-align: center; }
-  .no_dates div {
-    gap: 25px; }
-    .no_dates div a {
-      background-color: navy;
-      color: white;
-      padding: 12.5px 50px;
-      border-radius: 5px; }
-
 .recent_doctors {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.626);
   padding-top: 15px; }
-  .recent_doctors .recent_doctors_div {
-    width: 60%;
-    max-width: 900px;
-    margin: auto; }
   .recent_doctors hr {
     margin-top: 10px; }
   .recent_doctors .doctors_container {
@@ -300,14 +193,58 @@
           color: white;
           border-radius: 5px; }
 
+.recent_doctors_div, .mydates {
+  width: 60%;
+  max-width: 900px;
+  margin: auto; }
+
+#mydates {
+  background-color: rgba(255, 255, 255, 0.626);
+  padding-top: 1px;
+  width: 95%;
+  padding: 0px 2.5%; }
+
+.mydates hr {
+  margin-bottom: 20px; }
+
+.mydates .dates_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 70px;
+  padding: 0px 15px; }
+
+.mydates .date {
+  width: 90%;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
+  padding: 8px 15px;
+  background-color: rgba(194, 205, 255, 0.13); }
+  .mydates .date div {
+    width: 100%;
+    margin-bottom: 10px; }
+  .mydates .date span {
+    margin-bottom: 5px;
+    width: 100%; }
+
+.no_dates {
+  justify-content: center;
+  gap: 10px;
+  min-height: 40dvh;
+  width: 100%; }
+  .no_dates h1 {
+    text-align: center; }
+  .no_dates div {
+    gap: 25px; }
+    .no_dates div a {
+      background-color: navy;
+      color: white;
+      padding: 12.5px 50px;
+      border-radius: 5px; }
+
 .title p {
   margin: 10px 0px; }
-
-.title hr {
-  border: none;
-  height: 4px;
-  width: 60px;
-  background-color: rgba(5, 7, 107, 0.755); }
 
 .ttl {
   display: inline-block;
@@ -319,13 +256,15 @@
     margin-left: 10px; }
 
 .bigger {
-  font-size: 26px; }
+  font-size: 26px;
+  text-align: center; }
 
 .big {
   font-size: 22px; }
 
 .med {
-  font-size: 18px; }
+  font-size: 18px;
+  text-align: center; }
 
 .small {
   font-size: 14px; }
@@ -339,13 +278,13 @@
 .active_hr {
   background-color: #158223; }
 
-.active_hr {
-  background-color: #158223; }
+.enmark {
+  border: none;
+  height: 4px;
+  width: 60px;
+  background-color: rgba(5, 7, 107, 0.755); }
 
-.marked {
-  background-color: #c6c6c6 !important; }
-
-.absolutly, .container .ensurance_cont .ensurance_options, .favdoctors_container {
+.absolutly, .favdoctors_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -356,23 +295,22 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.353);
   z-index: 1040; }
-  .absolutly ul, .container .ensurance_cont .ensurance_options ul, .favdoctors_container ul {
+  .absolutly ul, .favdoctors_container ul {
     list-style: none; }
 
 .cont, .favdoctors_container .favdoctors {
   background-color: white;
   width: clamp(320px, 100%, 400px);
-  padding: 5px; }
+  padding: 10px;
+  border-radius: 5px; }
+  .cont .change, .favdoctors_container .favdoctors .change {
+    height: 30px; }
   .cont form, .favdoctors_container .favdoctors form {
     padding: 15px;
     margin-top: 5px;
     gap: 15px; }
   .cont button[type=submit], .favdoctors_container .favdoctors button[type=submit] {
     margin: auto; }
-
-.bb, .cont, .favdoctors_container .favdoctors {
-  border-radius: 10px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.124); }
 
 .cancel {
   background-color: rgba(222, 0, 0, 0.887);
@@ -387,29 +325,44 @@
 .accept {
   background-color: #00007d; }
 
-.col, .container .ensurance_cont .ensurance_options .ensurance_list .myensurances, .container .ensurance_cont .ensurance_options .ensurance_list .add_ensurances, .container .ensurance_cont .ensurance_options .ensurance_list .ensurances, .container .butrtons, .container .butrtons div, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .mydates .date div, .no_dates, .no_dates div, .recent_doctors .doctors_container, .cont form, .favdoctors_container .favdoctors form {
+.col, .info_body .info_container .profile_form_body .profile_form_content, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .mydates .date div, .no_dates, .no_dates div, .cont form, .favdoctors_container .favdoctors form {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
 @media (max-width: 900px) {
+  .display_data_div {
+    gap: 15% !important; }
+  .profile_list {
+    display: none; }
+  .profile_form_body {
+    width: 90% !important;
+    max-width: 620px;
+    margin: auto; }
   .doctors_container {
     padding: 25px 5px !important; }
-  .recent_doctors_div {
+  .recent_doctors_div, .mydates {
     width: 95% !important; }
   .title {
     padding: 0px 30px !important; }
     .title h1 {
       margin-left: 10px; }
-  .butrtons a {
-    padding: 15px 70px !important; }
-  .ensurance_list {
-    width: 90%; }
+  .ttl {
+    padding: 0px 30px !important; }
   .mydates {
     width: 100%;
     max-width: 600px; } }
 
 @media (max-width: 560px) {
+  .big {
+    font-size: 20px; }
+  .small {
+    font-size: 12px; }
+  .container {
+    gap: 10px !important;
+    padding: 10px 0px !important; }
+  .link_cont {
+    gap: 15px !important; }
   .title {
     padding: 0px 5px !important; }
   .doctor {
@@ -420,19 +373,9 @@
       width: 80px !important; }
   .btns_div {
     flex-direction: column; }
+  .dates_container {
+    padding: 0px 5px !important; }
   .date {
-    width: 85% !important; }
-  .sec2 {
-    margin: auto !important; }
-  .ensurance_list {
-    padding: 0px !important; }
-  .butrtons div {
-    flex-direction: column;
-    align-items: center; }
-  .myensurances {
-    gap: 5px; }
-  .ensurance img {
-    height: 70px !important;
-    width: 70px !important; } }
+    margin: 0px !important; } }
 
 /*# sourceMappingURL=myprofile.css.map */

@@ -126,6 +126,7 @@
       overflow-y: scroll;
       bottom: 10px; }
       .searches .searches_container .doctors .doctor_container {
+        height: 100%;
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -328,8 +329,6 @@
     padding: 0px !important;
     flex-direction: column;
     gap: 10px !important;
-    position: absolute;
-    z-index: 1000;
     background-color: white; }
     .searches_container .mobile_filter_div {
       position: sticky;

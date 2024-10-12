@@ -52,7 +52,11 @@
     {% endblock %}
     
     {% if user.is_authenticated %}
-        <script type="text/babel" src="{% static 'js/profilelist.js' %}"></script>
+        {% if user.is_doctor %}
+            <script type="text/babel" src="{% static 'js/docprofilelist.js' %}"></script>
+        {% else %}
+            <script type="text/babel" src="{% static 'js/profilelist.js' %}"></script>
+        {% endif %}
     {% else %}
         <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
     {% endif %}

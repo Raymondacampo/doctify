@@ -2,22 +2,20 @@
 import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Speciality, Ensurance, Clinic, Doctor, User, citiesList
-from django import forms
+from .models import Speciality, Ensurance, Clinic, Doctor, User, citiesList, ClientDate
 from django.db import IntegrityError
 from django.http import JsonResponse
 import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.validators import validate_international_phonenumber
 from django.core.paginator import Paginator
 from geopy.geocoders import Nominatim
 import requests
 import json
 from django.views.decorators.csrf import csrf_exempt
-from google.oauth2 import id_token
-from google.auth.transport import requests
 from django.contrib.auth.decorators import login_required
+from .forms import uDocForm, sDocForm
 
 
 def index(request):
@@ -29,6 +27,8 @@ def index(request):
     request.session['user_loc'] = []
     request.session['dateVal'] = []
     speciality = Speciality.objects.all()
+
+    
     return render(request, 'web/index.html', {
         'speciality': speciality
     })
@@ -39,24 +39,44 @@ def redirect_page(request):
 
     return redirect(request.session['curr_page'])
 
+
 # USER PAGES
 
 def dates(request):
     # dates = ClientDate.objects.filter(client = request.user)
     return render(request, 'myaccount/dates.html',{
-        'dates': 'dates'
+        'u': request.user
     })
 
-def recent_doctors(request):
+def recent(request):
     u = request.user
-    return render(request, 'myaccount/recent_doctors.html',{
-        'doctors': [d for d in u.recent_doctors.all()]
+    if u.is_doctor:
+        print('yes')
+        doc = Doctor.objects.get(docuser = u)
+        dates = ClientDate.objects.filter(doctor = doc)
+    else:
+        print('no')
+        dates = u.recent_doctors.all()
+
+    return render(request, 'myaccount/recent.html',{
+        'dates': [d for d in dates], 
     })
 
 
-def configurate(request):
-        return render(request, 'myaccount/configuration.html')
+def profile_configurate(request):
+    doc = Doctor.objects.get(docuser = request.user)
+    return render(request, 'myaccount/profile_config.html', {'doctor':doc.serialize()})
 
+def doctor_profile(request):
+    return render(request, 'myaccount/doctor_profile.html')
+
+def personal_info(request):
+    return render(request, 'myaccount/personal_info.html')
+
+
+def user_info(request):
+    u = request.user
+    return JsonResponse(u.username, safe=False)
 
 @login_required(login_url='/accounts/login/')
 def myuser(request):
@@ -102,119 +122,67 @@ def remove_ensurance(request, ens_id):
 
 @login_required(login_url='/accounts/login/')
 def mydates(request):
-    # dates = ClientDate.objects.filter(client = request.user)
+    u = request.user
+    if u.is_doctor:
+        doc = Doctor.objects.get(docuser = u)
+        dates = ClientDate.objects.filter(doctor = doc)
+    else:
+        dates = ClientDate.objects.filter(client = u)
     activelist = []
     unactivelist = []
-    # for d in dates:
-    #     d = d.serialize()
-    #     if d['isactive']:
-    #         activelist.append(d)
-    #     else:
-    #         unactivelist.append(d)
+    for d in dates:
+        d = d.serialize()
+        if d['isactive']:
+            activelist.append(d)
+        else:
+            unactivelist.append(d)
 
-    return JsonResponse([activelist, unactivelist], safe=False)
+    return JsonResponse([activelist, unactivelist, u.is_doctor], safe=False)
 
 @login_required(login_url='/accounts/login/')
 def favdoctors(request):
     # docs = ClientDate.objects.filter(user = request.user)
     return JsonResponse('docs', safe=False)
 
-
-
-# ACCOUNT CREATIONS
-# def signin(request):
-#     if request.method == 'POST':
-#         data = json.loads(request.body)
-#         user_name = data.get('user')
-#         password = data.get('password')
-#         user = authenticate(username=user_name, password=password)
-#         if user:
-#             login(request, user)
-#             return JsonResponse(True, safe=False)
-#         else:
-#             return JsonResponse([False, 'Usuario o contrasena incorrectos!'], safe=False)            
-        
-#     return render(request, 'web/signin.html')
-
-# def doc_signup(request):
-#     form = createUser(request.POST)
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             fname = form.cleaned_data['doc_fname']
-#             lname = form.cleaned_data['doc_lname']
-#             email = form.cleaned_data['email']
-#             password = form.cleaned_data['password']
-#             confirmation = form.cleaned_data['password2']
-#             phone = form.cleaned_data['phone']
-#             username = form.cleaned_data['username']
-
-#             if password != confirmation:
-#                 return render(request, 'web/docsignup.html', {
-#                     'pmessage':'Passwords wont match',
-#                     'form':form
-#                 })
-#         else:
-#             return render(request, 'web/docsignup.html', {
-#                 'pherror':form.errors.items,
-#                 'form':form
-#             })
-
-#         try:
-#             docUser = User.objects.create(username = username, first_name = fname, last_name = lname, email = email, phone =phone, password = password)
-#             doctor = Doctor.objects.create(docuser = docUser, name= f'{fname} {lname}', contact = phone.national_number)
-#             login(request, docUser)
-
-#             return redirect('myuser')
-        
-#         except IntegrityError:
-#             if clear('email', email):
-#                 return render(request, 'web/docsignup.html', {
-#                     'emessage':'Email already taken',
-#                     'form':form
-#                 })
-#             if clear('phone', phone):
-#                 return render(request, 'web/docsignup.html', {
-#                     'phmessage':'Phone number already taken',
-#                     'form':form
-#                 })
-#             if clear('username', username):
-#                 return render(request, 'web/docsignup.html', {
-#                     'umessage':'Username taken!',
-#                     'form':form
-#                 })
-
-#     return render(request, 'web/docsignup.html', {
-#         'form': createUser()    })
-
-# def signup(request):
-    form = createUser(request.POST)
+def doctor_signup(request):
     if request.method == 'POST':
-        if form.is_valid():
-            user_name = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        if request.user.is_authenticated:
+            form = sDocForm(request.POST)
+
+            if form.is_valid():
+                return redirect('index')
+            else:
+                return render(request, 'account/doctor_signup.html', {
+                'form': sDocForm(request.POST)
+            })
         else:
-            print(form.cleaned_data)
-        # try:
-        #     u = User.objects.create_user(user_name, email, password)
-        #     u.save()
-            
-        # except IntegrityError:
-            return render(request, 'web/signup.html', {
-                    'message':'Username taken!',
-                    'form':createUser()
-                })
-        # if request.session['dateVal']:
-        #     login(request, u)
-        #     return redirect('makedate', args=[request.session['dateVal'][0]])
-        # else:
-        #     login(request, u)
-        #     return redirect('index')
-    
+            form = uDocForm(request.POST)
+
+            if form.is_valid():
+                form.save(request)
+                u = request.POST['username']
+                p = request.POST['password1']
+                user = authenticate(request, username=u, password=p)
+                user.is_doctor = True
+                user.save()
+                login(request, user)
+                return redirect('index')
+            else:
+                return render(request, 'account/doctor_signup.html', {
+                'form': uDocForm(request.POST)
+            })
     else:
-        return render(request, 'web/signup.html', {
-            'form': createUser()
+        if request.user.is_authenticated:
+            if request.user.is_doctor:
+                return redirect('index')
+            form = sDocForm()
+        else:
+            form = uDocForm()
+            request.session['curr_page'] = 'doctor_signup'
+        return render(request, 'account/doctor_signup.html', {
+            'form': form
         })
+
 
 def logout_view(request):
     logout(request)
@@ -292,8 +260,8 @@ def profile(request, doctor_id):
         docdates = None
     return render(request, "web/profile.html", {
         'doctor': doc.serialize(),
-        'ens': doc.ensurance.all().values(),
-        'clinics': doc.clinic.all().values(),
+        'ens': doc.ensurances.all().values(),
+        'clinics': doc.clinics.all().values(),
         'docDates': docdates
         })
 
@@ -352,37 +320,37 @@ def doctor(request):
     docList =[]
 
     if speciality and ensurance and clinic and gender and city:
-        doctores = Doctor.objects.filter(speciality = speciality, ensurance = ensurance, clinic = clinic, gender = gender, city__icontains=city)
+        doctores = Doctor.objects.filter(specialities = speciality, ensurances = ensurance, clinics = clinic, gender = gender, cities__icontains=city)
     elif speciality and ensurance:
-        doctores = Doctor.objects.filter(speciality = speciality, ensurance = ensurance)    
+        doctores = Doctor.objects.filter(specialities = speciality, ensurances = ensurance)    
     elif speciality and clinic:
-        doctores = Doctor.objects.filter(speciality = speciality, clinic = clinic)
+        doctores = Doctor.objects.filter(specialities = speciality, clinics = clinic)
     elif speciality and gender:
-        doctores = Doctor.objects.filter(speciality = speciality, gender = gender)
+        doctores = Doctor.objects.filter(specialities = speciality, gender = gender)
     elif speciality and city:
-        doctores = Doctor.objects.filter(speciality = speciality, city__icontains=city)
+        doctores = Doctor.objects.filter(specialities = speciality, cities__icontains=city)
     elif ensurance and clinic:
-        doctores = Doctor.objects.filter(ensurance = ensurance, clinic = clinic)
+        doctores = Doctor.objects.filter(ensurances = ensurance, clinics = clinic)
     elif ensurance and gender:
-        doctores = Doctor.objects.filter(ensurance = ensurance, gender = gender)
+        doctores = Doctor.objects.filter(ensurances = ensurance, gender = gender)
     elif ensurance and city:
-        doctores = Doctor.objects.filter(speciality = speciality, city__icontains=city)
+        doctores = Doctor.objects.filter(specialities = speciality, cities__icontains=city)
     elif gender and clinic:
-        doctores = Doctor.objects.filter(gender = gender, clinic = clinic)
+        doctores = Doctor.objects.filter(gender = gender, clinics = clinic)
     elif gender and city:
-        doctores = Doctor.objects.filter(speciality = speciality, city__icontains=city)
+        doctores = Doctor.objects.filter(specialities = speciality, cities__icontains=city)
     elif clinic and city:
-        doctores = Doctor.objects.filter(speciality = speciality, city__icontains=city)
+        doctores = Doctor.objects.filter(specialities = speciality, cities__icontains=city)
     elif speciality:
-        doctores = Doctor.objects.filter(speciality = speciality)
+        doctores = Doctor.objects.filter(specialities = speciality)
     elif ensurance:
         doctores = Doctor.objects.filter(ensurance = ensurance)
     elif clinic:
-        doctores = Doctor.objects.filter(clinic = clinic)
+        doctores = Doctor.objects.filter(clinics = clinic)
     elif gender:
         doctores = Doctor.objects.filter(gender = gender)
     elif city:
-        doctores = Doctor.objects.filter(city__icontains=city)
+        doctores = Doctor.objects.filter(cities__icontains=city)
     else:
         doctores = Doctor.objects.all()
 
