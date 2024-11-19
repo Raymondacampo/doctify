@@ -61,82 +61,96 @@
 
 .indx_search_cont{
     display: flex;
-    justify-content: center;
-    font-weight: 600;
-    .sbDiv{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        gap: 10px;
-        div{
-            margin:10px;
-            .listDiv{
-                margin: 0px !important;
-                position: absolute;
-                width: 340px;
-                overflow-y: scroll;
-                border-radius: 0px 0px 0px 5px;
-                animation-name: display_list;
-                animation-duration: 0.5s;
-                animation-fill-mode: forwards;
-                overflow-x: hidden;
-                ul{
-                    width: 100%;
-                    li{
-                        width: 100%;
-                        list-style: none;
-                        background-color: white;
-                        font-size: 16px;
-                        color: rgba(0, 0, 0, 0.508);
-                        button{
-                            padding: 20px 0px;
-                            width: 100%;
-                            padding: 20px 0px 20px 10px;
-                        }
-                    }
-                    .noResultList{
-                        padding: 20px;
-                    }
-                }
-            }
-            .closedListDiv{
-                margin: 0px !important;
-            }
-
-
-        }
-    }
-    input[type=text]{
-        border: none;
-        height: 20px;
-        width: 320px;
-        background-color: white;
-        color: black;
-        padding: 10px;
-        text-align: center;
-        font-size: 16px;
-        box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.334);
-        font-weight: 600;
-        color: #23237e;
-    }
-    
-    input[type=text]:focus{
-        outline: none;
-    }
-
-    input[type=text]::placeholder{
-        color: #23237e;
-    }
-
-    .sb_border_on{
-        border-radius: 15px 15px 0px 0px;
-    }
-
-    .sb_border_off{
-        border-radius: 15px;
-
-    }
+    flex-wrap: wrap;
+    width: 40%;
+    position: relative;
 }
+
+
+// .indx_search_cont{
+//     display: flex;
+//     justify-content: center;
+//     font-weight: 600;
+//     li{
+//         color: white;
+//     }
+//     a{
+//         color: white;
+//     }
+//     .sbDiv{
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: space-around;
+//         gap: 10px;
+//         div{
+//             margin:10px;
+//             .listDiv{
+//                 margin: 0px !important;
+//                 position: absolute;
+//                 width: 340px;
+//                 overflow-y: scroll;
+//                 border-radius: 0px 0px 0px 5px;
+//                 animation-name: display_list;
+//                 animation-duration: 0.5s;
+//                 animation-fill-mode: forwards;
+//                 overflow-x: hidden;
+//                 ul{
+//                     width: 100%;
+//                     li{
+//                         width: 100%;
+//                         list-style: none;
+//                         background-color: white;
+//                         font-size: 16px;
+//                         color: rgba(0, 0, 0, 0.508);
+//                         button{
+//                             padding: 20px 0px;
+//                             width: 100%;
+//                             padding: 20px 0px 20px 10px;
+//                         }
+//                     }
+//                     .noResultList{
+//                         padding: 20px;
+//                     }
+//                 }
+//             }
+//             .closedListDiv{
+//                 margin: 0px !important;
+//             }
+
+
+//         }
+//     }
+//     input[type=text]{
+//         border: none;
+//         height: 20px;
+//         width: 320px;
+//         background-color: white;
+//         color: black;
+//         padding: 10px;
+//         text-align: center;
+//         font-size: 16px;
+//         box-shadow:  1px 1px 5px rgba(0, 0, 0, 0.334);
+//         font-weight: 600;
+//         color: #23237e;
+//     }
+    
+//     input[type=text]:focus{
+//         outline: none;
+//     }
+
+//     input[type=text]::placeholder{
+//         color: #23237e;
+//     }
+
+//     .sb_border_on{
+//         border-radius: 15px 15px 0px 0px;
+//     }
+
+//     .sb_border_off{
+//         border-radius: 5px;
+
+//     }
+// }
 
 
 // ANIMATIONS

@@ -63,7 +63,7 @@
                     gap: 10px;      
                     letter-spacing: 0.5px;         
                 }
-                div:hover{
+                .link_cont:hover{
                     background-color: rgba(205, 233, 255, 0.565);
                 }
             }
@@ -91,7 +91,7 @@
 .info_body{
     width: 100%;
     background-color: rgb(253, 253, 253);
-    padding: 30px 0px;
+    padding-top: 30px;
     .info_container{
         display: flex;
         justify-content: center;
@@ -99,15 +99,19 @@
         width: 100%;
         max-width: 900px;
         margin: auto;
-        padding: 0px 10px;
         .profile_list{
-            min-width: 160px;
-            
             ul{
                 list-style: none;
                 li{
-                    padding: 25px 10px;
+                    height: 70px;
+                    width: 160px;
                     letter-spacing: 0.5px;
+                }
+                a{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
                 }
                 .selected_list{
                     border-bottom: 2px solid navy;
@@ -120,31 +124,336 @@
 
         .profile_form_body{
             width: 100%;
-            
+            letter-spacing: 0.5px;
             .profile_form_content{
                 @extend .col;
                 max-width: 620px;
                 margin-top: 30px;
+
+                a{
+                    color: rgb(4, 0, 255);
+                }
+
                 .display_data_div{
                     padding: 20px 0px;
                     display: flex;
-                    gap: 25%;
+                    align-items: center;
                     width: 100%;
-                    border-top: 1px solid rgb(179, 179, 179);
-
+                    border-top: 1px solid rgba(179, 179, 179, 0.21);
+                    .data_ttl{
+                        width: 245px;
+                        margin-left: 5px;
+                    }
                     p{
                         max-width: 200px;
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
                     a{
-                        color: rgb(12, 135, 206);
+                        margin-left: auto;
+                        margin-right: 10px;
+                    }
+
+
+
+                }
+
+                .docdata_div{
+                    padding: 25px 0px;
+                    width: 100%;
+                    border-top: 1px solid rgba(179, 179, 179, 0.21);
+                    .docdata_ttl{
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 20px;
+                        button{
+                            color: rgb(4, 0, 255);
+                        }
+                    }
+                    .doc_ensurances_body{
+                        display: flex;
+                        gap: 10px;
+                        width: 100%;
+                        ul{
+                            display: flex;
+                            flex-wrap: wrap;
+                            list-style: none;
+                            gap: 30px;
+
+                        }
+                        .doc_ensurance{
+                            @extend .col;
+                            img{
+                                height: 35px;
+                                width: 35px;
+                            }
+                            p{
+                                font-size: 12px ;
+                            } 
+                        }
+                        a{
+                            text-align: center;
+                            white-space: nowrap;
+                            padding-top: 2.5%;
+                        }
+                    }
+                    .description{
+                        width: 100%;
+                        letter-spacing: 0.8px;
                     }
                 }
 
+                .form_edit{
+                    width: 100%;
+                    form{
+                        width: 100%;
+                        @extend .col;
+                        gap: 30px;                    
+                    }
+                    p{
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        margin-left: 10px;
+                        font-size: 16px;
+
+                        label{
+                            width: 80%;
+                            display: flex;
+                            color: rgb(19, 19, 194);
+                            font-weight: 600;
+                        }
+
+                        input, select{
+                            width: 95%;
+                            padding: 7px 5px;
+                            border: 1px solid rgb(184, 184, 184);
+                            border-radius: 5px;
+                            height: 30px;
+                        }
+                    }
+                    .form_btns{
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        gap: 10px;
+                        
+                        button{
+                            padding: 10px clamp(10px, 30%, 80px);
+                            border-radius: 5px;
+                            background: linear-gradient(rgb(52, 63, 148) 0%, rgb(35, 35, 126) 100%);
+                            display: block;
+                            color: white;
+                            text-align: center;
+                            max-width: 300px;
+                        }  
+                        a{
+                            padding: 10px clamp(10px, 30%, 80px);
+                            border-radius: 5px;
+                            border: 1px solid ;
+                            border-color: linear-gradient(rgb(52, 63, 148) 0%, rgb(35, 35, 126) 100%);
+                            background: white;
+                            display: block;
+                            text-align: center;
+                            max-width: 300px;
+                        }                      
+                    }
+
+                }
+
+                .edit{
+                    margin-left: auto;
+                    margin-right: 15px;
+                    margin-bottom: 15px;
+                    display: flex;
+                    justify-content: end;
+                    a{
+                        margin-left: auto;
+                        color: rgb(12, 135, 206);
+
+                    }
+                }
             }
         }
     }
+}
+
+
+
+.manage_body{
+    position: fixed;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    // width: 100%;
+    // height: 100%;
+    background-color: rgba(116, 116, 116, 0.518);
+    h3{
+        color: #0c0c68;
+    }
+    .manage_container{
+        background-color: white;
+        border-radius: 5px;
+        width: 90%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 20px;
+        ul{
+            list-style: none;
+            li{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            img{
+                height: 30px;
+                width: 35px;
+            }
+        }
+        .manage_content{
+            @extend .col;
+            gap: 30px;
+            margin-top: 30px;
+
+            textarea{
+                width: 80%;
+                height: auto;
+                min-height: 200px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                padding: 5px;
+                border: 1px solid rgba(179, 179, 179, 0.21);
+            }
+
+            .manage_search{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 90%;
+                max-width: 600px;
+                input{
+                    height: 30px;
+                    width: 97%;   
+                    font-size: 16px;
+                    padding: 7px 6.5px;
+                    border-radius: 5px;
+                    border: 1px solid #b8b8b8;
+                }
+                .list_container{
+                    position: relative;
+                    width: 100%;
+                    ul{
+                        position: absolute;
+                        width: 100%;
+                        max-height: 300px;
+                        overflow-y: scroll;
+                        overflow-x: hidden;
+                        animation-name: display_list;
+                        animation-duration: 0.5s;
+                        animation-fill-mode: forwards;
+                        font-size: 16px;
+                        li{
+                            background-color: white;
+                            width: 94%;
+                            padding: 20px 4%;
+                        }
+                        li:hover{
+                            background-color: rgb(239, 239, 239);
+                            cursor: pointer;
+                        }
+                    }    
+                }
+                
+            }
+
+            .my_manage{
+                width: 90%;
+                max-width: 600px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .manage_title{
+                    display: flex;
+                    justify-content: space-between;
+                    button{
+                        color: red !important;
+                        margin-right: 20px;
+                    }
+                }
+                ul{
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    font-size: 16px;
+                    max-height: 190px;
+                    width: 100%;
+                    li{
+                        width: 200px;
+                        padding: 10px 0px 10px 5px;
+                    }
+                    .delete{
+                        color: black !important;
+                        span{
+                            width: 70%;
+                        }
+                    }
+                    .delete:hover{
+                        background-color: whitesmoke;
+                        cursor: pointer;
+                    }
+                    
+                }
+            }
+
+            .add_cont{
+                @extend .col;
+                gap: 30px;
+                div{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 10px;
+                    align-items: center;
+                    padding: 0px 20px;
+                }
+                button{
+                    padding: 10px 30px;
+                    background-color: #0c0c68;
+                    color: white !important;
+                    border-radius: 5px;
+                }
+                button:disabled{
+                    background-color: #0c0c6870;
+                }
+            }
+        }
+    }
+}
+
+.delbtndes{
+    background-color: red;
+    height: 18px;
+    width: 20px;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+        width: 8px;
+        height: 3px;
+        background-color: white;
+    }
+}
+
+@keyframes display_list{
+    0% {max-height: 10px;}
+    100% {max-height: 300px;}
 }
 
 .confirm_remove{
@@ -450,8 +759,24 @@
 
 @media(max-width:900px){
 
+    .info_container{
+        padding: 0px !important;
+    }
+
     .display_data_div{
-        gap: 15% !important;
+        .data_ttl{
+            width: 150px !important;
+        }
+        p{
+            max-width: 150px !important;
+        }
+        a{
+            font-size: 12px;
+        }
+    }
+
+    .description{
+        font-size: 14px;
     }
 
     .profile_list{
@@ -486,7 +811,29 @@
     }
 }
 
+@media(max-width:650px){
+    .docdata_ttl{
+        margin-bottom: 40px !important;
+    }    
+}
+
+
 @media(max-width:560px){
+
+    .my_manage{
+        ul{
+            max-height: none !important ;
+        }
+    }
+
+    .form_btns{
+        button{
+            width: 100%;
+        }
+        a{
+            width: 100%;
+        }
+    }
     .big{
         font-size: 20px;
     }

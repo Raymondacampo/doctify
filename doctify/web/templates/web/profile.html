@@ -30,9 +30,7 @@
                 <hr>
                 <div class="info">
                     <div class="contact">  
-                        {% if docDates %}
-                            <div id="date_btn_cont"></div> 
-                        {% endif %}
+                        <div id="date_btn_cont"></div> 
                         <div style="display: flex; gap: 10px;">
                             <div class="number">&#9990; {{doctor.number}}</div>
                             <div class="chat"><a href="https://wa.me/{{doctor.number}}"><img src="{% static 'images/whatsapp-logo-icon.webp' %}" height="40px">Whatsapp</a></div>
@@ -86,7 +84,7 @@
             </div>
         </div>
     </div>
-        
-    <script type="text/babel" src="{% static 'js/profilereact.js' %}"></script>
-
+    {% if docDates %}
+        <script src="{% static 'dist/doctorProfile.bundle.js' %}"></script>
+    {% endif %}
 {% endblock %}

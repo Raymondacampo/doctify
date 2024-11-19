@@ -12,11 +12,13 @@
         <div class="indexText">
             <div><p>Encuentra el doctor que buscas rapidamente!</p></div>
         </div>
+        
         <div class="searchDiv">  
-                <div id="indx_search_cont" class="indx_search_cont"></div>
+                <div id="indx_search_cont" class="indx_search_cont"></div><a href="{% url 'search' %}">Search</a></div>
         </div>
     </div>
 
-    <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script>
+    <!-- <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script> -->
+     <script src="{% static 'dist/index.bundle.js' %}"></script>
 
 {% endblock %}

@@ -98,13 +98,7 @@ $mobileWidth: 320px;
                         .makedatebtn{
                             display: flex;
                             width: 100%;
-                            .buttonBlue{
-                                padding: 12px 20px;
-                                border-radius: 15px;
-                                background: linear-gradient(#3f4db3 0%, #3030ba 100%);
-                                color: white;
-                                font-weight: 600;
-                            }
+
                         }
                     }
                     .number{
@@ -270,6 +264,275 @@ $mobileWidth: 320px;
     }
 }
 
+.buttonBlue{
+    padding: 12px 20px;
+    border-radius: 15px;
+    background: linear-gradient(#3f4db3 0%, #3030ba 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.calender_container{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(166, 166, 166, 0.411);
+    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    
+
+    .calender_div{
+        width: 100%;
+        height: 100%;
+        max-width: 500px;
+        max-height: 700px;
+        background-color: white;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.196);
+    }
+}
+
+.open_calender{
+    animation-name: fade_in;
+    animation-duration: 0.6s;
+}
+
+.close_calender{
+    animation-name: fade_out;
+    animation-duration: 0.6s;
+    opacity: 0%;
+}
+
+.loading_calender{
+    height: 297px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+}
+
+@keyframes fade_out{
+    0% {opacity: 100%;}
+    100% {opacity: 0%;}
+}
+
+    .header{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .calendar_header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+        color: #121242;
+    }
+
+    .clinics{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        button{
+            height: auto;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            padding: 10px 30px;
+            font-size: 16px;
+            position: relative;
+        }
+        button:disabled{
+            color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: auto;
+        }
+        .selected_clinic{
+            border: 2px solid #121242;
+            padding: 10px 29px;
+            color: #121242;
+        }
+    }
+    .hours_btn_div{
+        position: relative;
+        width: 100%;
+
+        ul{
+            width: 100%;
+            max-height: 300px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            list-style: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            animation-name: display_list;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            li{
+                button{
+                    padding: 15px;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }        
+    }
+    .confirm_date_creation{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 150px;
+        width: 100%;
+        gap: 20px;
+        button{
+            background-color: #23237e;
+            color: white;
+            letter-spacing: 0.7px;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+    }
+
+
+.ppl{
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    height: 250px;
+    margin-left: 15px;
+    li{
+        font-size: 18px;
+        display: flex;
+        width: 100%;
+        .day_names{
+            li{
+                color: #121242;
+            }
+        }
+        ul{
+            width: 100%;
+            justify-content: space-evenly;
+            li{
+                text-align: center;
+                margin: 10px;   
+                letter-spacing: 0.7px;  
+                color: #23237e;
+                position: relative;
+            }
+            .selected_day{
+                background-color: #23237e;
+                color: #ffffff;
+                border-radius: 20px;
+                padding: 10px;
+                position: absolute;
+                top: -10px;
+                left: -10px;
+            }
+            .s{
+                left: 6px;
+            }
+            .none_list{
+                color: white;
+            }
+            .no_date{
+                color: rgb(199, 199, 199);
+                font-size: 16px;
+            }
+            .no_date:hover{
+                cursor: default;
+            }
+            display: flex;
+            list-style: none;            
+        }
+    }
+
+}     
+
+select{
+    width: 95%;
+    padding: 5px;
+    option{
+        button{
+            padding: 10px 2px;
+        }
+        
+    }
+}
+
+
+
+.hours_btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 10px 0px;
+    font-size: 12px;
+    color: rgb(85, 85, 85);
+    width: 100%;
+    span, i{
+        margin: 0px 10px;
+    }
+
+}
+.hours_btn:hover{
+    cursor: pointer;
+}
+
+.disabled_btn{
+    @extend .hours_btn;
+    border: 1px solid rgba(0, 0, 0, 0.119);
+    cursor: auto !important;
+    color: rgba(0, 0, 0, 0.3);
+    .arrow{
+        border: solid rgba(0, 0, 0, 0.3);
+        border-width: 0 2px 2px 0;
+    }
+}   
+
+
+
+
+
+
+@media(max-width: 650px){
+    .calender_div{
+        max-width: none !important;
+        max-height: none !important;
+    }
+
+    .header{
+        .change{
+            top: 5px !important;
+            right: -10px !important;
+        }
+    }
+
+    .ppl{
+        width: 100% !important;
+    }
+
+    .clinics{
+        margin-top: 10% !important;
+    }
+}
+
 
 
 .pin {
@@ -323,9 +586,7 @@ $mobileWidth: 320px;
     .makedatebtn{
         justify-content: center;
     }
-    .buttonBlue{
-        width:80% !important;
-    }
+
     .cities{
         gap: 2px !important;
         justify-content: center;
@@ -590,57 +851,39 @@ a:hover{
 
 // CALENDAR THINGS
 
-.calendar_header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: auto;
-    h1{
-        margin-right: 30px;
-        color: #23237e;
-    }
-    div{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        button{
-            margin-right: 20px;
-        }
-    }
-}
 
-.calendar{
-    height: 55%;
-    padding: 5%;
-    ul{
-        display: flex;
-        list-style: none;
-        flex-wrap: wrap;
-        li{
-            display: inline-block;
-            width: calc(100% / 7);
-            font-weight: 600;
-            text-align: center;
-            button{
-                padding: 15px;
-            }
-        } 
-    }
-    .nodate{
-        visibility: hidden;
-    }
-    .nidate{
-        color: rgb(208, 208, 208);
-        pointer-events: none;
-        padding: 17px !important; 
-    }
-    .date{
-        color: #23237e;
-        font-size: 18px;
-        font-weight: 600;
-    }
-}
+
+// .calendar{
+//     height: 55%;
+//     padding: 5%;
+//     ul{
+//         display: flex;
+//         list-style: none;
+//         flex-wrap: wrap;
+//         li{
+//             display: inline-block;
+//             width: calc(100% / 7);
+//             font-weight: 600;
+//             text-align: center;
+//             button{
+//                 padding: 15px;
+//             }
+//         } 
+//     }
+//     .nodate{
+//         visibility: hidden;
+//     }
+//     .nidate{
+//         color: rgb(208, 208, 208);
+//         pointer-events: none;
+//         padding: 17px !important; 
+//     }
+//     .date{
+//         color: #23237e;
+//         font-size: 18px;
+//         font-weight: 600;
+//     }
+// }
 
       
 .dateInfo{

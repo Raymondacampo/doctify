@@ -17,10 +17,9 @@
     .searches .searches_container .filters {
       display: flex;
       flex-direction: column;
-      min-width: 280px;
+      width: 280px;
       background-color: white;
-      border-radius: 10px;
-      max-width: 400px; }
+      border-radius: 10px; }
       .searches .searches_container .filters .filters_title {
         background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
         color: white;
@@ -115,154 +114,12 @@
                 font-weight: 600; }
               .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text]:focus::placeholder {
                 color: white; }
-    .searches .searches_container .doctors {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      background-color: white;
-      border-radius: 15px;
-      width: 85%;
-      overflow-y: scroll;
-      bottom: 10px; }
-      .searches .searches_container .doctors .doctor_container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 25px;
-        padding: 2px; }
-        .searches .searches_container .doctors .doctor_container .doctor_render {
-          width: clamp(320px, 90%, 1200px);
-          margin: 0px auto; }
-        .searches .searches_container .doctors .doctor_container .doctor {
-          display: flex;
-          flex-direction: column;
-          padding: clamp(20px, 3%, 20px);
-          border-radius: 15px;
-          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.156);
-          width: 94%;
-          line-height: 1.5;
-          gap: 30px;
-          margin-bottom: 3%; }
-          .searches .searches_container .doctors .doctor_container .doctor .doc_info {
-            display: flex;
-            gap: 15px; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_img div {
-              height: 120px;
-              width: 120px; }
-              .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_img div img {
-                height: 100%;
-                width: 100%;
-                border-radius: 100px;
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 5px; }
-              .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances .ensurances {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0px 10px;
-                max-width: 55%; }
-                .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances .ensurances h4 {
-                  color: #23237e; }
-                .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances .ensurances img {
-                  height: 50px; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .specialities {
-              display: flex;
-              gap: 0px 5px; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .locations {
-              display: flex;
-              width: 100%;
-              gap: 2px 10px;
-              flex-wrap: wrap; }
-              .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .locations .clinics {
-                display: flex;
-                gap: 8px;
-                flex-wrap: wrap; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .city {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              background-color: rgba(205, 205, 205, 0.285);
-              padding: 4px 8px;
-              border-radius: 15px;
-              gap: 5px;
-              font-size: 14px; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .clinic {
-              color: #23237e;
-              font-size: 14px;
-              font-weight: 600;
-              display: flex;
-              align-items: center;
-              gap: 5px; }
-              .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt .clinic img {
-                height: 12.5px;
-                position: relative;
-                bottom: 1.5px; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt span {
-              font-size: 14px;
-              font-weight: 600;
-              color: #717171; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt p {
-              max-height: 90px;
-              -webkit-line-clamp: 3;
-              line-clamp: 4;
-              overflow: hidden;
-              display: -webkit-box;
-              -webkit-box-orient: vertical; }
-            .searches .searches_container .doctors .doctor_container .doctor .doc_info .doc_txt hr {
-              margin: 7px 0px;
-              border: none;
-              height: 3px;
-              color: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-              background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%); }
-        .searches .searches_container .doctors .doctor_container .pagination_div {
-          display: flex;
-          width: 300px;
-          margin: 0px auto 10px auto;
-          font-weight: 600; }
-          .searches .searches_container .doctors .doctor_container .pagination_div span {
-            color: #585858;
-            flex: 50%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            top: 4px; }
-          .searches .searches_container .doctors .doctor_container .pagination_div button {
-            color: navy;
-            flex: 25%;
-            align-items: center; }
-            .searches .searches_container .doctors .doctor_container .pagination_div button span {
-              color: navy;
-              position: static; }
-            .searches .searches_container .doctors .doctor_container .pagination_div button .arrow {
-              position: relative;
-              top: 4px;
-              margin-left: 5px;
-              margin-bottom: 2px;
-              border: solid #23237e;
-              border-width: 0 2px 2px 0;
-              display: inline-block;
-              padding: 7px; }
-            .searches .searches_container .doctors .doctor_container .pagination_div button .right {
-              transform: rotate(-45deg);
-              -webkit-transform: rotate(-45deg); }
-            .searches .searches_container .doctors .doctor_container .pagination_div button .left {
-              transform: rotate(135deg);
-              -webkit-transform: rotate(135deg); }
-      .searches .searches_container .doctors .no_result_div {
-        display: flex;
-        height: 100%;
-        width: 100%; }
-        .searches .searches_container .doctors .no_result_div div {
-          margin: auto;
-          color: #505050;
-          text-align: center; }
-    .searches .searches_container .doctors::-webkit-scrollbar {
-      display: none; }
+    .searches .searches_container .doctor_render {
+      background-color: #23237e;
+      width: 100%; }
+      .searches .searches_container .doctor_render h1 {
+        font-size: 32px;
+        color: black; }
     .searches .searches_container .doc_btn {
       width: 100%;
       display: flex;

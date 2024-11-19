@@ -82,12 +82,6 @@
             .profile_container .doc_info_1 .info_div .info .contact #date_btn_cont .makedatebtn {
               display: flex;
               width: 100%; }
-              .profile_container .doc_info_1 .info_div .info .contact #date_btn_cont .makedatebtn .buttonBlue {
-                padding: 12px 20px;
-                border-radius: 15px;
-                background: linear-gradient(#3f4db3 0%, #3030ba 100%);
-                color: white;
-                font-weight: 600; }
           .profile_container .doc_info_1 .info_div .info .contact .number {
             display: flex;
             align-items: center;
@@ -201,6 +195,217 @@
         height: 250px;
         border: 0px; }
 
+.buttonBlue {
+  padding: 12px 20px;
+  border-radius: 15px;
+  background: linear-gradient(#3f4db3 0%, #3030ba 100%);
+  color: white;
+  font-weight: 600; }
+
+.calender_container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(166, 166, 166, 0.411);
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000; }
+  .calender_container .calender_div {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 700px;
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.196); }
+
+.open_calender {
+  animation-name: fade_in;
+  animation-duration: 0.6s; }
+
+.close_calender {
+  animation-name: fade_out;
+  animation-duration: 0.6s;
+  opacity: 0%; }
+
+.loading_calender {
+  height: 297px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px; }
+
+@keyframes fade_out {
+  0% {
+    opacity: 100%; }
+  100% {
+    opacity: 0%; } }
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end; }
+
+.calendar_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  color: #121242; }
+
+.clinics {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px; }
+  .clinics button {
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 10px 30px;
+    font-size: 16px;
+    position: relative; }
+  .clinics button:disabled {
+    color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: auto; }
+  .clinics .selected_clinic {
+    border: 2px solid #121242;
+    padding: 10px 29px;
+    color: #121242; }
+
+.hours_btn_div {
+  position: relative;
+  width: 100%; }
+  .hours_btn_div ul {
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    list-style: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    animation-name: display_list;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards; }
+    .hours_btn_div ul li button {
+      padding: 15px;
+      height: 100%;
+      width: 100%; }
+
+.confirm_date_creation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+  gap: 20px; }
+  .confirm_date_creation button {
+    background-color: #23237e;
+    color: white;
+    letter-spacing: 0.7px;
+    border-radius: 5px;
+    padding: 10px 20px; }
+
+.ppl {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  height: 250px;
+  margin-left: 15px; }
+  .ppl li {
+    font-size: 18px;
+    display: flex;
+    width: 100%; }
+    .ppl li .day_names li {
+      color: #121242; }
+    .ppl li ul {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      /* 7 equal columns */
+      grid-auto-rows: 1fr;
+      display: flex;
+      list-style: none; }
+      .ppl li ul li {
+        flex: 1;
+        text-align: center;
+        margin: 10px;
+        letter-spacing: 0.7px;
+        color: #23237e;
+        position: relative; }
+      .ppl li ul .selected_day {
+        background-color: #23237e;
+        color: #ffffff;
+        border-radius: 20px;
+        padding: 10px;
+        position: absolute;
+        top: -10px;
+        left: -10px; }
+      .ppl li ul .none_list {
+        color: white; }
+      .ppl li ul .no_date {
+        color: #c7c7c7;
+        font-size: 16px; }
+      .ppl li ul .no_date:hover {
+        cursor: default; }
+
+select {
+  width: 95%;
+  padding: 5px; }
+  select option button {
+    padding: 10px 2px; }
+
+.hours_btn, .disabled_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 10px 0px;
+  font-size: 12px;
+  color: #555555;
+  width: 100%; }
+  .hours_btn span, .disabled_btn span, .hours_btn i, .disabled_btn i {
+    margin: 0px 10px; }
+
+.hours_btn:hover, .disabled_btn:hover {
+  cursor: pointer; }
+
+.disabled_btn {
+  border: 1px solid rgba(0, 0, 0, 0.119);
+  cursor: auto !important;
+  color: rgba(0, 0, 0, 0.3); }
+  .disabled_btn .arrow {
+    border: solid rgba(0, 0, 0, 0.3);
+    border-width: 0 2px 2px 0; }
+
+@media (max-width: 650px) {
+  .calender_div {
+    max-width: none !important;
+    max-height: none !important; }
+  .header .change {
+    top: 5px !important;
+    right: -10px !important; }
+  .ppl {
+    width: 100% !important; }
+  .clinics {
+    margin-top: 10% !important; } }
+
 .pin {
   width: 12.5px;
   height: 12.5px;
@@ -243,8 +448,6 @@
         margin: auto; }
   .makedatebtn {
     justify-content: center; }
-  .buttonBlue {
-    width: 80% !important; }
   .cities {
     gap: 2px !important;
     justify-content: center;
@@ -440,47 +643,6 @@ a:hover .box_prof_clinic {
   padding: 20px; }
   .closeBtn button {
     font-size: 26px; }
-
-.calendar_header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  margin: auto; }
-  .calendar_header h1 {
-    margin-right: 30px;
-    color: #23237e; }
-  .calendar_header div {
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-    .calendar_header div button {
-      margin-right: 20px; }
-
-.calendar {
-  height: 55%;
-  padding: 5%; }
-  .calendar ul {
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap; }
-    .calendar ul li {
-      display: inline-block;
-      width: calc(100% / 7);
-      font-weight: 600;
-      text-align: center; }
-      .calendar ul li button {
-        padding: 15px; }
-  .calendar .nodate {
-    visibility: hidden; }
-  .calendar .nidate {
-    color: #d0d0d0;
-    pointer-events: none;
-    padding: 17px !important; }
-  .calendar .date {
-    color: #23237e;
-    font-size: 18px;
-    font-weight: 600; }
 
 .dateInfo {
   margin-top: 10px;

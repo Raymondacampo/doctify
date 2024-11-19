@@ -54,7 +54,7 @@
           flex-direction: column;
           gap: 10px;
           letter-spacing: 0.5px; }
-        .body_container .container .options_container a div:hover {
+        .body_container .container .options_container a .link_cont:hover {
           background-color: rgba(205, 233, 255, 0.565); }
     .body_container .container .down_btns {
       margin-top: 30px;
@@ -72,43 +72,276 @@
 .info_body {
   width: 100%;
   background-color: #fdfdfd;
-  padding: 30px 0px; }
+  padding-top: 30px; }
   .info_body .info_container {
     display: flex;
     justify-content: center;
     gap: 80px;
     width: 100%;
     max-width: 900px;
-    margin: auto;
-    padding: 0px 10px; }
-    .info_body .info_container .profile_list {
-      min-width: 160px; }
-      .info_body .info_container .profile_list ul {
-        list-style: none; }
-        .info_body .info_container .profile_list ul li {
-          padding: 25px 10px;
-          letter-spacing: 0.5px; }
-        .info_body .info_container .profile_list ul .selected_list {
-          border-bottom: 2px solid navy; }
-        .info_body .info_container .profile_list ul li:hover {
-          background-color: #f8f8f8; }
+    margin: auto; }
+    .info_body .info_container .profile_list ul {
+      list-style: none; }
+      .info_body .info_container .profile_list ul li {
+        height: 70px;
+        width: 160px;
+        letter-spacing: 0.5px; }
+      .info_body .info_container .profile_list ul a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center; }
+      .info_body .info_container .profile_list ul .selected_list {
+        border-bottom: 2px solid navy; }
+      .info_body .info_container .profile_list ul li:hover {
+        background-color: #f8f8f8; }
     .info_body .info_container .profile_form_body {
-      width: 100%; }
+      width: 100%;
+      letter-spacing: 0.5px; }
       .info_body .info_container .profile_form_body .profile_form_content {
         max-width: 620px;
         margin-top: 30px; }
+        .info_body .info_container .profile_form_body .profile_form_content a {
+          color: #0400ff; }
         .info_body .info_container .profile_form_body .profile_form_content .display_data_div {
           padding: 20px 0px;
           display: flex;
-          gap: 25%;
+          align-items: center;
           width: 100%;
-          border-top: 1px solid #b3b3b3; }
+          border-top: 1px solid rgba(179, 179, 179, 0.21); }
+          .info_body .info_container .profile_form_body .profile_form_content .display_data_div .data_ttl {
+            width: 245px;
+            margin-left: 5px; }
           .info_body .info_container .profile_form_body .profile_form_content .display_data_div p {
             max-width: 200px;
             overflow: hidden;
             text-overflow: ellipsis; }
           .info_body .info_container .profile_form_body .profile_form_content .display_data_div a {
+            margin-left: auto;
+            margin-right: 10px; }
+        .info_body .info_container .profile_form_body .profile_form_content .docdata_div {
+          padding: 25px 0px;
+          width: 100%;
+          border-top: 1px solid rgba(179, 179, 179, 0.21); }
+          .info_body .info_container .profile_form_body .profile_form_content .docdata_div .docdata_ttl {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .docdata_ttl button {
+              color: #0400ff; }
+          .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body {
+            display: flex;
+            gap: 10px;
+            width: 100%; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body ul {
+              display: flex;
+              flex-wrap: wrap;
+              list-style: none;
+              gap: 30px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance img {
+              height: 35px;
+              width: 35px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance p {
+              font-size: 12px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body a {
+              text-align: center;
+              white-space: nowrap;
+              padding-top: 2.5%; }
+          .info_body .info_container .profile_form_body .profile_form_content .docdata_div .description {
+            width: 100%;
+            letter-spacing: 0.8px; }
+        .info_body .info_container .profile_form_body .profile_form_content .form_edit {
+          width: 100%; }
+          .info_body .info_container .profile_form_body .profile_form_content .form_edit form {
+            width: 100%;
+            gap: 30px; }
+          .info_body .info_container .profile_form_body .profile_form_content .form_edit p {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-left: 10px;
+            font-size: 16px; }
+            .info_body .info_container .profile_form_body .profile_form_content .form_edit p label {
+              width: 80%;
+              display: flex;
+              color: #1313c2;
+              font-weight: 600; }
+            .info_body .info_container .profile_form_body .profile_form_content .form_edit p input, .info_body .info_container .profile_form_body .profile_form_content .form_edit p select {
+              width: 95%;
+              padding: 7px 5px;
+              border: 1px solid #b8b8b8;
+              border-radius: 5px;
+              height: 30px; }
+          .info_body .info_container .profile_form_body .profile_form_content .form_edit .form_btns {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px; }
+            .info_body .info_container .profile_form_body .profile_form_content .form_edit .form_btns button {
+              padding: 10px clamp(10px, 30%, 80px);
+              border-radius: 5px;
+              background: linear-gradient(#343f94 0%, #23237e 100%);
+              display: block;
+              color: white;
+              text-align: center;
+              max-width: 300px; }
+            .info_body .info_container .profile_form_body .profile_form_content .form_edit .form_btns a {
+              padding: 10px clamp(10px, 30%, 80px);
+              border-radius: 5px;
+              border: 1px solid;
+              border-color: linear-gradient(#343f94 0%, #23237e 100%);
+              background: white;
+              display: block;
+              text-align: center;
+              max-width: 300px; }
+        .info_body .info_container .profile_form_body .profile_form_content .edit {
+          margin-left: auto;
+          margin-right: 15px;
+          margin-bottom: 15px;
+          display: flex;
+          justify-content: end; }
+          .info_body .info_container .profile_form_body .profile_form_content .edit a {
+            margin-left: auto;
             color: #0c87ce; }
+
+.manage_body {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(116, 116, 116, 0.518); }
+  .manage_body h3 {
+    color: #0c0c68; }
+  .manage_body .manage_container {
+    background-color: white;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px; }
+    .manage_body .manage_container ul {
+      list-style: none; }
+      .manage_body .manage_container ul li {
+        display: flex;
+        align-items: center;
+        gap: 10px; }
+      .manage_body .manage_container ul img {
+        height: 30px;
+        width: 35px; }
+    .manage_body .manage_container .manage_content {
+      gap: 30px;
+      margin-top: 30px; }
+      .manage_body .manage_container .manage_content textarea {
+        width: 80%;
+        height: auto;
+        min-height: 200px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 5px;
+        border: 1px solid rgba(179, 179, 179, 0.21); }
+      .manage_body .manage_container .manage_content .manage_search {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+        max-width: 600px; }
+        .manage_body .manage_container .manage_content .manage_search input {
+          height: 30px;
+          width: 97%;
+          font-size: 16px;
+          padding: 7px 6.5px;
+          border-radius: 5px;
+          border: 1px solid #b8b8b8; }
+        .manage_body .manage_container .manage_content .manage_search .list_container {
+          position: relative;
+          width: 100%; }
+          .manage_body .manage_container .manage_content .manage_search .list_container ul {
+            position: absolute;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            animation-name: display_list;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            font-size: 16px; }
+            .manage_body .manage_container .manage_content .manage_search .list_container ul li {
+              background-color: white;
+              width: 94%;
+              padding: 20px 4%; }
+            .manage_body .manage_container .manage_content .manage_search .list_container ul li:hover {
+              background-color: #efefef;
+              cursor: pointer; }
+      .manage_body .manage_container .manage_content .my_manage {
+        width: 90%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px; }
+        .manage_body .manage_container .manage_content .my_manage .manage_title {
+          display: flex;
+          justify-content: space-between; }
+          .manage_body .manage_container .manage_content .my_manage .manage_title button {
+            color: red !important;
+            margin-right: 20px; }
+        .manage_body .manage_container .manage_content .my_manage ul {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          font-size: 16px;
+          max-height: 190px;
+          width: 100%; }
+          .manage_body .manage_container .manage_content .my_manage ul li {
+            width: 200px;
+            padding: 10px 0px 10px 5px; }
+          .manage_body .manage_container .manage_content .my_manage ul .delete {
+            color: black !important; }
+            .manage_body .manage_container .manage_content .my_manage ul .delete span {
+              width: 70%; }
+          .manage_body .manage_container .manage_content .my_manage ul .delete:hover {
+            background-color: whitesmoke;
+            cursor: pointer; }
+      .manage_body .manage_container .manage_content .add_cont {
+        gap: 30px; }
+        .manage_body .manage_container .manage_content .add_cont div {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+          align-items: center;
+          padding: 0px 20px; }
+        .manage_body .manage_container .manage_content .add_cont button {
+          padding: 10px 30px;
+          background-color: #0c0c68;
+          color: white !important;
+          border-radius: 5px; }
+        .manage_body .manage_container .manage_content .add_cont button:disabled {
+          background-color: #0c0c6870; }
+
+.delbtndes {
+  background-color: red;
+  height: 18px;
+  width: 20px;
+  border-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .delbtndes div {
+    width: 8px;
+    height: 3px;
+    background-color: white; }
+
+@keyframes display_list {
+  0% {
+    max-height: 10px; }
+  100% {
+    max-height: 300px; } }
 
 .confirm_remove {
   display: flex;
@@ -325,14 +558,22 @@
 .accept {
   background-color: #00007d; }
 
-.col, .info_body .info_container .profile_form_body .profile_form_content, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .mydates .date div, .no_dates, .no_dates div, .cont form, .favdoctors_container .favdoctors form {
+.col, .info_body .info_container .profile_form_body .profile_form_content, .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance, .info_body .info_container .profile_form_body .profile_form_content .form_edit form, .manage_body .manage_container .manage_content, .manage_body .manage_container .manage_content .add_cont, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .mydates .date div, .no_dates, .no_dates div, .cont form, .favdoctors_container .favdoctors form {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
 @media (max-width: 900px) {
-  .display_data_div {
-    gap: 15% !important; }
+  .info_container {
+    padding: 0px !important; }
+  .display_data_div .data_ttl {
+    width: 150px !important; }
+  .display_data_div p {
+    max-width: 150px !important; }
+  .display_data_div a {
+    font-size: 12px; }
+  .description {
+    font-size: 14px; }
   .profile_list {
     display: none; }
   .profile_form_body {
@@ -353,7 +594,17 @@
     width: 100%;
     max-width: 600px; } }
 
+@media (max-width: 650px) {
+  .docdata_ttl {
+    margin-bottom: 40px !important; } }
+
 @media (max-width: 560px) {
+  .my_manage ul {
+    max-height: none !important; }
+  .form_btns button {
+    width: 100%; }
+  .form_btns a {
+    width: 100%; }
   .big {
     font-size: 20px; }
   .small {

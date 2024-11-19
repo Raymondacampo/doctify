@@ -3,17 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-        </style>
-        <script src="https://accounts.google.com/gsi/client" async></script>
+    <link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}" >
+    <script src="https://accounts.google.com/gsi/client" async></script>
     {% block style %}
     {% endblock %}
 </head>
@@ -21,7 +18,7 @@
     <header>
         <div id="nav_bar">
             <div class="logo_container">
-                <div class="nav_logo"><a href="{% url 'index' %}"><img src="{% static 'images/dclogo.png' %}"></a></div>
+                <div class="nav_logo"><a href="{% url 'index' %}"><img alt="Inicio" src="{% static 'images/dclogo.png' %}"></a></div>
                 <div class="nav_name"><a href="{% url 'index' %}"><span>Doctify</span></a></div>
             </div>
 
@@ -51,14 +48,7 @@
     {% block body %}
     {% endblock %}
     
-    {% if user.is_authenticated %}
-        {% if user.is_doctor %}
-            <script type="text/babel" src="{% static 'js/docprofilelist.js' %}"></script>
-        {% else %}
-            <script type="text/babel" src="{% static 'js/profilelist.js' %}"></script>
-        {% endif %}
-    {% else %}
-        <script type="text/babel" src="{% static 'js/signin.js' %}"></script>
-    {% endif %}
+    <script src="{% static 'dist/profileList.bundle.js' %}"></script>
+
 </body>
 </html>

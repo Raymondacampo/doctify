@@ -6,6 +6,6 @@
     <link rel="stylesheet" href="{% sass_src 'scss/index.scss' %}">
 {% endblock %}
 {% block body %}
-<div id="searches" class="searches"></div>
-<script type="text/babel" src="{% static 'js/search.js' %}"></script>
+<div id="searches_container"></div>
+<script src="{% static 'dist/search.bundle.js' %}"></script>
 {% endblock %}
