@@ -1,269 +1,294 @@
-.searches {
+.container {
   display: flex;
   justify-content: center;
-  min-height: 90dvh;
-  width: 100%;
-  background-color: white;
-  box-shadow: 1px 15px 15px rgba(0, 0, 0, 0.156);
-  margin: auto; }
-  .searches .searches_container {
-    display: inherit;
-    width: 100%;
-    max-width: 1100px;
-    justify-content: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px clamp(10px, 6%, 120px) 20px 10px; }
-    .searches .searches_container .filters {
-      display: flex;
-      flex-direction: column;
-      width: 280px;
-      background-color: white;
-      border-radius: 10px; }
-      .searches .searches_container .filters .filters_title {
-        background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
+  margin-top: 20px;
+  min-height: 80dvh;
+  margin-bottom: 5rem; }
+  .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+    font-weight: 100; }
+  .container .filters {
+    gap: 30px;
+    width: 19rem;
+    background-color: white;
+    border-radius: 10px;
+    letter-spacing: 0.7px;
+    padding: 0px 1rem; }
+    .container .filters h3 {
+      color: #101079; }
+    .container .filters .sb_cont .search_bar {
+      margin-top: 10px;
+      position: relative; }
+      .container .filters .sb_cont .search_bar input {
+        height: 40px;
+        border: 0px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        font-size: 16px;
+        padding-left: 10px;
+        outline: none; }
+      .container .filters .sb_cont .search_bar input:focus {
+        border-radius: 5px 5px 0px 0px; }
+      .container .filters .sb_cont .search_bar ul {
+        width: 101%;
+        z-index: 1000;
+        box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.145); }
+    .container .filters .gender_cont {
+      gap: 20px; }
+      .container .filters .gender_cont div {
+        display: flex;
+        gap: 10px;
+        margin-left: 5px; }
+    .container .filters .date_sistem_div {
+      gap: 20px;
+      padding-bottom: 2rem; }
+      .container .filters .date_sistem_div div {
+        display: flex;
+        gap: 10px;
+        margin-left: 5px; }
+      .container .filters .date_sistem_div .disabled_checkbox {
+        color: gray; }
+    .container .filters input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 2px solid #ccc;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background-color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s; }
+    .container .filters input[type="checkbox"]:checked {
+      background-color: #3768ef;
+      border: 3px solid #ccc; }
+    .container .filters hr {
+      color: #000000; }
+  .container .doctor_render {
+    width: 750px;
+    margin: 0px 1.5rem;
+    letter-spacing: 0.7px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.055); }
+    .container .doctor_render .doctor {
+      min-height: 150px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.102);
+      padding: 25px 0px;
+      margin: 10px 0px;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between; }
+      .container .doctor_render .doctor hr {
+        position: relative; }
+      .container .doctor_render .doctor .content {
+        display: flex;
+        width: 100%; }
+      .container .doctor_render .doctor .section_1 {
+        height: 100%; }
+      .container .doctor_render .doctor .section_2 {
+        gap: 10px;
+        width: 100%; }
+        .container .doctor_render .doctor .section_2 .presentation {
+          display: flex;
+          gap: 10px;
+          width: 100%; }
+          .container .doctor_render .doctor .section_2 .presentation .name_spec {
+            width: 100%; }
+            .container .doctor_render .doctor .section_2 .presentation .name_spec .name {
+              display: flex;
+              position: relative;
+              flex-wrap: wrap;
+              gap: 5px 15px; }
+              .container .doctor_render .doctor .section_2 .presentation .name_spec .name h3 {
+                margin-right: auto; }
+              .container .doctor_render .doctor .section_2 .presentation .name_spec .name .ensurances {
+                position: relative;
+                min-width: 45px; }
+                .container .doctor_render .doctor .section_2 .presentation .name_spec .name .ensurances h5 {
+                  padding-right: 10px;
+                  color: #3273db; }
+                .container .doctor_render .doctor .section_2 .presentation .name_spec .name .ensurances img {
+                  height: 45px;
+                  width: 45px;
+                  z-index: 1;
+                  position: absolute;
+                  top: -20px; }
+              .container .doctor_render .doctor .section_2 .presentation .name_spec .name a:hover {
+                color: #101079; }
+            .container .doctor_render .doctor .section_2 .presentation .name_spec hr {
+              margin: 5px 0px; }
+            .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 5px;
+              font-weight: 600;
+              position: relative; }
+              .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 .specialities {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-right: auto;
+                font-size: 14px; }
+              .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 .rating_container {
+                position: relative;
+                display: flex;
+                align-items: center;
+                font-weight: 100;
+                padding-right: 10px; }
+                .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 .rating_container .rate_content {
+                  display: flex;
+                  gap: 5px;
+                  font-size: 12px; }
+                  .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 .rating_container .rate_content .count {
+                    color: #5f5f5f; }
+                .container .doctor_render .doctor .section_2 .presentation .name_spec .info_1 .rating_container a:hover {
+                  border-bottom: 1px solid black; }
+        .container .doctor_render .doctor .section_2 .info_2 {
+          gap: 2.5px;
+          font-size: 14px; }
+          .container .doctor_render .doctor .section_2 .info_2 .camera_icon {
+            fill: black; }
+          .container .doctor_render .doctor .section_2 .info_2 .in_person_icon {
+            position: relative;
+            bottom: 2px; }
+          .container .doctor_render .doctor .section_2 .info_2 div {
+            display: flex;
+            align-items: center;
+            gap: 4px; }
+      .container .doctor_render .doctor .profile_button {
+        border: 1px solid #101079;
+        background-color: #0c0c5f;
+        border-radius: 5px;
+        height: 35px;
+        width: 95%;
+        max-width: 400px;
         color: white;
         display: flex;
-        align-items: center;
         justify-content: center;
-        padding: 25px;
-        height: 15px;
-        border-radius: 10px 10px 40px 0px;
-        z-index: 4; }
-        .searches .searches_container .filters .filters_title .change div {
-          background-color: white !important; }
-      .searches .searches_container .filters .filters_container {
-        height: 100%;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
         align-items: center;
-        text-align: start;
-        margin-top: 10px; }
-        .searches .searches_container .filters .filters_container hr {
-          border: none;
-          height: 1px;
-          color: linear-gradient(225deg, #596c7f27 0%, #170b6e2c 100%);
-          background: linear-gradient(225deg, #596c7f2c 0%, #170b6e2c 100%);
-          width: 100%; }
-        .searches .searches_container .filters .filters_container .filters_container_child {
-          width: 100%; }
-          .searches .searches_container .filters .filters_container .filters_container_child hr {
-            background-color: white !important;
-            height: 1px !important; }
-          .searches .searches_container .filters .filters_container .filters_container_child div {
-            width: 90%;
-            margin: 20px auto; }
-            .searches .searches_container .filters .filters_container .filters_container_child div .filter {
-              display: flex;
-              justify-content: center;
-              position: relative;
-              letter-spacing: 0.7px;
-              width: 100%;
-              margin: 5px 0px; }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv {
-                margin: 32px 0px !important;
-                position: absolute;
-                width: 100%;
-                overflow-y: scroll;
-                overflow-x: hidden;
-                border-radius: 0px 0px 0px 5px;
-                animation-name: display_list;
-                animation-duration: 0.5s;
-                animation-fill-mode: forwards;
-                z-index: 100;
-                box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.04); }
-                .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv ul {
-                  width: 100%; }
-                  .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv ul li {
-                    width: 100%;
-                    list-style: none;
-                    background-color: white;
-                    font-size: 16px;
-                    color: rgba(0, 0, 0, 0.508); }
-                    .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv ul li button {
-                      padding: 20px 0px 20px 7px;
-                      width: 100%; }
-                  .searches .searches_container .filters .filters_container .filters_container_child div .filter .listDiv ul .noResultList {
-                    padding: 20px 0px 20px 75px;
-                    overflow-y: hidden; }
-
-@keyframes display_list {
-  0% {
-    max-height: 10px; }
-  100% {
-    max-height: 300px; } }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter .closedListDiv {
-                display: none; }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text] {
-                width: 100%;
-                height: 15px;
-                padding: 10px 10px;
-                border: 1px solid #d4d4d4;
-                border-radius: 5px;
-                text-align: center;
-                font-size: 16px;
-                z-index: 1;
-                letter-spacing: 0.7px;
-                color: #000472ae;
-                font-weight: 600; }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text]:focus {
-                outline: none; }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text]::placeholder {
-                color: #000472ae;
-                font-weight: 600; }
-              .searches .searches_container .filters .filters_container .filters_container_child div .filter input[type=text]:focus::placeholder {
-                color: white; }
-    .searches .searches_container .doctor_render {
-      background-color: #23237e;
-      width: 100%; }
-      .searches .searches_container .doctor_render h1 {
-        font-size: 32px;
-        color: black; }
-    .searches .searches_container .doc_btn {
-      width: 100%;
+        letter-spacing: 1px; }
+      .container .doctor_render .doctor .profile_button:hover {
+        background-color: #0c0c5fd8; }
+    .container .doctor_render .pagination {
+      margin-top: 20px;
       display: flex;
       justify-content: center; }
-      .searches .searches_container .doc_btn a, .searches .searches_container .doc_btn button {
-        text-align: center;
-        margin: auto;
-        padding: 8px 0px;
-        max-width: 400px;
-        width: 100%;
-        color: white;
-        background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-        border-radius: 20px; }
-      .searches .searches_container .doc_btn button:hover {
-        background: linear-gradient(225deg, rgba(132, 158, 180, 0.841) 0%, rgba(36, 21, 133, 0.831) 100%); }
-
-.top {
-  top: 0;
-  overflow-y: hidden;
-  max-height: 100dvh; }
-
-.pin {
-  width: 12.5px;
-  height: 12.5px;
-  background-color: #23237e;
-  border-radius: 60px 60px 0px 60px;
-  position: relative;
-  transform: rotate(45deg);
-  top: -3px; }
-
-.pin::after {
-  content: "";
-  width: 6.25px;
-  height: 6.25px;
-  background: white;
-  position: absolute;
-  left: 26%;
-  top: 26%;
-  border-radius: 60px; }
-
-.filters_data {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin: 0px auto;
-  letter-spacing: 0.7px;
-  color: #959595;
-  font-weight: 600;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.132);
-  padding: 5px 2.5%;
-  width: 75%;
-  max-width: 1000px;
-  min-height: 35px;
-  background-color: rgba(159, 205, 255, 0.211);
-  backdrop-filter: blur(50px); }
-
-@media (max-width: 1400px) {
-  .searches {
-    display: block;
-    height: 100%; }
-  .searches_container {
-    max-width: none !important;
-    margin: auto;
-    padding: 0px !important;
-    flex-direction: column;
-    gap: 10px !important;
-    background-color: white; }
-    .searches_container .mobile_filter_div {
-      position: sticky;
-      top: 0px;
-      width: 90%;
-      background-color: #f7f8ff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.04);
-      padding: 5px 5%;
-      gap: 10px; }
-      .searches_container .mobile_filter_div button {
-        padding: 15px 5%;
-        border: 1px solid #c2c2c2;
-        border-radius: 15px;
-        background-color: white; }
-    .searches_container .filters_background {
-      padding-top: 50px;
-      display: flex;
+      .container .doctor_render .pagination div {
+        flex: 1;
+        display: flex;
+        align-items: center; }
+        .container .doctor_render .pagination div p {
+          font-size: 12px; }
+        .container .doctor_render .pagination div i {
+          position: relative;
+          bottom: -1.5px;
+          left: -5px; }
+      .container .doctor_render .pagination div:nth-child(2) {
+        flex: 0.5;
+        justify-content: center; }
+      .container .doctor_render .pagination div:nth-child(1) {
+        justify-content: end; }
+    .container .doctor_render .no_results {
       justify-content: center;
       align-items: center;
-      overflow-y: scroll;
-      height: 100dvh;
-      width: 100% !important;
-      background-color: black;
-      position: fixed !important;
-      z-index: 2 !important;
-      background-color: rgba(0, 0, 0, 0.307);
-      backdrop-filter: blur(4px); }
-      .searches_container .filters_background .filters {
-        width: 90%;
-        max-width: 700px;
-        position: static; }
-        .searches_container .filters_background .filters .filters_title {
-          justify-content: space-between;
-          border-radius: 10px 10px 0px 0px; }
-    .searches_container .doctors {
-      width: 100% !important;
-      height: 100% !important;
-      max-width: 1000px !important;
-      margin: auto; }
-      .searches_container .doctors .doctor_container {
-        margin: auto;
-        height: 98%; }
-        .searches_container .doctors .doctor_container .doctor {
-          margin-bottom: 40px !important; } }
+      height: 100%; }
+      .container .doctor_render .no_results img {
+        height: 100px; }
+  .container .filter_btn_container {
+    position: sticky;
+    top: 0;
+    /* or bottom, left, right depending on direction */
+    z-index: 1;
+    /* optional, to control overlap */
+    background-color: white;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    width: 98%;
+    max-width: 720px;
+    margin: 0px auto;
+    margin-bottom: 0.5rem;
+    padding: 5px 1%; }
+    .container .filter_btn_container button {
+      color: #101079;
+      padding: 1rem 5rem;
+      border-radius: 5px;
+      margin-left: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 5px; }
+      .container .filter_btn_container button img {
+        height: 25px; }
+    .container .filter_btn_container button:hover {
+      background-color: #f5f5ffb9; }
 
-@media (max-width: 500px) {
-  .filters_data {
-    font-size: 14px !important; }
-  .doctors {
-    width: 100% !important; }
-    .doctors .doctor_container {
-      margin: auto !important;
-      width: clamp(320px, 100%, 450px) !important;
-      padding: 0px !important; }
-      .doctors .doctor_container .doctor {
-        min-width: 95% !important;
-        padding: 8% 3% !important;
-        gap: 20px !important;
-        margin-bottom: 35px !important; }
-        .doctors .doctor_container .doctor .doc_info {
-          flex-direction: column; }
-          .doctors .doctor_container .doctor .doc_info .doc_img {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 5px; }
-          .doctors .doctor_container .doctor .doc_info .doc_txt {
-            text-align: center;
-            margin-bottom: 5px; }
-            .doctors .doctor_container .doctor .doc_info .doc_txt .name_ensurances {
-              flex-direction: column !important; }
-            .doctors .doctor_container .doctor .doc_info .doc_txt .locations {
-              justify-content: center; }
-              .doctors .doctor_container .doctor .doc_info .doc_txt .locations .clinics {
-                justify-content: center; }
-            .doctors .doctor_container .doctor .doc_info .doc_txt h2 {
-              margin: 5px; } }
+.col, .container .filters, .container .filters .gender_cont, .container .filters .date_sistem_div, .container .doctor_render .doctor, .container .doctor_render .doctor .section_2, .container .doctor_render .doctor .section_2 .info_2, .container .doctor_render .no_results {
+  display: flex;
+  flex-direction: column; }
+
+.off {
+  display: none; }
+
+@keyframes display_filters {
+  0% {
+    left: -500px; }
+  100% {
+    left: 0px; } }
+
+@media (max-width: 1200px) {
+  .container {
+    flex-direction: column;
+    margin: 0px !important; }
+  .doctor_render {
+    width: 95% !important;
+    max-width: 750px;
+    min-height: 750px !important;
+    margin: 0px auto !important; }
+    .doctor_render .no_results {
+      min-height: 750px; }
+  .filters {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    overflow-y: scroll;
+    box-shadow: 1px 6px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    gap: 20px !important;
+    height: 100%;
+    min-width: 458px;
+    border-radius: 0px !important;
+    animation-name: display_filters;
+    animation-duration: 0.5s; }
+    .filters header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px; }
+    .filters .search_bar ul {
+      width: 100% !important; } }
+
+@media (max-width: 767px) {
+  .doctor h4 {
+    font-size: 14px; }
+  .doctor .content img {
+    height: 75px; }
+  .doctor .content h3 {
+    font-size: 18px; }
+  .doctor .content .specialities {
+    font-size: 14px; }
+  .doctor .content .info {
+    font-size: 12px !important; }
+  .doctor .profile_button {
+    height: 30px !important;
+    font-size: 13px; }
+  .filter_btn_container {
+    margin: 0px !important; } }
+
+@media (max-width: 481px) {
+  .info_2 {
+    font-size: 12px !important; }
+  .filters {
+    width: 94% !important;
+    padding: 0px 3% !important;
+    min-width: 0px !important; } }
+
+@media (max-width: 381px) {
+  .ensurances img {
+    display: none !important; } }
 
 /*# sourceMappingURL=search.css.map */

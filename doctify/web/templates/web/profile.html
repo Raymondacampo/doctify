@@ -3,88 +3,213 @@
 {% load sass_tags %}
 {% block style %}
     <link rel="stylesheet" href="{% sass_src 'scss/profile.scss' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 {% endblock %}
 {% block body %}
+    <div class="history_container" style="margin-bottom: 1rem; margin-top: 1rem; margin-left: 1rem;  z-index: 1; position: absolute;">
+        <div>
+            <a href="{% url 'search' %}" style="color: white; border-bottom: 1px solid white;">Search</a>  <span style="color: white;"> / {{doctor.docuser.gender.salutation}} {{doctor.name}}</span>
+        </div>
+    </div>
+    <div class="colored_bg"></div>
     <div class="profile_container">
-        <div class="doc_info_1">
-            <div class="image_div">
-                <img src="{{doctor.image}}" alt="">
-            </div>
-            <div class="info_div">
-                <h2>{{doctor.name}}</h2> 
-                <div class="aligment">
-                    <div class="aligment_div" >
-                        <div class="specialities">
-                            {% for s in doctor.specialities %}
-                                <span>{{s}}</span>
-                            {% endfor %}
+        <div class="m-w col">
+
+            <!-- PRESENTATION SECTION -->
+            <div class="presentation_container">
+                <img src="/{{doctor.image}}" alt="">
+                <div class="doc_intro col">
+                    <h2 id="doc-name">{{doctor.docuser.gender.salutation}} {{doctor.name}}</h2>
+                    <div class="specialities">
+                        {% for s in doctor.specialities.all %}
+                        <h4>{{s}}</h4>
+                        {% endfor %}                    
+                    </div>
+                    {% if doc.review_count.value > 0 %}
+                    <div class="rate_content">
+                        <div class="rating_val">
+                            <span >{{doc.average_rating.value}}</span>
+                            <div class="rating" data-rating="{{doc.average_rating.value}}"></div>    
                         </div>
-                        <div class="cities">
-                            {% for c in doctor.cities%}
-                                <div class="city">{{c}}<div class='pin'></div></div>
-                            {% endfor %}                        
-                        </div>                          
+                        <span><button class="n_b" data-section="section_reviews">See {{doc.review_count.value}} reviews</button></span>
                     </div>
-                  
-                </div>               
-                <hr>
-                <div class="info">
-                    <div class="contact">  
-                        <div id="date_btn_cont"></div> 
-                        <div style="display: flex; gap: 10px;">
-                            <div class="number">&#9990; {{doctor.number}}</div>
-                            <div class="chat"><a href="https://wa.me/{{doctor.number}}"><img src="{% static 'images/whatsapp-logo-icon.webp' %}" height="40px">Whatsapp</a></div>
-                        </div> 
-                        
+                    {% else %}
+                    <div class="no_rating_div ">
+                        <h3>No reviews yet</h3>
+                        <button class="n_b" data-section="section_reviews">Make a review</button>                        
                     </div>
-                        
+                    {% endif %}
+
                 </div>
             </div>
+
+            <!-- NAV BUTTONS -->
+            <div class="navigation_buttons">
+                {% if doctor.description %}
+                <button data-section="section_about" class="nav-button n_b">About</button>
+                {% endif %}
+                <button data-section="section_ensurances" class="nav-button n_b">Insurances</button>
+                <button data-section="section_locations" class="nav-button n_b">Locations</button>
+                <button data-section="section_reviews" class="nav-button n_b">Reviews</button>
             </div>
-        <div class="doc_info_2">
-            <div class="doc_info_left">
-                {% if ens %}
-                <div class="ensurances_div">
-                    <h2>Seguros</h2>
-                    <hr>
-                    <div class="ensurances">
-                        {% for e in ens %}
-                            {% if e.logo %}
-                                <div class="ensurance" title="{{e.name}}"><img src="{{e.logo}}" height="50px"><span>{{e.name}}</span></div>
-                            {% else %}
-                                <div class="ensurance" title="{{e.name}}"><h4>{{e.name}}</h4></div>
+
+            <!-- ABOUT SECTION -->
+            {% if doctor.description %}
+                <section id="section_about">
+                    <h1>About</h1>
+                    <hr class="enmark">
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; letter-spacing: 1px;">
+                        {% for d in dates %}
+                            {% if d.clinica %}
+                            <div class="date-scheduled" style="flex-wrap: wrap; gap: 1rem; max-width: 300px;">
+                                <div style="width: 100%;">Works in <b>{{d.clinica.name}}</b> on <b>{{d.days}}</b></div>
+                                <div> From <b>{{d.hour_ampm.0}}</b> to <b>{{d.hour_ampm|slice:"-1:"|join:""}}</b></div>
+                            </div>
                             {% endif %}
                         {% endfor %}                        
                     </div>
-                </div>      
-                {% endif %}
 
-                <div class="description_div">
-                    <div><h2>Descripcion del doctor</h2><hr></div>
-                    <div class="desc"><p id="doc_description">{{doctor.description}}</p></div>
-
-                </div>   
-       
-            </div>
-            <div class="doc_info_right">
-                    <h2>Clinicas</h2>
-                    <hr>
-                    <div class="clinics">
-                        {% for c in clinics %}
-                        <div class="clinic">
-                            <div style="display: flex; gap: 5px;"><img src="{% static 'images/clinic_icon.png' %}" height="18px"></img><h3>{{c.name}} </h3></div>
-                            <span>{{c.phone}}</span>
-                            {% if c.map %}
-                                <iframe src="{{c.map}}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            {% endif %}                            
+                    <p class="description clamped" id="description_loc">{{doctor.description}}</p>
+                    <button id="toggleBtn" style="display: none;">See More</button> 
+                </section>
+            {% endif %}
+            <!-- ENSURANCES SECTION -->
+            <section id="section_ensurances">
+                <h1>Insurances</h1>
+                <hr class="enmark">
+                {% if doctor.ensurances.all %}
+                    <div class="insurances">
+                        {% for e in doctor.ensurances.all %}
+                        <div class="insurance">
+                            <img src="/static/images/{{e.logo}}" alt="">
+                            <span>{{e.name}}</span>                        
                         </div>
 
                         {% endfor %}
+                        <div>
+                            <h5 style="color: rgb(94, 94, 94);">Para confirmar si el doctor trabaja con su seguro, le recomendamos llamar <a href="">{{doctor.docuser.phone}}</a></h5>
+                        </div>
                     </div>
+                {% else %}
+                    {% if doctor.docuser == user %}
+                    <h4 style="color: red;">Make a description to show your information to the customers</h4>
+                    {% endif %}
+                {% endif %}
+            </section>
+
+            <!-- LOCATIONS SECTION -->
+            {% if doctor.clinics.exists %}
+            <section id="section_locations">
+                <h1>Locations</h1>
+                <div class="locations">
+                        {% for c in doctor.clinics.all %}
+                        <div class="loc">
+                        <iframe src="{{c.map}}"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <h2>{{c.name}}</h2>
+                            <div class="loc_alg">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="20" fill="#101079">
+                                    <path d="M12 2c-3.86 0-7 3.14-7 7 0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                                {{c.adress}}
+                            </div>
+                            <div>
+                                <svg style="position: relative; top: 3px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="#101079">
+                                    <path d="M6.62 10.79a15.09 15.09 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.24 11.72 11.72 0 003.7.6 1 1 0 011 1v3.55a1 1 0 01-1 1A16 16 0 013 4a1 1 0 011-1h3.55a1 1 0 011 1 11.72 11.72 0 00.6 3.7 1 1 0 01-.24 1.11z" />
+                                  </svg>
+                                  
+                                  
+                                {{c.contact}}
+                            </div>
+                        </div>
+                        {% endfor %}                         
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- REVIEWS SECTION -->
+            <section id="section_reviews">
+                <h1>Reviews</h1>
+                <hr>
+                <div class="reviews_container">
+                    <div class="make-review-container">
+                        <div class="rating-summary col">
+                            <div class="rating_val col">
+                                <div class="rating-header">
+                                    <h1>{{doc.average_rating.value}}</h1>
+                                    <div class="col">
+                                        <div class="rating" data-rating="{{doc.average_rating.value}}"></div>  
+                                        <span>{{doc.review_count.value}} reviews</span>  
+                                    </div>                                    
+                                </div>
+
+                                <div class="rating-bars col">
+                                    {% for rating in rating_data %}
+                                    <div class="rating-bar" >
+                                        <span class="star-val">{{ rating.rate }} Star{% if rating.rate > 1 %}s{% endif %}</span>
+                                        
+                                        <div class="bar-container">
+                                            <div class="bar-fill" style="width: {{ rating.percentage|floatformat:0 }}%;"></div>
+                                          </div>                                          
+                                        <span>{{ rating.percentage|floatformat:0 }}% ({{ rating.count }} votes)</span>
+                                        <span></span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="make-review col">
+                            {% if doctor.reviews.exists%}
+                            <h3>Want to share your experience with {{doctor.docuser.gender.salutation}} {{doctor.name}}?</h3>
+                            {% else %}
+                            <h3>Be the first one to share your experience with {{doctor.docuser.gender.salutation}}{{doctor.name}}</h3>
+                            {% endif %}
+                            <div id="make_review"></div>    
+                        </div>
+                           
+                    </div>
+                    <div id="reviews"></div>         
+                </div>
+            </section>
+        </div>
+
+        <!-- BOOKING CONTENT -->
+        {% if doctor.docuser.phone or doctor.dates.exists %}
+        <div class="booking_div">
+            <div class="m-a">
+                {% if doctor.dates.exists %}
+                <div class="d_s">
+                    <h3>Booking information</h3>
+                    {% if user.is_authenticated %}
+                    <div id="date_btn_cont"></div> 
+                    {% else %}
+                    <a href="/accounts/login"><button class="buttonBlue">Hacer cita</button> </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% if doctor.docuser.phone and doctor.dates.exists %}
+                <div class="line"></div>
+                {% endif %}
+                {% if doctor.docuser.phone %}
+                <div class="col">
+                    <button class="phone_container">{{doctor.docuser.phone}}</button>
+                    <a class="ws" href="https://wa.me/{{doctor.docuser.phone}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="white">
+                        <path d="M12.001 1.999c-5.523 0-10 4.477-10 10 0 1.768.465 3.439 1.351 4.928L2 22l5.141-1.322c1.44.787 3.053 1.187 4.738 1.187 5.523 0 10-4.477 
+                        10-10s-4.477-10-10-10zm0 1.5c4.693 0 8.5 3.807 8.5 8.5s-3.807 8.5-8.5 8.5c-1.548 0-3.045-.408-4.345-1.18l-.308-.184-3.348.86.877-3.336-.195-.316c-.77-1.25-1.181-2.679-1.181-4.194 
+                        0-4.693 3.807-8.5 8.5-8.5zm-2.73 3.1c-.228-.509-.462-.517-.676-.526l-.565-.01c-.2 0-.52.075-.79.375-.27.3-1.04 1.017-1.04 2.48 0 1.463 1.065 2.878 1.21 3.073.148.195 2.035 3.112 
+                        5.003 4.235 2.469.905 2.969.725 3.499.678.531-.047 1.7-.694 1.941-1.363.241-.669.241-1.242.169-1.363-.072-.121-.268-.195-.565-.341-.297-.146-1.75-.865-2.02-.964-.27-.1-.467-.146-.665.147-.198.294-.765.964-.94
+                        1.137-.176.172-.348.195-.645.049-.297-.146-1.254-.462-2.39-1.472-.883-.788-1.479-1.759-1.654-2.053-.176-.294-.018-.454.13-.6.133-.133.297-.345.446-.518.149-.172.198-.295.297-.492.1-.197.048-.372-.025-.518-.073-.146-.663-1.657-.928-2.265z"/>
+                      </svg>
+                      Whatsapp</a>                
+                </div>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
     </div>
-    {% if docDates %}
-        <script src="{% static 'dist/doctorProfile.bundle.js' %}"></script>
-    {% endif %}
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js-functions/seeMore.js' %}"></script>
+    <script src="{% static 'dist/doctorProfile.bundle.js' %}"></script>      
 {% endblock %}

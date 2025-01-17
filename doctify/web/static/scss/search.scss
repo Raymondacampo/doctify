@@ -1,540 +1,399 @@
-.searches{
+.container{
     display: flex;
     justify-content: center;
-    min-height: 90dvh;
-    width: 100%;
-    background-color: white;
-    box-shadow: 1px 15px 15px rgba(0, 0, 0, 0.156);
-    margin: auto;
-    // padding: 0px 10px;
-    .searches_container{
-        display: inherit;
-        width: 100%;
-        max-width: 1100px;
-        justify-content: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 20px clamp(10px, 6%, 120px) 20px 10px;
-
-        // FILTERS
-        .filters{
-            display: flex;
-            flex-direction: column;
-            width: 280px;
-            background-color: white;
-            border-radius: 10px; 
-            .filters_title{
-                background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                
-                padding: 25px;
-                height: 15px;
-                border-radius: 10px 10px 40px 0px ;
-                z-index: 4;
-                .change{
-                    
-                    div{
-                        background-color: white !important;
-                    }
-                }
-            }
-
-            .filters_container{
-                height: 100%;
-                min-height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: start;
-                margin-top: 10px;
-                hr{
-                    border: none;
-                    height: 1px;
-                    color: linear-gradient(225deg, #596c7f27 0%, #170b6e2c 100%);
-                    background: linear-gradient(225deg, #596c7f2c 0%, #170b6e2c 100%);
-                    width: 100%;
-                }   
-                .filters_container_child{
-                    width: 100%;
-                    hr{
-                        background-color: rgb(255, 255, 255) !important;
-                        height: 1px !important;
-                    }
-                    div{
-                        width: 90%;
-                        margin: 20px auto;
-
-                        .filter{
-                            display: flex;
-                            justify-content: center;
-                            position: relative;
-                            letter-spacing: 0.7px;
-                            width: 100%;
-                            margin: 5px 0px;
-                            .listDiv{
-                                margin: 32px 0px !important;
-                                position: absolute;
-                                width: 100%;
-                                overflow-y: scroll;
-                                overflow-x: hidden;
-                                border-radius: 0px 0px 0px 5px;
-                                animation-name: display_list;
-                                animation-duration: 0.5s;
-                                animation-fill-mode: forwards;
-                                z-index: 100;
-                                box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.04);
-                                ul{
-                                    width: 100%;
-                                    li{
-                                        width: 100%;
-                                        list-style: none;
-                                        background-color: white;
-                                        font-size: 16px;
-                                        color: rgba(0, 0, 0, 0.508);
-                                        button{
-                                            padding: 20px 0px 20px 7px;
-                                            width: 100%;
-                                        }
-                                    }
-                                    .noResultList{
-                                        padding: 20px 0px 20px 75px;
-                                        overflow-y: hidden;
-                                    }
-                                }
-                            }  
-                            @keyframes display_list{
-                                0% {max-height: 10px;}
-                                100% {max-height: 300px;}
-                            }
-                            
-                            .closedListDiv{
-                                display: none;
-                            }  
-                            input[type=text]{
-                                width: 100%;
-                                height: 15px;
-                                padding: 10px 10px;
-                                border: 1px solid rgb(212, 212, 212);
-                                border-radius: 5px;
-                                text-align: center;
-                                font-size: 16px;
-                                z-index: 1;
-                                letter-spacing: 0.7px;
-                                color:#000472ae ;
-                                font-weight: 600;
-                            }   
-                            input[type=text]:focus{
-                                outline: none;
-                            }     
-                            
-                            input[type=text]::placeholder{
-                                color:#000472ae ;
-                                font-weight: 600;
-                            }
-                            
-                            input[type=text]:focus::placeholder{
-                                color: white;
-                            }
-                                }                        
-                    }
-                }               
-                }
-        }            
-    
-
-        .doctor_render{
-            background-color: #23237e;
-            width: 100%;
-            h1{font-size: 32px;
-            color: black;}
-        }
-        // DOCTORS
-        // .doctors{
-        //     display: flex;
-        //     flex-direction: column;
-        //     align-items: center;
-        //     gap: 10px;
-        //     background-color: white;
-        //     border-radius: 15px; 
-        //     overflow-y: scroll;
-        //     bottom: 10px;
-        //     // DOCOTR RESULTS
-
-        //     .doctor_container{
-        //         height: 100%;
-        //         display: flex;
-        //         flex-direction: column;
-        //         width: 100%;
-        //         gap: 25px;  
-        //         padding: 2px;
-        //         .doctor_render{
-        //             width: clamp(320px,90%, 1200px);
-        //             margin: 0px auto;
-        //         }
-        //         .doctor{
-        //             display: flex;
-        //             flex-direction: column;
-        //             padding: clamp(20px, 3%, 20px);
-        //             border-radius: 15px;
-        //             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.156);
-        //             width: 94%;
-        //             line-height: 1.5;
-        //             gap: 30px;
-        //             margin-bottom: 3%;
-        //             .doc_info{
-        //                 display: flex;
-        //                 gap: 15px;
-        //                 .doc_img{
-        //                     div{
-        //                         height: 120px;
-        //                         width: 120px;
-                                
-        //                         img{
-        //                             height: 100%;
-        //                             width: 100%;
-        //                             border-radius: 100px;
-        //                             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-        //                         }
-        //                     }
-        //                 }
-        //                 .doc_txt{
-        //                     .name_ensurances{
-        //                         display: flex;
-        //                         justify-content: space-between;
-        //                         align-items: center;
-        //                         margin-bottom: 5px;
-        //                         .ensurances{
-        //                             display: flex;
-        //                             flex-wrap: wrap;
-        //                             gap: 0px 10px;
-        //                             max-width: 55%;
-        //                             h4{
-        //                                 color: #23237e;
-        //                             }
-        //                             img{
-        //                                 height: 50px;
-        //                             }                                    
-        //                         }
-
-        //                     }
-
-        //                     .specialities{
-        //                         display: flex;
-        //                         gap: 0px 5px;
-        //                     }
-
-        //                     .locations{
-        //                         display: flex;
-        //                         width: 100%;
-        //                         gap: 2px 10px;
-        //                         flex-wrap: wrap;
-        //                         .clinics{
-        //                             display: flex;
-        //                             gap: 8px;
-        //                             flex-wrap: wrap;
-        //                         }
-        //                     }
-
-        //                     .city{
-        //                         display: flex;
-        //                         justify-content: center;
-        //                         align-items: center;
-        //                         background-color: rgba(205, 205, 205, 0.285);
-        //                         padding: 4px 8px;
-        //                         border-radius: 15px;
-        //                         gap: 5px;
-        //                         font-size: 14px;
-        //                     }   
-                            
-
-        //                     .clinic{
-        //                         color: #23237e;
-        //                         font-size: 14px;
-        //                         font-weight: 600;
-        //                         display: flex;
-        //                         align-items: center;
-        //                         gap: 5px;
-        //                         img{
-        //                             height: 12.5px;
-        //                             position: relative;
-        //                             bottom: 1.5px;
-        //                         }
-        //                     }
-        //                     span{
-        //                         font-size: 14px;
-        //                         font-weight: 600;
-        //                         color: rgb(113, 113, 113);
-        //                     }
-        //                     p{
-        //                         max-height: 90px;
-        //                         -webkit-line-clamp: 3;
-        //                         line-clamp: 4;
-        //                         overflow: hidden;
-        //                         display: -webkit-box;
-        //                         -webkit-box-orient: vertical;
-        //                     }
-        //                     hr{
-        //                         margin: 7px 0px;
-        //                         border: none;
-        //                         height: 3px;
-        //                         color: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-        //                         background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-        //                     }
-        //                 }                        
-        //             }
-        //         }                      
-                
-  
-        //         .pagination_div{
-        //             display: flex;
-        //             width: 300px;
-        //             margin: 0px auto 10px auto;
-        //             font-weight: 600;
-
-        //             span{
-        //                 color: rgb(88, 88, 88);
-        //                 flex: 50%;
-        //                 text-align: center;
-        //                 position: relative;
-        //                 z-index: 1;
-        //                 top: 4px;
-        //             }
-        //             button{
-        //                 color: navy;
-        //                 flex: 25%;
-        //                 align-items: center;
-                        
-        //                 span{
-        //                     color: navy;   
-        //                     position: static;
-        //                 }
-        //                 .arrow {
-        //                     position: relative;
-        //                     top: 4px;
-        //                     margin-left: 5px;
-        //                     margin-bottom: 2px;
-        //                     border: solid #23237e;
-        //                     border-width: 0 2px 2px 0;
-        //                     display: inline-block;
-        //                     padding: 7px;
-        //                 }
-        //                 .right {
-        //                     transform: rotate(-45deg);
-        //                     -webkit-transform: rotate(-45deg);
-        //                   }
-                          
-        //                 .left {
-        //                     transform: rotate(135deg);
-        //                     -webkit-transform: rotate(135deg);
-        //                   }
-        //             }
-        //         }        
-        //     }
-
-        //     // NO DOCTOR RESULTS
-        //     .no_result_div{
-        //         display: flex;
-        //         height: 100%;
-        //         width: 100%;
-        //         div{
-        //             margin: auto;
-        //             color: rgb(80, 80, 80);
-        //             text-align: center;
-        //         }
-        //     }
-
-        // }
-        // .doctors::-webkit-scrollbar{
-        //     display: none;
-        // }
-
-        .doc_btn{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            a, button{
-                text-align: center;
-                margin: auto;
-                padding: 8px 0px;
-                max-width: 400px;
-                width: 100%;
-                color: white;
-                background: linear-gradient(225deg, #596c7f 0%, #170b6ee5 100%);
-                border-radius: 20px;
-            }
-            button:hover{
-                background: linear-gradient(225deg, rgba(132, 158, 180, 0.841) 0%, rgba(36, 21, 133, 0.831) 100%); 
-            }
-        }
+    margin-top: 20px;
+    min-height: 80dvh;
+    margin-bottom: 5rem;
+    h1, h2, h3, h4, h5, h6{
+        font-weight: 100;
     }
-
-}
-
-.top{
-    top: 0;
-    overflow-y: hidden;
-    max-height: 100dvh;
-}
-
-.pin {
-    width: 12.5px ;
-    height: 12.5px ;
-    background-color: #23237e;
-    border-radius: 60px 60px 0px 60px ;
-    position:relative ;
-    transform: rotate(45deg);
-    top: -3px;
-  }
-  .pin::after {
-    content: "" ;
-    width: 6.25px ;
-    height: 6.25px ;
-    background: rgb(255, 255, 255) ;
-    position: absolute ;
-    left: 26% ;
-    top: 26% ;
-    border-radius: 60px ;
-  }
-
-  .filters_data{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin: 0px auto;
-    letter-spacing: 0.7px;
-    color: rgb(149, 149, 149);
-    font-weight: 600;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.132);
-    padding: 5px 2.5%;
-    width: 75%;
-    max-width: 1000px;
-    min-height: 35px;
-    background-color: rgba(159, 205, 255, 0.211);
-    backdrop-filter: blur(50px);
-}
-
-@media(max-width:1400px){
-    .searches{
-        display: block;
-        height: 100%;
-    }
-    .searches_container{
-        max-width: none !important;
-        margin: auto;
-        padding: 0px !important;
-        flex-direction: column;
-        gap: 10px !important;
+    .filters{
+        @extend .col;
+        gap: 30px;
+        width: 19rem;
         background-color: white;
-        .mobile_filter_div{
-            position: sticky;
-            top: 0px;
-            width: 90%;
-            background-color: rgb(247, 248, 255);
-            display: flex;
+        border-radius: 10px; 
+        letter-spacing: 0.7px;
+        padding:0px 1rem;
+        h3{
+            color: #101079;
+        }
+        .sb_cont{
+            .search_bar{
+                margin-top: 10px;
+                position: relative;
+                input{
+                    height: 40px;
+                    border: 0px;
+                    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+                    border-radius: 5px;
+                    font-size: 16px;
+                    padding-left: 10px;
+                    outline: none;
+                }
+                input:focus{
+                    border-radius: 5px 5px 0px 0px;
+                }
+                ul{
+                    width: 101%;
+                    z-index: 1000;
+                    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.145)
+                }
+            }
+        }
+        .gender_cont{
+            @extend .col;
+            gap: 20px;
+
+            div{
+                display: flex;
+                gap: 10px;
+                margin-left: 5px;
+            }
+        }
+        .date_sistem_div{
+            @extend .col;
+            gap: 20px;
+            padding-bottom: 2rem;
+            div{
+                display: flex;
+                gap: 10px;
+                margin-left: 5px;
+            }
+            .disabled_checkbox{
+                color: gray;
+            }            
+        }
+        input[type="checkbox"]{
+            appearance: none;
+            -webkit-appearance: none;
+            border: 2px solid #ccc;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #3768ef;
+            border: 3px solid #ccc;
+            // border-color: #cecece;
+          }
+
+        hr{
+            color: #000000;
+
+        }
+    }            
+
+
+    .doctor_render{
+        width: 750px;
+        margin: 0px 1.5rem;
+        letter-spacing: 0.7px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.055);
+        .doctor{
+            min-height: 150px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.102);
+            padding: 25px 0px;
+            margin: 10px 0px;
+            @extend .col;
+            gap: 20px;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.04);
-            padding: 5px 5%;
-            gap: 10px;
-            button{
-                padding: 15px 5%;
-                border: 1px solid rgb(194, 194, 194); 
-                border-radius: 15px;
-                background-color: white;
+            hr{
+                position: relative;
             }
-
-
-        }
-        .filters_background{
-            padding-top: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-y: scroll;
-            height: 100dvh;
-            width: 100% !important;
-            background-color: black;
-            position: fixed !important;
-            z-index: 2 !important;
-            background-color: rgba(0, 0, 0, 0.307);
-            backdrop-filter: blur(4px);
-            .filters{
-                width: 90%;
-                max-width: 700px;
-                position: static;
-                .filters_title{
-                    justify-content: space-between;
-                    border-radius: 10px 10px 0px 0px;
-                }
+            .content{
+                display: flex;
+                width: 100%;
             }
-        }
-
-        .doctors{
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 1000px !important;
-            margin: auto;
-            .doctor_container{
-                margin: auto;
-                height: 98%;
-                .doctor{
-                    margin-bottom: 40px !important;
-                }
-            }
-
-        }
-    }
-
-}
-
-
-
-@media(max-width:500px){
-    .filters_data{
-        font-size: 14px !important;
-    }
-
-    .doctors{
-        width: 100% !important;
-        .doctor_container{
-            margin: auto !important;
-            width: clamp(320px, 100%, 450px) !important;
-            padding: 0px !important;
-            .doctor{
-                min-width: 95% !important;  
-                padding: 8% 3% !important;
-                gap: 20px !important;
-                margin-bottom:35px !important;
+            .section_1{
+                height: 100%;
                 
-                .doc_info{
-                    flex-direction: column;
-                    .doc_img{
-                        display: flex;
-                        justify-content: center;
-                        margin-bottom: 5px;
-                    }
-                    .doc_txt{
-                        text-align: center;
-                        margin-bottom: 5px;
-                        .name_ensurances{
-                            flex-direction: column !important;
+            }    
+            .section_2{
+                @extend .col;
+                gap: 10px;
+                width: 100%;
+                .presentation{
+                    display: flex;
+                    // align-items: center;
+                    gap: 10px;
+                    width: 100%;
+                    .name_spec{
+                        width: 100%;
+                        .name{
+                            display: flex;
+                            position: relative;
+                            flex-wrap: wrap;
+                            gap: 5px 15px;
+                            h3{
+                                margin-right: auto;
+                            }
 
-                        }
-                        .locations{
-                            justify-content: center;
-                            .clinics{
-                                justify-content: center;
+                            .ensurances{
+                                position: relative;
+                                min-width: 45px;
+                                h5{
+                                    padding-right: 10px;
+                                    color: #3273db;
+                                }
+                                img{
+                                    height: 45px;
+                                    width: 45px;
+                                    
+                                    z-index: 1;
+                                    position: absolute;
+                                    top: -20px;
+                                }
+                            }
+                            a:hover{
+                                color: #101079;
                             }
                         }
-                        h2{
-                            margin: 5px;
+                        hr{
+                            margin: 5px 0px;
                         }
+                        .info_1{
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 5px ;
+                            font-weight: 600;
+                            position: relative;
+                            .specialities{
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 10px;
+                                margin-right: auto;
+                                font-size: 14px;
+                            }
+                            .rating_container{
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+                                font-weight: 100;
+                                padding-right: 10px;
+
+                                .rate_content{
+                                    display: flex;
+                                    gap: 5px;
+                                    font-size: 12px;
+                                    .count{
+                                        color: rgb(95, 95, 95);
+                                    }
+                                }
+                                a:hover{
+                                    border-bottom: 1px solid black;
+                                }
+                            }
+                        }
+
                     }
                 }
+                .info_2{
+                    @extend .col;
+                    gap: 2.5px;
+                    font-size: 14px;
+                    .camera_icon{
+                        fill: black;
+                      }
+                      .in_person_icon{
+                        position: relative;
+                        bottom: 2px;
+                      }
+
+                    div{
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                    }
+                }
+            }   
+            .profile_button{
+                border: 1px solid #101079;
+                background-color: #0c0c5f;
+                border-radius: 5px;
+                height: 35px;
+                width: 95%;
+                max-width: 400px;
+                color: white;
+                // font-weight: 600;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                letter-spacing: 1px;
+            }     
+            .profile_button:hover{
+                background-color: #0c0c5fd8;
             }
         }
-    }     
+        .pagination{
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            div{
+                flex: 1; 
+                display: flex;
+                align-items: center;
+                p{
+                    font-size: 12px;
+                }
+                i{
+                    position: relative;
+                    bottom: -1.5px;
+                    left: -5px;
+                }
+              }
+              
+            div:nth-child(2) {
+                flex: 0.5; 
+                justify-content: center;
+            }
+            div:nth-child(1){
+                justify-content: end
+            }
+        }
+
+        .no_results{
+            @extend .col;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            img{
+                height: 100px;
+            }
+        }
+    }
+ 
+
+    .filter_btn_container{
+        position: sticky;
+        top: 0; /* or bottom, left, right depending on direction */
+        z-index: 1; /* optional, to control overlap */
+        background-color: white;
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+        width: 98%;
+        max-width: 720px;
+        margin: 0px auto;
+        margin-bottom: 0.5rem;
+        padding: 5px 1%;
+        button{
+            color: #101079;
+            padding: 1rem 5rem;
+            border-radius: 5px;
+            margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            img{
+                height: 25px;
+            }
+        }
+        button:hover{
+            background-color: #f5f5ffb9;
+        }
+    }
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+}
+.off{
+    display: none;
+}
+
+@keyframes display_filters{
+    0% {left: -500px;}
+    100% {left: 0px;}
+}
+
+@media (max-width: 1200px){
+    .container{
+        flex-direction: column;
+        margin: 0px !important;
+    }
+    .doctor_render{
+        width: 95% !important;
+        max-width: 750px;
+        min-height: 750px !important;
+        margin: 0px auto !important;
+        .no_results{
+            min-height: 750px;
+            }
+    }
+    .filters{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        overflow-y: scroll;
+        box-shadow: 1px 6px 40px rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        gap: 20px !important;
+        height: 100%;
+        min-width: 458px;
+        border-radius: 0px !important;
+        animation-name: display_filters;
+        animation-duration: 0.5s;
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .search_bar{
+            ul{
+                width: 100% !important;
+            }
+        }
+    }
+}
+@media (max-width: 767px){
+    .doctor{
+        h4{
+            font-size: 14px;
+        }
+        .content{
+            img{
+                height: 75px;
+            }
+            h3{
+                font-size: 18px;
+            }
+            .specialities{
+                font-size: 14px;
+            }
+            .info{
+                font-size: 12px !important;
+            }
+        }
+        .profile_button{
+            height: 30px !important;
+            font-size: 13px;
+        }
+    }
+    .filter_btn_container{
+        margin: 0px !important;
+    }
+}
+
+@media (max-width: 481px){
+    .info_2{
+        font-size: 12px !important;
+    }
+    .filters{
+        width: 94% !important;
+        padding: 0px 3% !important;
+        min-width: 0px !important;
+    }
+}
+
+@media (max-width: 381px){
+    .ensurances{
+        img{
+            display: none !important;
+        }
+    }
 }

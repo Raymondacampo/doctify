@@ -1,224 +1,429 @@
+@charset "UTF-8";
 .profile_container {
   margin: 10px auto;
   display: flex;
-  flex-direction: column;
-  background-color: white;
-  min-height: 100%;
+  min-height: 100dvh;
   width: 100%;
   max-width: 1200px;
-  gap: 50px;
-  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.187);
+  gap: 20px;
   padding-bottom: 100px;
-  padding-top: 15px; }
-  .profile_container .doc_info_1 {
+  padding-top: 15px;
+  letter-spacing: 0.7px; }
+  .profile_container h1, .profile_container h2, .profile_container h3, .profile_container h4, .profile_container h5, .profile_container h6 {
+    font-weight: 100; }
+  .profile_container h1 {
+    font-size: 30px;
+    color: #0c0c5f; }
+  .profile_container section {
     width: 95%;
-    display: flex;
-    padding: 15px 0px;
-    margin-left: auto;
-    gap: 15px; }
-    .profile_container .doc_info_1 .image_div {
-      width: 180px;
-      height: 180px;
-      min-width: 180px;
-      margin: auto; }
-      .profile_container .doc_info_1 .image_div img {
-        height: 100%;
-        width: 100%;
-        border-radius: 100px; }
-    .profile_container .doc_info_1 .info_div {
+    margin: 0px auto;
+    margin-bottom: 2.5rem; }
+    .profile_container section p {
+      font-size: 14px;
       width: 85%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px; }
-      .profile_container .doc_info_1 .info_div .cities {
-        display: flex;
-        gap: 5px;
-        flex-wrap: wrap; }
-        .profile_container .doc_info_1 .info_div .cities .city {
-          display: flex;
-          justify-content: center;
-          max-width: 200px;
-          align-items: center;
-          background-color: rgba(205, 205, 205, 0.285);
-          padding: 5px 10px;
-          border-radius: 15px; }
-          .profile_container .doc_info_1 .info_div .cities .city div {
-            margin-bottom: 2px;
-            margin-left: 3px; }
-      .profile_container .doc_info_1 .info_div hr {
-        border: none;
-        height: 1.5px;
-        margin: 5px 0px;
-        color: linear-gradient(225deg, #596c7f31 0%, #170b6ed5 100%);
-        background: linear-gradient(225deg, #596c7f34 0%, #170b6ed5 100%);
-        width: 100%; }
-      .profile_container .doc_info_1 .info_div .aligment {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 10px 15px;
-        max-width: 700px; }
-        .profile_container .doc_info_1 .info_div .aligment .aligment_div {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          gap: 5px; }
-      .profile_container .doc_info_1 .info_div .specialities {
-        display: flex;
-        gap: 5px 20px; }
-        .profile_container .doc_info_1 .info_div .specialities span {
-          color: #515151;
-          font-weight: 600; }
-      .profile_container .doc_info_1 .info_div .info {
-        display: flex;
-        flex-direction: column;
-        gap: 15px; }
-        .profile_container .doc_info_1 .info_div .info .contact {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 20px; }
-          .profile_container .doc_info_1 .info_div .info .contact #date_btn_cont {
-            display: flex; }
-            .profile_container .doc_info_1 .info_div .info .contact #date_btn_cont .makedatebtn {
-              display: flex;
-              width: 100%; }
-          .profile_container .doc_info_1 .info_div .info .contact .number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 15px;
-            background-color: #121242;
-            border-radius: 15px;
-            color: white;
-            font-weight: 600;
-            letter-spacing: 0.7px;
-            width: 150px; }
-          .profile_container .doc_info_1 .info_div .info .contact .chat {
-            justify-content: center;
-            padding: 0px 5px;
-            background-color: #00E510;
-            border-radius: 15px;
-            font-weight: 600;
-            letter-spacing: 0.7px;
-            width: clamp(140px, 90%, 150px) !important; }
-            .profile_container .doc_info_1 .info_div .info .contact .chat a {
-              color: white;
-              display: flex;
-              align-items: center; }
-  .profile_container .doc_info_2 {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
+      word-break: break-all;
+      line-height: 1.5; }
+  .profile_container section::after {
+    height: 1px;
+    width: 100%;
+    background-color: #05052e; }
+  .profile_container .insurances {
+    max-height: 400px;
     flex-wrap: wrap;
-    margin: auto; }
-    .profile_container .doc_info_2 h2 {
-      background-color: rgba(190, 226, 230, 0.1);
-      border-radius: 5px 5px 0px 0px;
-      padding: 5px; }
-    .profile_container .doc_info_2 hr {
-      margin-bottom: 10px;
-      border: none;
-      height: 3px;
-      background-color: rgba(106, 140, 144, 0.501);
-      color: rgba(106, 140, 144, 0.501); }
-    .profile_container .doc_info_2 .doc_info_left {
-      width: 62.5%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2.5%;
+    width: 95%; }
+    .profile_container .insurances .insurance {
       display: flex;
-      flex-direction: column;
-      gap: 50px; }
-      .profile_container .doc_info_2 .doc_info_left .description_div {
-        width: 95%;
-        margin: 0px auto; }
-        .profile_container .doc_info_2 .doc_info_left .description_div .desc {
-          display: flex;
-          gap: 5px;
-          padding: 0px 10px; }
-        .profile_container .doc_info_2 .doc_info_left .description_div p {
-          letter-spacing: 0.7px;
-          line-height: 1.3; }
-        .profile_container .doc_info_2 .doc_info_left .description_div .short_description {
-          max-height: 90px;
-          -webkit-line-clamp: 2;
-          line-clamp: 2;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical; }
-        .profile_container .doc_info_2 .doc_info_left .description_div .cover_description {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          position: relative;
-          bottom: 25px; }
-          .profile_container .doc_info_2 .doc_info_left .description_div .cover_description .cover_p {
-            background-image: linear-gradient(rgba(255, 255, 255, 0), white);
-            height: 25px; }
-          .profile_container .doc_info_2 .doc_info_left .description_div .cover_description .show_more_div {
-            display: flex;
-            justify-content: center; }
-            .profile_container .doc_info_2 .doc_info_left .description_div .cover_description .show_more_div button {
-              color: #50a0e1; }
-      .profile_container .doc_info_2 .doc_info_left .ensurances_div {
-        width: 95%;
-        margin: 0px auto; }
-        .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px; }
-          .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0px 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center; }
-            .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance img {
-              height: 50px; }
-            .profile_container .doc_info_2 .doc_info_left .ensurances_div .ensurances .ensurance span {
-              font-size: 12px; }
-    .profile_container .doc_info_2 .doc_info_right {
-      width: 35%; }
-      .profile_container .doc_info_2 .doc_info_right .clinics {
-        padding: 0px 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 30px; }
-        .profile_container .doc_info_2 .doc_info_right .clinics h3 {
-          color: #23237e; }
-        .profile_container .doc_info_2 .doc_info_right .clinics .clinic {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          padding-left: 5px; }
-      .profile_container .doc_info_2 .doc_info_right iframe {
-        width: 98%;
-        height: 250px;
-        border: 0px; }
+      align-items: center;
+      gap: 1rem;
+      margin: 0.5rem 0px; }
+      .profile_container .insurances .insurance img {
+        height: 70px; }
+  .profile_container #section_locations {
+    border: 1px solid gray;
+    border-radius: 15px;
+    width: 90%;
+    padding: 2.5%; }
+    .profile_container #section_locations h1 {
+      font-size: 36px;
+      border-bottom: 2px solid #0c0c5f; }
+  .profile_container .locations .loc {
+    justify-content: center;
+    width: 90%;
+    margin: 2.5rem auto; }
+  .profile_container .locations .loc_alg {
+    display: flex;
+    align-items: center;
+    gap: 5px; }
+  .profile_container .locations .phone-icon {
+    color: #25D366;
+    /* WhatsApp green */
+    width: 20px;
+    height: 20px; }
+  .profile_container .locations iframe {
+    height: 400px;
+    width: 85%;
+    border: none;
+    margin-bottom: 1rem; }
 
-.buttonBlue {
-  padding: 12px 20px;
-  border-radius: 15px;
-  background: linear-gradient(#3f4db3 0%, #3030ba 100%);
+.m-w {
+  width: 80%;
+  margin-top: 2rem; }
+
+.colored_bg {
+  width: 100%;
+  height: 320px;
+  position: absolute;
+  z-index: -1;
+  background-color: #0c0c5f;
+  background-image: linear-gradient(to top right, #05052e, #0c0c5f); }
+
+.enmark {
+  border: none;
+  height: 3px;
+  width: 90%;
+  background-color: #0c0c5f;
+  margin-bottom: 1rem; }
+
+.presentation_container {
+  display: flex;
+  gap: 1rem;
+  padding-left: 1rem;
+  align-items: center;
+  min-height: 200px;
+  height: 10dvh; }
+  .presentation_container img {
+    height: 150px; }
+  .presentation_container div {
+    gap: 0.5rem; }
+  .presentation_container .specialities, .presentation_container .rate_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem; }
+  .presentation_container .rate_content {
+    height: fit-content;
+    width: 78%;
+    background-color: #24244e;
+    gap: 0px 2rem;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 16px;
+    flex-wrap: wrap; }
+    .presentation_container .rate_content span {
+      border-bottom: 1px solid white; }
+    .presentation_container .rate_content .rating_val {
+      align-items: center;
+      gap: 0px;
+      font-size: 28px; }
+      .presentation_container .rate_content .rating_val span {
+        border: none; }
+  .presentation_container .no_rating_div {
+    height: 50px;
+    width: fit-content;
+    padding: 0.5rem 2rem;
+    background-color: #24244e;
+    display: flex;
+    align-items: center;
+    gap: 20px; }
+    .presentation_container .no_rating_div button {
+      border-bottom: 1px solid white; }
+  .presentation_container .doc_intro {
+    width: 100%;
+    color: white; }
+
+.reviews_container .make-review-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(128, 128, 128, 0.094);
+  margin-top: 0.5rem; }
+  .reviews_container .make-review-container .rating-summary {
+    min-width: 50%;
+    padding: 1rem;
+    align-items: center; }
+    .reviews_container .make-review-container .rating-summary .rating_val {
+      align-items: center;
+      width: 100%;
+      display: flex;
+      gap: 1rem; }
+      .reviews_container .make-review-container .rating-summary .rating_val .rating-header {
+        display: flex;
+        gap: 1rem;
+        width: 100%; }
+        .reviews_container .make-review-container .rating-summary .rating_val .rating-header h1 {
+          font-size: 2.5em; }
+        .reviews_container .make-review-container .rating-summary .rating_val .rating-header .rating {
+          font-size: 36px;
+          position: relative;
+          z-index: -1;
+          top: -15px; }
+          .reviews_container .make-review-container .rating-summary .rating_val .rating-header .rating .star {
+            color: #ffe550; }
+        .reviews_container .make-review-container .rating-summary .rating_val .rating-header span {
+          font-size: 12px;
+          position: relative;
+          z-index: -1;
+          top: -7.5px;
+          left: 5px;
+          color: gray; }
+      .reviews_container .make-review-container .rating-summary .rating_val .rating-bars {
+        display: flex;
+        width: 100%;
+        gap: 1rem; }
+        .reviews_container .make-review-container .rating-summary .rating_val .rating-bars span {
+          font-size: 12px;
+          color: gray; }
+        .reviews_container .make-review-container .rating-summary .rating_val .rating-bars .rating-bar {
+          display: flex;
+          align-items: center;
+          width: 95%; }
+          .reviews_container .make-review-container .rating-summary .rating_val .rating-bars .rating-bar .star-val {
+            min-width: 3rem; }
+          .reviews_container .make-review-container .rating-summary .rating_val .rating-bars .rating-bar .bar-container {
+            min-width: 200px;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            z-index: -1;
+            margin: 0px 5px; }
+          .reviews_container .make-review-container .rating-summary .rating_val .rating-bars .rating-bar .bar-fill {
+            height: 100%;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+            border-radius: 5px; }
+  .reviews_container .make-review-container .make-review {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 35%;
+    padding: 1rem; }
+    .reviews_container .make-review-container .make-review h3 {
+      width: 300px; }
+    .reviews_container .make-review-container .make-review .make-review-button {
+      padding: 1rem 2.5rem;
+      border: 1px solid black; }
+    .reviews_container .make-review-container .make-review .make-review-button:hover {
+      background-color: rgba(255, 255, 255, 0.858); }
+
+.reviews_container .review {
+  margin: 2.5rem 0px;
+  gap: 0.25rem;
+  letter-spacing: 1px;
+  color: #3b3b3b; }
+  .reviews_container .review h4 {
+    font-weight: 600; }
+  .reviews_container .review p {
+    font-size: 14px;
+    max-width: 90%;
+    word-wrap: break-word; }
+  .reviews_container .review .rating {
+    z-index: -1;
+    position: relative;
+    top: -4px; }
+  .reviews_container .review .sec_1 {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    gap: 0.8rem; }
+
+.reviews_container .first_review_cont {
+  background-color: rgba(0, 0, 0, 0.075);
+  align-items: center;
+  padding: 1rem; }
+  .reviews_container .first_review_cont .title {
+    max-width: 400px;
+    text-align: center; }
+
+.rating-with-review .fr-star {
+  width: 10%;
+  /* Default width for full stars */
+  overflow: hidden;
+  font-size: 48px; }
+
+.rating-with-review .fr-star.empty {
+  color: #d7d7d7;
+  /* Gold color for filled portion */ }
+
+.rating-with-review .fr-star.active {
+  color: #ffd414; }
+
+.rating-with-review .fr-star:hover {
+  cursor: pointer; }
+
+.rating-with-review .review-box-container {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.276);
+  backdrop-filter: blur(5px); }
+
+.rating-with-review .review-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 0.5rem 1rem 2rem 1rem;
+  width: 92%;
+  max-width: 500px;
+  text-align: left; }
+  .rating-with-review .review-box .change {
+    width: fit-content;
+    margin-left: auto;
+    position: relative;
+    right: -7.5px;
+    top: -5px; }
+
+.rating-with-review .review-box h3 {
+  margin-bottom: 10px; }
+
+.rating-with-review .review-stars {
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center; }
+
+.rating-with-review .missing {
+  color: red; }
+
+.rating-with-review .review-input {
+  width: 95%;
+  padding: 10px 2.5%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  font-family: sans-serif;
+  margin-bottom: 2rem; }
+
+.rating-with-review .submit-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #0d0d6c;
   color: white;
-  font-weight: 600; }
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; }
+
+.booking_div {
+  height: fit-content;
+  border: 1px solid #d7d7d7;
+  background-color: white;
+  padding: 1.5rem 2rem;
+  align-items: center;
+  position: sticky;
+  top: 5px;
+  gap: 1.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  margin-right: 1rem; }
+  .booking_div h4 {
+    margin-bottom: 10px; }
+  .booking_div div {
+    gap: 0.5rem 0rem; }
+  .booking_div .col, .booking_div .m-a, .booking_div .profile_container .insurances, .profile_container .booking_div .insurances, .booking_div .profile_container .locations, .profile_container .booking_div .locations, .booking_div .profile_container .locations .loc, .profile_container .locations .booking_div .loc, .booking_div .presentation_container .rate_content .rating_val, .presentation_container .rate_content .booking_div .rating_val, .booking_div .reviews_container .review, .reviews_container .booking_div .review, .booking_div .rating-with-review .review-box, .rating-with-review .booking_div .review-box {
+    width: 100%; }
+    .booking_div .col button, .booking_div .m-a button, .booking_div .profile_container .insurances button, .profile_container .booking_div .insurances button, .booking_div .profile_container .locations button, .profile_container .booking_div .locations button, .profile_container .locations .booking_div .loc button, .booking_div .presentation_container .rate_content .rating_val button, .presentation_container .rate_content .booking_div .rating_val button, .booking_div .reviews_container .review button, .reviews_container .booking_div .review button, .booking_div .rating-with-review .review-box button, .rating-with-review .booking_div .review-box button, .booking_div .col a, .booking_div .m-a a, .booking_div .profile_container .insurances a, .profile_container .booking_div .insurances a, .booking_div .profile_container .locations a, .profile_container .booking_div .locations a, .profile_container .locations .booking_div .loc a, .booking_div .presentation_container .rate_content .rating_val a, .presentation_container .rate_content .booking_div .rating_val a, .booking_div .reviews_container .review a, .reviews_container .booking_div .review a, .booking_div .rating-with-review .review-box a, .rating-with-review .booking_div .review-box a {
+      width: 100%; }
+    .booking_div .col .buttonBlue, .booking_div .m-a .buttonBlue, .booking_div .profile_container .insurances .buttonBlue, .profile_container .booking_div .insurances .buttonBlue, .booking_div .profile_container .locations .buttonBlue, .profile_container .booking_div .locations .buttonBlue, .profile_container .locations .booking_div .loc .buttonBlue, .booking_div .presentation_container .rate_content .rating_val .buttonBlue, .presentation_container .rate_content .booking_div .rating_val .buttonBlue, .booking_div .reviews_container .review .buttonBlue, .reviews_container .booking_div .review .buttonBlue, .booking_div .rating-with-review .review-box .buttonBlue, .rating-with-review .booking_div .review-box .buttonBlue {
+      padding-left: 0px;
+      padding-right: 0px; }
+  .booking_div .m-a {
+    padding: 0px 2%;
+    min-width: 200px; }
+    .booking_div .m-a h3 {
+      margin-bottom: 1rem; }
+    .booking_div .m-a .line {
+      display: none; }
+
+.m-a {
+  margin: auto;
+  white-space: nowrap;
+  font-size: 18px; }
+  .m-a .phone_container {
+    background-color: #d83d40;
+    border-radius: 10px;
+    color: white;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.5px; }
+  .m-a .phone_container:hover {
+    background-color: #c53538; }
+  .m-a .ws {
+    background-color: #25D366;
+    border-radius: 10px;
+    color: white;
+    padding: 7px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; }
+  .m-a .ws:hover {
+    background-color: #20b958; }
+  .m-a .date_btn_cont {
+    width: 100%; }
+  .m-a .buttonBlue {
+    border-radius: 10px;
+    width: 100%;
+    padding: 7px 0px;
+    background-color: #0d0d6c;
+    color: white; }
+  .m-a .buttonBlue:hover {
+    background-color: #111188; }
+
+.navigation_buttons {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  z-index: 0;
+  top: 0;
+  border: 1px solid #d7d7d7;
+  padding: 1.75rem 15%;
+  margin: 50px 0px; }
+  .navigation_buttons .nav-button {
+    border: none;
+    background: white;
+    cursor: pointer; }
+  .navigation_buttons .nav-button.active {
+    border-bottom: 2px solid #0c0c5f;
+    /* Highlighted button color */
+    color: black; }
 
 .calender_container {
   position: fixed;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: rgba(166, 166, 166, 0.411);
   backdrop-filter: blur(5px);
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000; }
+  z-index: 1000;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  /* for Internet Explorer, Edge */
+  scrollbar-width: none; }
   .calender_container .calender_div {
+    margin-top: 2rem;
     width: 100%;
     height: 100%;
     max-width: 500px;
-    max-height: 700px;
     background-color: white;
     padding: 10px 20px;
     display: flex;
@@ -227,6 +432,11 @@
     gap: 10px;
     border-radius: 5px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.196); }
+
+.calender_container::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+  /* optional */ }
 
 .open_calender {
   animation-name: fade_in;
@@ -255,6 +465,20 @@
   display: flex;
   align-items: center;
   justify-content: end; }
+  .header .unselectedStyle {
+    background-color: #ffffff;
+    color: #000;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; }
+  .header .selectedStyle {
+    background-color: #dadada;
+    color: #000;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; }
 
 .calendar_header {
   display: flex;
@@ -266,14 +490,16 @@
 .clinics {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
-  margin-top: 20px; }
+  margin-top: 20px;
+  flex-wrap: wrap; }
   .clinics button {
     height: auto;
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 10px 30px;
-    font-size: 16px;
+    font-size: 14px;
     position: relative; }
   .clinics button:disabled {
     color: rgba(0, 0, 0, 0.3);
@@ -289,7 +515,7 @@
   width: 100%; }
   .hours_btn_div ul {
     width: 100%;
-    max-height: 300px;
+    height: auto;
     overflow-y: scroll;
     overflow-x: hidden;
     list-style: none;
@@ -318,52 +544,57 @@
     color: white;
     letter-spacing: 0.7px;
     border-radius: 5px;
-    padding: 10px 20px; }
+    padding: 10px 20px;
+    width: fit-content !important; }
+
+@keyframes display_list {
+  0% {
+    max-height: 0px; }
+  100% {
+    max-height: 250px; } }
 
 .ppl {
-  display: flex;
   width: 90%;
-  flex-direction: column;
-  align-items: center;
+  margin-left: 15px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* 7 equal columns */
+  grid-auto-rows: 1fr;
+  gap: 5px;
+  /* Optional: Space between items */
   list-style: none;
-  height: 250px;
-  margin-left: 15px; }
+  padding: 0;
+  margin: 0;
+  font-size: 14px; }
   .ppl li {
-    font-size: 18px;
-    display: flex;
-    width: 100%; }
-    .ppl li .day_names li {
-      color: #121242; }
-    .ppl li ul {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      /* 7 equal columns */
-      grid-auto-rows: 1fr;
-      display: flex;
-      list-style: none; }
-      .ppl li ul li {
-        flex: 1;
-        text-align: center;
-        margin: 10px;
-        letter-spacing: 0.7px;
-        color: #23237e;
-        position: relative; }
-      .ppl li ul .selected_day {
-        background-color: #23237e;
-        color: #ffffff;
-        border-radius: 20px;
-        padding: 10px;
-        position: absolute;
-        top: -10px;
-        left: -10px; }
-      .ppl li ul .none_list {
-        color: white; }
-      .ppl li ul .no_date {
-        color: #c7c7c7;
-        font-size: 16px; }
-      .ppl li ul .no_date:hover {
-        cursor: default; }
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 0.8px;
+    color: #23237e;
+    font-weight: 600;
+    font-size: 16px; }
+  .ppl .day_name {
+    color: #121242; }
+  .ppl .selected_day {
+    padding: 0px; }
+    .ppl .selected_day button {
+      width: fit-content !important;
+      padding: 10px;
+      background-color: #3232a8;
+      color: #ffffff;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 1px; }
+      .ppl .selected_day button span {
+        display: flex;
+        width: 20px !important;
+        justify-content: center;
+        text-align: center; }
+  .ppl .none_list {
+    color: white; }
+  .ppl .no_date {
+    color: #c7c7c7;
+    font-size: 16px; }
 
 select {
   width: 95%;
@@ -394,17 +625,153 @@ select {
     border: solid rgba(0, 0, 0, 0.3);
     border-width: 0 2px 2px 0; }
 
-@media (max-width: 650px) {
+.col, .profile_container .insurances, .profile_container .locations, .profile_container .locations .loc, .presentation_container .rate_content .rating_val, .reviews_container .review, .rating-with-review .review-box, .booking_div .m-a {
+  display: flex;
+  flex-direction: column; }
+
+.date-scheduled {
+  display: flex;
+  align-items: center;
+  background-color: #0c0c681c;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 14px; }
+
+@media (max-width: 1320px) {
+  .profile_container {
+    width: 100% !important;
+    max-width: none !important; }
+  .calender_div {
+    width: 100% !important; }
+  .presentation_container {
+    min-height: fit-content !important; }
+  .rate_content {
+    padding: 1rem 5% !important; }
+    .rate_content .rating_val {
+      font-size: 20px !important; }
+  .m-w {
+    width: 100%; }
+  .booking_div {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    position: fixed;
+    bottom: 0;
+    top: initial !important;
+    width: 100%;
+    height: 100px;
+    padding: 0px; }
+    .booking_div .col, .booking_div .profile_container .insurances, .profile_container .booking_div .insurances, .booking_div .profile_container .locations, .profile_container .booking_div .locations, .booking_div .profile_container .locations .loc, .profile_container .locations .booking_div .loc, .booking_div .presentation_container .rate_content .rating_val, .presentation_container .rate_content .booking_div .rating_val, .booking_div .reviews_container .review, .reviews_container .booking_div .review, .booking_div .rating-with-review .review-box, .rating-with-review .booking_div .review-box, .booking_div .m-a, .booking_div .date_btn_cont {
+      width: 90%;
+      max-width: 400px;
+      justify-content: center; }
+    .booking_div .col, .booking_div .profile_container .insurances, .profile_container .booking_div .insurances, .booking_div .profile_container .locations, .profile_container .booking_div .locations, .booking_div .profile_container .locations .loc, .profile_container .locations .booking_div .loc, .booking_div .presentation_container .rate_content .rating_val, .presentation_container .rate_content .booking_div .rating_val, .booking_div .reviews_container .review, .reviews_container .booking_div .review, .booking_div .rating-with-review .review-box, .rating-with-review .booking_div .review-box, .booking_div .m-a {
+      margin-right: auto; }
+      .booking_div .col button, .booking_div .profile_container .insurances button, .profile_container .booking_div .insurances button, .booking_div .profile_container .locations button, .profile_container .booking_div .locations button, .profile_container .locations .booking_div .loc button, .booking_div .presentation_container .rate_content .rating_val button, .presentation_container .rate_content .booking_div .rating_val button, .booking_div .reviews_container .review button, .reviews_container .booking_div .review button, .booking_div .rating-with-review .review-box button, .rating-with-review .booking_div .review-box button, .booking_div .m-a button, .booking_div .col a, .booking_div .profile_container .insurances a, .profile_container .booking_div .insurances a, .booking_div .profile_container .locations a, .profile_container .booking_div .locations a, .profile_container .locations .booking_div .loc a, .booking_div .presentation_container .rate_content .rating_val a, .presentation_container .rate_content .booking_div .rating_val a, .booking_div .reviews_container .review a, .reviews_container .booking_div .review a, .booking_div .rating-with-review .review-box a, .rating-with-review .booking_div .review-box a, .booking_div .m-a a {
+        width: 100%; }
+    .booking_div h3 {
+      font-size: 18px; }
+    .booking_div .m-a {
+      align-items: center;
+      flex-direction: row; }
+      .booking_div .m-a .d_s {
+        width: 200px;
+        gap: 0.5rem 2rem;
+        margin-left: auto; }
+      .booking_div .m-a .line {
+        display: block;
+        width: 1px;
+        height: 80px;
+        background-color: #70707e;
+        margin: 0px 0.5rem; }
+  .m-a {
+    display: block; }
+  .buttonBlue {
+    padding: 10px 0px !important; }
+  section p {
+    width: 100% !important; } }
+
+@media (max-width: 780px) {
+  .rating-summary, .make-review {
+    width: 95% !important;
+    padding: 0.5rem !important; }
+    .rating-summary span, .make-review span {
+      white-space: nowrap; }
+  .rating_val {
+    width: fit-content !important; }
+  .loc {
+    width: 100% !important; }
+    .loc iframe {
+      width: 100% !important; } }
+
+@media (max-width: 765px) {
+  .presentation_container img {
+    height: 120px; }
+  .presentation_container .doc_intro h2 {
+    font-size: 24px; }
+  .colored_bg {
+    height: 250px; }
+  .rate_content {
+    font-size: 12px !important;
+    padding: 1rem 0px; }
+    .rate_content .rating_val {
+      flex-direction: row !important;
+      align-items: center;
+      gap: 5px !important;
+      font-size: 16px !important; }
+  .navigation_buttons {
+    padding: 1.5rem 5%;
+    font-size: 14px; }
   .calender_div {
     max-width: none !important;
-    max-height: none !important; }
+    max-height: none !important;
+    margin: 0px !important; }
   .header .change {
     top: 5px !important;
     right: -10px !important; }
   .ppl {
     width: 100% !important; }
   .clinics {
-    margin-top: 10% !important; } }
+    margin-top: 10% !important; }
+  .loc iframe {
+    height: 300px !important; } }
+
+@media (max-width: 481px) {
+  .review-box {
+    height: 96% !important;
+    width: 96% !important;
+    padding: 1rem 2% !important;
+    border-radius: 0px !important; }
+    .review-box .review-input.r {
+      height: 100px !important; }
+    .review-box .change {
+      right: 0px !important; }
+    .review-box .submit-button {
+      margin-top: auto; }
+  .doc_intro h2 {
+    font-size: 20px !important; }
+  .specialities h4 {
+    font-size: 14px !important; }
+  .rate_content {
+    justify-content: center;
+    gap: 5px !important; }
+  .no_rating_div {
+    font-size: 12px !important;
+    padding: 0.5rem 1rem !important; }
+  .m-a {
+    font-size: 14px !important;
+    gap: 2.5% !important; }
+    .m-a .col button, .m-a .profile_container .insurances button, .profile_container .m-a .insurances button, .m-a .profile_container .locations button, .profile_container .m-a .locations button, .profile_container .locations .m-a .loc button, .m-a .presentation_container .rate_content .rating_val button, .presentation_container .rate_content .m-a .rating_val button, .m-a .reviews_container .review button, .reviews_container .m-a .review button, .m-a .rating-with-review .review-box button, .rating-with-review .m-a .review-box button, .m-a .booking_div .m-a button, .booking_div .m-a .m-a button, .m-a .col a, .m-a .profile_container .insurances a, .profile_container .m-a .insurances a, .m-a .profile_container .locations a, .profile_container .m-a .locations a, .profile_container .locations .m-a .loc a, .m-a .presentation_container .rate_content .rating_val a, .presentation_container .rate_content .m-a .rating_val a, .m-a .reviews_container .review a, .reviews_container .m-a .review a, .m-a .rating-with-review .review-box a, .rating-with-review .m-a .review-box a, .m-a .booking_div .m-a a, .booking_div .m-a .m-a a {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem; }
+    .m-a .line {
+      margin: 0px !important; }
+  .review .sec_1 {
+    font-size: 12px !important; }
+  .loc iframe {
+    height: 250px !important; } }
 
 .pin {
   width: 12.5px;
@@ -425,292 +792,48 @@ select {
   top: 26%;
   border-radius: 60px; }
 
-@media (max-width: 600px) {
-  .doc_info_1 {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100% !important;
-    padding: 10px 0px 0px 0px !important;
-    gap: 0px !important; }
-    .doc_info_1 hr {
-      background: #ffffff !important;
-      color: #ffffff !important; }
-    .doc_info_1 .info_div {
-      width: 98% !important; }
-      .doc_info_1 .info_div .specialities {
-        justify-content: center;
-        width: 100% !important; }
-      .doc_info_1 .info_div .cities {
-        width: 100% !important; }
-      .doc_info_1 .info_div .info {
-        align-items: center;
-        margin: auto; }
-  .makedatebtn {
-    justify-content: center; }
-  .cities {
-    gap: 2px !important;
-    justify-content: center;
-    font-size: 12px !important; }
-  .image_div img {
-    height: 90% !important;
-    width: 90% !important; }
-  .contact {
-    justify-content: center;
-    font-size: 14px;
-    gap: 25px !important; }
-    .contact a {
-      width: 40%; }
-  #date_btn_cont {
-    width: 60%;
-    margin: auto; }
-  .aligment {
-    gap: 22px !important; }
-    .aligment .aligment_div {
-      margin: auto;
-      flex-direction: column; } }
-
-@media (max-width: 900px) {
-  .doc_info_2 {
-    flex-direction: column;
-    align-items: center;
-    width: 95% !important;
-    gap: 50px; }
-    .doc_info_2 .doc_info_left {
-      width: 100% !important; }
-      .doc_info_2 .doc_info_left .description_div {
-        width: 100% !important; }
-      .doc_info_2 .doc_info_left .ensurances_div {
-        width: 100% !important; }
-    .doc_info_2 .doc_info_right {
-      width: 100% !important; }
-      .doc_info_2 .doc_info_right .locations {
-        width: 95% !important;
-        margin: auto; } }
-
-.doc_prof_cont {
-  display: flex;
-  justify-content: center;
-  padding: 1%;
-  margin-top: 10px; }
-  .doc_prof_cont .doc_prof_box {
-    height: auto;
-    width: 80%;
-    min-width: 320px;
-    padding: 2%;
-    background-color: white;
-    border-radius: 25px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column; }
-    .doc_prof_cont .doc_prof_box .prof_sec_1 {
-      height: auto;
-      width: 85%;
-      display: flex;
-      justify-content: space-around;
-      background-color: rgba(240, 248, 255, 0.455);
-      padding: 2%;
-      border-radius: 25px; }
-      .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont {
-        width: 79%; }
-        .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .name_prof {
-          height: auto;
-          width: 100%; }
-          .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .name_prof span {
-            font-size: 46px;
-            font-weight: 600; }
-        .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .specialities_prof {
-          display: flex;
-          flex-wrap: wrap; }
-          .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .specialities_prof .speciality_prof {
-            font-size: 14px;
-            margin-right: 30px;
-            font-weight: 600;
-            color: #4e4e4e; }
-        .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .description_prof {
-          width: 95%;
-          margin-top: 15px; }
-          .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .description_prof span {
-            font-size: 16px; }
-        .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .cita {
-          margin-top: 10px;
-          height: auto; }
-          .doc_prof_cont .doc_prof_box .prof_sec_1 .prof_txt_cont .cita button {
-            font-size: 16px;
-            background: linear-gradient(#343f94 0%, #23237e 100%);
-            padding: 10px;
-            border-radius: 15px;
-            color: white;
-            font-weight: 500; }
-    .doc_prof_cont .doc_prof_box .prof_sec_2 {
-      height: auto;
-      width: 95%;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      background-color: rgba(240, 248, 255, 0.455);
-      padding: 2%;
-      border-radius: 25px; }
-      .doc_prof_cont .doc_prof_box .prof_sec_2 h3 {
-        padding: 5px; }
-      .doc_prof_cont .doc_prof_box .prof_sec_2 .box_prof {
-        display: flex;
-        flex-direction: column;
-        max-width: 450px;
-        border-radius: 15px;
-        padding: 10px;
-        margin: 20px;
-        width: 20%;
-        min-width: 250px; }
-
-.img_prof {
-  height: 60%;
-  width: 21%;
-  height: 160px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  border-radius: 75px; }
-  .img_prof img {
-    height: 100%;
-    border-radius: 75px; }
-
-.box_prof_ens {
-  display: block;
-  border: 1px rgba(66, 66, 66, 0.697);
-  border-style: solid;
-  border-radius: 25px;
-  padding: 3px 15px;
-  width: auto;
-  margin: 2px auto 2px 0px;
-  background-color: white; }
-  .box_prof_ens span {
-    font-weight: 700; }
-
-.box_prof_clinic {
-  margin: 5px auto 5px 0px;
-  padding: 10px;
-  border-radius: 15px;
-  background: linear-gradient(#343f94 0%, #23237e 100%);
-  box-shadow: 1px 1px 3px black;
-  color: white; }
-  .box_prof_clinic a {
-    color: white;
-    margin: auto 0px; }
-
-a:hover .box_prof_clinic {
-  background: linear-gradient(#343f94 0%, #444494 100%);
-  box-shadow: 1px 1px 6px black;
-  transition: 1s; }
-
-.space_sd {
-  position: absolute;
-  background-color: white;
-  border-radius: 15px;
-  max-height: 300px;
-  min-height: 80px;
-  width: 175px;
-  overflow: scroll;
-  overflow-x: hidden;
-  align-self: flex-start;
-  border-style: solid;
-  border-width: 2px; }
-
-.date_container {
-  position: absolute;
-  height: 100dvh;
-  width: 100dvw;
-  top: 0px;
-  left: 0px;
-  background-color: rgba(117, 117, 117, 0.238);
-  z-index: 1000;
-  backdrop-filter: blur(5px); }
-
-.dates_div {
-  background-color: white;
-  min-height: 80dvh;
-  min-height: 600px;
-  width: 85%;
-  max-width: 1000px;
-  min-width: 300px;
-  border-radius: 15px;
-  margin: 10vh auto; }
-
-.closeBtn {
-  display: flex;
-  justify-content: end;
-  padding: 20px; }
-  .closeBtn button {
-    font-size: 26px; }
-
-.dateInfo {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; }
-  .dateInfo .dateInfoCenter {
-    justify-content: center; }
-  .dateInfo .e {
-    background-color: #ffffff; }
-  .dateInfo div {
-    margin: 10px 0px;
-    width: 100%;
-    display: flex; }
-
-.timesDiv {
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  /* Minimal spacing between stars */
+  font-size: 18px;
+  /* Adjusts star size */
+  color: #ffd700;
+  /* Gold for filled stars */
   position: relative;
-  margin: 0px !important; }
-  .timesDiv div {
-    margin: 0px; }
-  .timesDiv .timesList {
-    position: absolute;
-    bottom: -200px;
-    display: flex;
-    flex-direction: column;
-    max-width: 150px;
-    min-width: 150px;
-    max-height: 350px;
-    overflow-y: scroll;
-    border-radius: 15px 0px 0px 15px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.465);
-    margin: 0px !important; }
-    .timesDiv .timesList button {
-      padding: 25px 30px;
-      background-color: white; }
-  .timesDiv .timeSelection {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.465);
-    border-radius: 15px;
-    padding: 25px;
-    color: black;
-    font-size: 20px;
-    font-weight: 600; }
+  top: -5px; }
 
-.messageCont {
-  border-radius: 15px;
-  margin: 30dvh auto;
-  padding: 25px;
-  display: block;
-  height: 40dvh;
-  width: 55dvw !important;
-  background-color: white; }
-  .messageCont .successMessage {
-    display: flex;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 15px; }
-  .messageCont .successDate {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px; }
+.rating .star {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  /* Same width/height for scalable stars */
+  height: 1em; }
 
-.title {
-  font-size: 24px;
-  font-weight: 600; }
+.rating .star::before {
+  content: '★';
+  /* Full star */
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: inherit;
+  color: #ffd700;
+  /* Gold color for filled portion */
+  width: 100%;
+  /* Default width for full stars */
+  overflow: hidden; }
 
-.content {
-  font-size: 20px;
-  margin-left: 10px; }
+.rating .star.half::before {
+  width: 45%;
+  /* Half-star filled width */
+  color: #ffd700;
+  /* Gold for the filled half */ }
+
+.rating .star.empty::before {
+  color: #ccc;
+  /* Gray for empty stars */
+  width: 100%;
+  /* Ensure empty star spans fully */ }
 
 /*# sourceMappingURL=profile.css.map */

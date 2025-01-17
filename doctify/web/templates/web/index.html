@@ -6,19 +6,70 @@
 {% endblock %}
 {% block body %}
     <div class="web_container">
-        <div class="icons_cont">
-            <div class="icon i_bx_s"><img src="{% static 'images/doctorlogo.png' %}" alt=""></div>
-        </div>
-        <div class="indexText">
-            <div><p>Encuentra el doctor que buscas rapidamente!</p></div>
-        </div>
-        
-        <div class="searchDiv">  
-                <div id="indx_search_cont" class="indx_search_cont"></div><a href="{% url 'search' %}">Search</a></div>
+        <section class="sec_1">
+            <div class="hero-text">
+                <h1>Welcome to Doctify</h1>
+                <p>Your trusted platform to find and book the best doctors in the Dominican Republic.</p>
+              </div>
+            <div class="searchbar_container">  
+                <h2>Realiza tu busqueda</h2>
+                <div id="indx_search_cont" class="indx_search_cont"></div>
+            </div>   
+            <div class="bg_fade"></div>         
+        </section>
+        <section class="sec_2">
+            <h2>What is Doctify?</h2>
+            <p>
+
+                Doctify is your doctor search and appointment booking web app designed to simplify access to healthcare in the Dominican Republic. It provides a user-friendly platform for patients to find, review, and book appointments with verified doctors across various specialties. At the same time, it helps doctors reach more patients and manage their appointments efficiently.
+            </p>                
+
+            <!-- <div class="bg_fade"></div>   -->
+        </section>
+        <section class="features">
+            <h2>Why Choose Doctify?</h2>
+            <div class="features-container">
+              <div class="feature">
+                <img src="{% static 'images/friends.png' %}" alt="User Friendly">
+                <h3>User-Friendly</h3>
+                <p>Navigate our intuitive platform with ease and find the healthcare solutions you need quickly.</p>
+              </div>
+              <div class="feature">
+                <img src="{% static 'images/doctor.png' %}" alt="Trusted Doctors">
+                <h3>Verified Doctors</h3>
+                <p>Access profiles of certified and trusted healthcare professionals in your area.</p>
+              </div>
+              <div class="feature">
+                <img src="{% static 'images/data-protection.png' %}" alt="Secure Data">
+                <h3>Secure & Private</h3>
+                <p>Your personal information is safe with our advanced data security measures.</p>
+              </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2>What Our Users Say</h2>
+            <div class="testimonials-container">
+              <div class="testimonial">
+                <p>"Doctify made it so easy to find the right doctor for me. Highly recommended!"</p>
+                <h4>- Maria Gonzalez</h4>
+              </div>
+              <div class="testimonial">
+                <p>"As a doctor, Doctify has helped me connect with more patients and manage appointments efficiently."</p>
+                <h4>- Dr. Juan Ramirez</h4>
+              </div>
+            </div>
+          </section>
+          <section class="cta">
+            <h2>Ready to Find the Right Doctor?</h2>
+            <p>Join thousands of users who trust Doctify for their healthcare needs.</p>
+            <a href="/accounts/login/" class="cta-button">Get Started</a>
+          </section>
         </div>
     </div>
 
-    <!-- <script type="text/babel" src="{% static 'js/indexreact.js' %}"></script> -->
-     <script src="{% static 'dist/index.bundle.js' %}"></script>
 
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'dist/index.bundle.js' %}"></script>      
 {% endblock %}

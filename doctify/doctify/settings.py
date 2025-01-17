@@ -152,8 +152,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+# TIME_ZONE = 'UTC'
+USE_TZ = True
+TIME_ZONE = 'America/Santo_Domingo' 
 USE_I18N = True
 
 USE_TZ = True
@@ -183,6 +184,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "web.User"
 
 LOGIN_REDIRECT_URL = 'redirect'
+SESSION_COOKIE_SAMESITE = 'Lax'  # Recommended for OAuth flows
+SESSION_COOKIE_SECURE = True     # Ensure HTTPS is used in production
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
@@ -194,17 +198,24 @@ EMAIL_HOST_PASSWORD = 'crcu hjmv ntee ayez'
 SOCIALACCOUNT_ADAPTER = 'populate_user'
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET=True
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'web.views.request.session["curr_page"]'
-SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_REDIRECT_URL = None
+SOCIALACCOUNT_LOGIN_REDIRECT_URL = 'redirect'
+SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_STORE_TOKENS = True
+
 
 ACCOUNT_AUTHENTICATION_METHOD ='username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = 'True'
 ACCOUNT_FORMS={
     'signup':'web.forms.CustomUser'
 }
 
 SECURE_REFERRER_POLICY= "strict-origin-when-cross-origin"
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']

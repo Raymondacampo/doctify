@@ -4,8 +4,15 @@
 {% block style %}
     <link rel="stylesheet" href="{% sass_src 'scss/search.scss' %}">
     <link rel="stylesheet" href="{% sass_src 'scss/index.scss' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 {% endblock %}
 {% block body %}
-<div id="searches_container"></div>
-<script src="{% static 'dist/search.bundle.js' %}"></script>
+
+<div id="searches_container" class="container"></div>
+
+
+{% endblock %}
+{% block script %}
+<script src="{% static 'dist/search.bundle.js' %}"></script>      
 {% endblock %}

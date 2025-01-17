@@ -59,13 +59,24 @@
     .body_container .container .down_btns {
       margin-top: 30px;
       display: flex;
-      gap: 15px; }
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      margin: auto;
+      align-items: center; }
       .body_container .container .down_btns a {
         padding: 15px 30px;
         border-radius: 5px; }
       .body_container .container .down_btns .lo_btn {
         background-color: #000098;
-        color: white; }
+        color: white;
+        padding: 4.5px 13.5%;
+        font-size: 16px;
+        height: 28px;
+        width: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
       .body_container .container .down_btns .lo_btn:hover {
         background-color: navy; }
 
@@ -122,17 +133,42 @@
         .info_body .info_container .profile_form_body .profile_form_content .docdata_div {
           padding: 25px 0px;
           width: 100%;
-          border-top: 1px solid rgba(179, 179, 179, 0.21); }
+          border-top: 1px solid rgba(179, 179, 179, 0.21);
+          position: relative;
+          line-height: 1.5; }
           .info_body .info_container .profile_form_body .profile_form_content .docdata_div .docdata_ttl {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px; }
             .info_body .info_container .profile_form_body .profile_form_content .docdata_div .docdata_ttl button {
               color: #0400ff; }
+          .info_body .info_container .profile_form_body .profile_form_content .docdata_div .date-scheduled {
+            display: flex;
+            align-items: center;
+            background-color: #0c0c681c;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 14px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .date-scheduled span {
+              margin-left: auto;
+              padding: 0.25rem;
+              cursor: pointer;
+              font-size: 28px;
+              font-weight: 600;
+              letter-spacing: -0.6px;
+              height: 20px; }
+              .info_body .info_container .profile_form_body .profile_form_content .docdata_div .date-scheduled span b {
+                position: relative;
+                top: -18px; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .date-scheduled span:hover {
+              background-color: #0c0c6829; }
           .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body {
             display: flex;
             gap: 10px;
             width: 100%; }
+            .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body h5 {
+              color: red;
+              font-weight: 100; }
             .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body ul {
               display: flex;
               flex-wrap: wrap;
@@ -149,6 +185,7 @@
               padding-top: 2.5%; }
           .info_body .info_container .profile_form_body .profile_form_content .docdata_div .description {
             width: 100%;
+            word-break: break-all;
             letter-spacing: 0.8px; }
         .info_body .info_container .profile_form_body .profile_form_content .form_edit {
           width: 100%; }
@@ -205,6 +242,19 @@
             margin-left: auto;
             color: #0c87ce; }
 
+.clickable-span {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  width: 28px !important; }
+  .clickable-span b {
+    position: relative;
+    top: -6px;
+    left: 2px; }
+
+.clickable-span:hover {
+  background-color: #0c0c6829; }
+
 .manage_body {
   position: fixed;
   z-index: 1001;
@@ -222,10 +272,13 @@
     background-color: white;
     border-radius: 5px;
     width: 90%;
-    max-width: 900px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px; }
+    padding-bottom: 40px;
+    animation-name: display_manage;
+    animation-duration: 0.5s;
+    animation-direction: normal; }
     .manage_body .manage_container ul {
       list-style: none; }
       .manage_body .manage_container ul li {
@@ -237,7 +290,22 @@
         width: 35px; }
     .manage_body .manage_container .manage_content {
       gap: 30px;
-      margin-top: 30px; }
+      margin-top: 1rem; }
+      .manage_body .manage_container .manage_content .search_bar {
+        width: 100%;
+        position: relative;
+        z-index: 1; }
+        .manage_body .manage_container .manage_content .search_bar ul {
+          width: 99%;
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.123); }
+        .manage_body .manage_container .manage_content .search_bar input {
+          height: 30px;
+          width: 97%;
+          font-size: 16px;
+          padding: 7px 6.5px;
+          border-radius: 5px;
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.231);
+          border: none; }
       .manage_body .manage_container .manage_content textarea {
         width: 80%;
         height: auto;
@@ -251,13 +319,6 @@
         gap: 10px;
         width: 90%;
         max-width: 600px; }
-        .manage_body .manage_container .manage_content .manage_search input {
-          height: 30px;
-          width: 97%;
-          font-size: 16px;
-          padding: 7px 6.5px;
-          border-radius: 5px;
-          border: 1px solid #b8b8b8; }
         .manage_body .manage_container .manage_content .manage_search .list_container {
           position: relative;
           width: 100%; }
@@ -307,22 +368,147 @@
           .manage_body .manage_container .manage_content .my_manage ul .delete:hover {
             background-color: whitesmoke;
             cursor: pointer; }
-      .manage_body .manage_container .manage_content .add_cont {
-        gap: 30px; }
-        .manage_body .manage_container .manage_content .add_cont div {
+      .manage_body .manage_container .manage_content .form_content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 90%;
+        margin: 0px auto; }
+        .manage_body .manage_container .manage_content .form_content .selection {
           display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 10px;
+          justify-content: start;
+          gap: 1rem;
+          height: 1.5rem;
           align-items: center;
-          padding: 0px 20px; }
-        .manage_body .manage_container .manage_content .add_cont button {
-          padding: 10px 30px;
-          background-color: #0c0c68;
-          color: white !important;
-          border-radius: 5px; }
-        .manage_body .manage_container .manage_content .add_cont button:disabled {
-          background-color: #0c0c6870; }
+          border: 1px solid rgba(179, 179, 179, 0.5);
+          letter-spacing: 0.8px;
+          border-radius: 5px;
+          max-width: 110px;
+          cursor: pointer;
+          padding: 0px 0.5rem; }
+        .manage_body .manage_container .manage_content .form_content .wd {
+          padding: 0px 0.5rem; }
+        .manage_body .manage_container .manage_content .form_content .checked {
+          background-color: rgba(221, 237, 255, 0.6); }
+        .manage_body .manage_container .manage_content .form_content .checked-bor {
+          border: 2.5px solid #0c3c68;
+          font-weight: 600;
+          background-color: rgba(221, 237, 255, 0.6); }
+        .manage_body .manage_container .manage_content .form_content .time-pickers-container {
+          display: flex;
+          gap: 0.75rem 1rem;
+          flex-wrap: wrap;
+          align-items: center;
+          letter-spacing: 0.8px; }
+          .manage_body .manage_container .manage_content .form_content .time-pickers-container div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; }
+            .manage_body .manage_container .manage_content .form_content .time-pickers-container div h4 {
+              width: 60px;
+              text-align: end; }
+          .manage_body .manage_container .manage_content .form_content .time-pickers-container span {
+            font-size: 12px;
+            color: gray; }
+        .manage_body .manage_container .manage_content .form_content .time-picker {
+          position: relative; }
+          .manage_body .manage_container .manage_content .form_content .time-picker input {
+            width: 87%;
+            padding: 0px 5%;
+            height: 30px;
+            letter-spacing: 0.8px;
+            font-size: 16px;
+            color: #3c70ff;
+            font-weight: 600;
+            border: 1px solid black;
+            border-radius: 5px; }
+          .manage_body .manage_container .manage_content .form_content .time-picker input::placeholder {
+            font-size: 14px; }
+          .manage_body .manage_container .manage_content .form_content .time-picker ul {
+            position: absolute;
+            z-index: 1;
+            background-color: white;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: scroll;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.168);
+            scrollbar-width: thin; }
+            .manage_body .manage_container .manage_content .form_content .time-picker ul li {
+              padding: 1rem 0.25rem;
+              font-size: 12px;
+              cursor: pointer;
+              justify-content: center; }
+      .manage_body .manage_container .manage_content .add_cont, .manage_body .manage_container .manage_content .disabled {
+        position: relative;
+        bottom: 0px;
+        margin-top: 1.5rem; }
+        .manage_body .manage_container .manage_content .add_cont button, .manage_body .manage_container .manage_content .disabled button {
+          padding: 10px 40%; }
+  .manage_body .manage_container::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+    /* optional */ }
+  .manage_body .change {
+    position: relative;
+    margin-left: auto;
+    right: 5px; }
+
+.management_buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0px auto;
+  letter-spacing: 0.8px;
+  margin-top: 1rem; }
+  .management_buttons .buttons_container {
+    display: flex;
+    width: 96%;
+    max-width: 700px;
+    margin: 0px auto;
+    justify-content: space-between;
+    margin-top: 0.5rem; }
+    .management_buttons .buttons_container button {
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: white;
+      font-size: 18px; }
+    .management_buttons .buttons_container .rm {
+      background-color: #dc0000; }
+    .management_buttons .buttons_container .add {
+      background-color: #0c0c68; }
+
+@keyframes display_manage {
+  0% {
+    transform: translateY(100%);
+    /* start off screen at the bottom */
+    opacity: 0;
+    /* optional: start transparent */ }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    /* optional: fully visible by the end */ } }
+
+.add_cont, .disabled {
+  gap: 30px; }
+  .add_cont div, .disabled div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    padding: 0px 20px; }
+  .add_cont button, .disabled button {
+    padding: 10px 30px;
+    background-color: #0c0c68;
+    color: white !important;
+    border-radius: 5px; }
+
+.disabled button {
+  background-color: #0c0c6873 !important;
+  cursor: auto; }
+
+button:disabled {
+  background-color: #0c0c6870; }
 
 .delbtndes {
   background-color: red;
@@ -391,16 +577,19 @@
     margin-top: 10px; }
   .recent_doctors .doctors_container {
     padding: 25px 15px;
-    gap: 15px; }
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0px auto; }
     .recent_doctors .doctors_container .doctor {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       background-color: white;
       box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.151);
-      padding: 10px 15px;
+      padding: 0.5rem;
       border-radius: 10px;
-      width: 90%; }
+      width: 90%;
+      height: 10dvh; }
       .recent_doctors .doctors_container .doctor a {
         white-space: nowrap; }
       .recent_doctors .doctors_container .doctor div {
@@ -409,57 +598,111 @@
       .recent_doctors .doctors_container .doctor img {
         height: 90px;
         width: 90px;
-        margin-right: 15px;
+        margin-right: 5px;
         border-radius: 70px; }
       .recent_doctors .doctors_container .doctor .btns_div {
         display: flex;
         flex-wrap: wrap;
-        justify-content: end; }
+        justify-content: center;
+        justify-content: space-between;
+        height: 75%;
+        width: 30%; }
         .recent_doctors .doctors_container .doctor .btns_div .profile_link {
-          padding: 9px 15px;
+          padding: 9px 0px;
           background-color: navy;
           color: white;
-          border-radius: 5px; }
-        .recent_doctors .doctors_container .doctor .btns_div .delete_btn {
-          padding: 9px 15px;
-          background-color: red;
-          color: white;
-          border-radius: 5px; }
+          border-radius: 5px;
+          width: 100%;
+          text-align: center;
+          font-size: 14px; }
+    .recent_doctors .doctors_container .doctor:hover {
+      background-color: rgba(192, 255, 255, 0.154); }
+
+.delete_btn {
+  padding: 9px 15px;
+  background-color: red;
+  color: white;
+  border-radius: 5px; }
 
 .recent_doctors_div, .mydates {
   width: 60%;
   max-width: 900px;
-  margin: auto; }
+  margin: auto;
+  margin-top: 1rem; }
+
+.pagination_container {
+  display: flex;
+  margin: 20px; }
+
+.pagination-btn {
+  display: inline-flex;
+  /* So text & icon sit side by side */
+  align-items: center;
+  /* Vertically center text & icon */
+  gap: 8px;
+  /* Spacing between text & icon */
+  padding: 8px 16px;
+  /* Button-like padding */
+  background-color: #0c0c68;
+  /* Button background color */
+  color: #fff;
+  /* Text/icon color */
+  text-decoration: none;
+  /* Remove link underline */
+  border-radius: 4px;
+  /* Rounded corners */
+  font-size: 14px;
+  /* Adjust as needed */
+  transition: background-color 0.3s ease; }
+
+.pagination-btn:hover {
+  background-color: #141486; }
+
+/* Optional: Distinguish 'prev' vs. 'next' if you like */
+.pagination-btn.prev {
+  margin-right: 8px;
+  /* Some spacing if placed side by side with next */ }
+
+.pagination-btn svg {
+  /* Make sure the icon size matches nicely with text */
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  /* So it inherits the text color */ }
 
 #mydates {
   background-color: rgba(255, 255, 255, 0.626);
   padding-top: 1px;
   width: 95%;
-  padding: 0px 2.5%; }
+  margin-top: 1rem; }
 
-.mydates hr {
-  margin-bottom: 20px; }
-
-.mydates .dates_container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 70px;
-  padding: 0px 15px; }
-
-.mydates .date {
-  width: 90%;
-  margin-left: 10px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
-  padding: 8px 15px;
-  background-color: rgba(194, 205, 255, 0.13); }
-  .mydates .date div {
-    width: 100%;
-    margin-bottom: 10px; }
-  .mydates .date span {
-    margin-bottom: 5px;
-    width: 100%; }
+.mydates {
+  width: 100% !important; }
+  .mydates hr {
+    margin-bottom: 20px; }
+  .mydates .dates_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px;
+    padding: 0px 15px; }
+  .mydates .date {
+    width: 95%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.172);
+    padding: 8px 15px;
+    background-color: rgba(225, 230, 255, 0.13);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    position: relative; }
+    .mydates .date .full {
+      display: flex;
+      gap: 10px; }
+    .mydates .date span {
+      margin-bottom: 5px;
+      width: 100%; }
 
 .no_dates {
   justify-content: center;
@@ -506,7 +749,7 @@
   background-color: white; }
 
 .unactive_div {
-  background-color: whitesmoke; }
+  background-color: #f0f0f0 !important; }
 
 .active_hr {
   background-color: #158223; }
@@ -533,32 +776,74 @@
 
 .cont, .favdoctors_container .favdoctors {
   background-color: white;
-  width: clamp(320px, 100%, 400px);
-  padding: 10px;
-  border-radius: 5px; }
+  width: clamp(320px, 95%, 400px);
+  padding: 10px 5px;
+  border-radius: 5px;
+  align-items: center; }
+  .cont h3, .favdoctors_container .favdoctors h3 {
+    padding: 1rem;
+    text-align: center;
+    letter-spacing: 1px; }
   .cont .change, .favdoctors_container .favdoctors .change {
-    height: 30px; }
+    height: 30px;
+    position: relative;
+    top: -10px; }
   .cont form, .favdoctors_container .favdoctors form {
     padding: 15px;
     margin-top: 5px;
     gap: 15px; }
   .cont button[type=submit], .favdoctors_container .favdoctors button[type=submit] {
     margin: auto; }
+  .cont .form_container, .favdoctors_container .favdoctors .form_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%; }
+  .cont .form_sec, .favdoctors_container .favdoctors .form_sec {
+    display: flex;
+    letter-spacing: 0.8px;
+    width: 90%;
+    margin: 0px auto; }
+    .cont .form_sec label, .favdoctors_container .favdoctors .form_sec label {
+      font-size: 16px;
+      width: 35%; }
+    .cont .form_sec input[type=text], .favdoctors_container .favdoctors .form_sec input[type=text] {
+      width: 65%;
+      height: 25px;
+      padding: 0.25rem;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); }
+    .cont .form_sec div, .favdoctors_container .favdoctors .form_sec div {
+      display: flex;
+      width: 100%;
+      gap: 1rem; }
 
 .cancel {
-  background-color: rgba(222, 0, 0, 0.887);
-  margin: auto;
-  padding: 8px 30px;
-  color: white;
-  border-radius: 5px; }
+  border: 2px solid black;
+  background-color: #33336916;
+  padding: 4.5px 13.5%;
+  border-radius: 5px;
+  height: 25px;
+  margin: auto 0px;
+  font-size: 18px; }
 
 .cancel:hover {
-  background-color: #cb2f2f; }
+  background-color: rgba(15, 10, 49, 0.482);
+  color: white; }
 
 .accept {
-  background-color: #00007d; }
+  background-color: #00007d;
+  padding: 5px 15%;
+  color: white;
+  border-radius: 5px;
+  height: 25px;
+  margin: auto 0px; }
 
-.col, .info_body .info_container .profile_form_body .profile_form_content, .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance, .info_body .info_container .profile_form_body .profile_form_content .form_edit form, .manage_body .manage_container .manage_content, .manage_body .manage_container .manage_content .add_cont, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .mydates .date div, .no_dates, .no_dates div, .cont form, .favdoctors_container .favdoctors form {
+.accept:hover {
+  background-color: #00009a; }
+
+.col, .info_body .info_container .profile_form_body .profile_form_content, .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance, .info_body .info_container .profile_form_body .profile_form_content .form_edit form, .manage_body .manage_container .manage_content, .add_cont, .disabled, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .recent_doctors .doctors_container .doctor .btns_div, .no_dates, .no_dates div, .cont, .favdoctors_container .favdoctors, .cont form, .favdoctors_container .favdoctors form {
   display: flex;
   flex-direction: column;
   align-items: center; }
@@ -581,13 +866,11 @@
     max-width: 620px;
     margin: auto; }
   .doctors_container {
-    padding: 25px 5px !important; }
+    padding: 25px 0px !important; }
   .recent_doctors_div, .mydates {
     width: 95% !important; }
-  .title {
-    padding: 0px 30px !important; }
-    .title h1 {
-      margin-left: 10px; }
+  .title h1 {
+    margin-left: 10px; }
   .ttl {
     padding: 0px 30px !important; }
   .mydates {
@@ -596,9 +879,18 @@
 
 @media (max-width: 650px) {
   .docdata_ttl {
-    margin-bottom: 40px !important; } }
+    margin-bottom: 40px !important; }
+  .bigger {
+    font-size: 22px; }
+  .med {
+    font-size: 16px; }
+  .time-picker input {
+    text-align: center; } }
 
 @media (max-width: 560px) {
+  .manage_container {
+    height: 100% !important;
+    width: 100% !important; }
   .my_manage ul {
     max-height: none !important; }
   .form_btns button {
@@ -614,19 +906,23 @@
     padding: 10px 0px !important; }
   .link_cont {
     gap: 15px !important; }
-  .title {
-    padding: 0px 5px !important; }
   .doctor {
     width: 95% !important;
     flex-wrap: wrap; }
     .doctor img {
-      height: 80px !important;
-      width: 80px !important; }
+      height: 70px !important;
+      width: 70px !important; }
+    .doctor .med {
+      font-size: 14px; }
   .btns_div {
     flex-direction: column; }
   .dates_container {
     padding: 0px 5px !important; }
-  .date {
-    margin: 0px !important; } }
+  .wd {
+    width: 100% !important; }
+  .change {
+    top: 20px; }
+  .form_content {
+    width: 100% !important; } }
 
 /*# sourceMappingURL=myprofile.css.map */

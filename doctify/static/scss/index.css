@@ -1,83 +1,200 @@
 .web_container {
-  padding-bottom: 100px;
-  display: table;
-  width: 100%;
-  background: linear-gradient(225deg, #011b31 0%, #08042b 100%); }
-
-@keyframes bordear {
-  from {
-    border-radius: 0px; }
-  to {
-    border-radius: 0px 0px 100% 100%; } }
-
-.indexText {
-  display: flex;
-  justify-content: center; }
-  .indexText div {
-    width: clamp(320px, 95dvw, 600px);
-    text-align: center;
+  letter-spacing: 0.6px; }
+  .web_container h1, .web_container h2, .web_container h3, .web_container h4, .web_container h5, .web_container h6 {
+    font-weight: 100; }
+  .web_container p {
+    letter-spacing: 1px; }
+  .web_container section {
+    align-items: center;
+    text-align: center; }
+  .web_container .sec_1 {
+    margin-top: 30px;
+    gap: 60px;
+    position: relative;
+    height: 50dvh;
+    justify-content: center; }
+    .web_container .sec_1 .searchbar_container {
+      height: 205px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      padding: 20px 0px;
+      border: solid 2px black;
+      border-radius: 10px;
+      background-color: white;
+      width: clamp(550px, 80%, 750px); }
+      .web_container .sec_1 .searchbar_container h2 {
+        font-size: 22px; }
+      .web_container .sec_1 .searchbar_container .indx_search_cont {
+        width: 95%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; }
+        .web_container .sec_1 .searchbar_container .indx_search_cont .search_bar {
+          width: 100%;
+          position: relative; }
+          .web_container .sec_1 .searchbar_container .indx_search_cont .search_bar input {
+            height: 20px;
+            font-size: 18px;
+            padding: 10px 10px;
+            width: 92%;
+            border: 1px solid black;
+            border-radius: 5px; }
+          .web_container .sec_1 .searchbar_container .indx_search_cont .search_bar ul {
+            width: 98%;
+            z-index: 1000; }
+    .web_container .sec_1 .bg_fade {
+      height: 320px;
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      background-color: #05052e;
+      bottom: -170px; }
+  .web_container .sec_2 {
+    padding-top: 5dvh;
+    background-color: #05052e;
     color: white;
-    font-size: 32px; }
+    padding-bottom: 8dvh; }
+    .web_container .sec_2 h2 {
+      margin-bottom: 25px;
+      font-weight: 100;
+      letter-spacing: 1px; }
+    .web_container .sec_2 p {
+      width: clamp(320px, 90%, 750px);
+      font-size: 20px;
+      letter-spacing: 1px;
+      text-align: center; }
+    .web_container .sec_2 .bg_fade {
+      height: 100px;
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      background-color: #05052e;
+      bottom: -26.5dvh;
+      border-radius: 50%/50px; }
+  .web_container .sec_3 {
+    margin-top: 15dvh; }
+    .web_container .sec_3 h2 {
+      margin-bottom: 10px;
+      font-size: 26px; }
+    .web_container .sec_3 .benefits_container {
+      align-items: center;
+      width: 95%;
+      max-width: 1000px;
+      gap: 25dvh; }
+      .web_container .sec_3 .benefits_container .benefits {
+        height: 50dvh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 50%;
+        flex-wrap: wrap;
+        flex: 1;
+        gap: 70px; }
+        .web_container .sec_3 .benefits_container .benefits .text_container {
+          align-items: center;
+          gap: 50px;
+          flex: 1; }
+        .web_container .sec_3 .benefits_container .benefits .showoff_image img {
+          height: 220px;
+          width: 220px;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: #080847;
+          margin-bottom: 10px; }
+        .web_container .sec_3 .benefits_container .benefits .text {
+          text-align: left; }
+          .web_container .sec_3 .benefits_container .benefits .text p {
+            font-size: 14px; }
+        .web_container .sec_3 .benefits_container .benefits .f {
+          order: 2; }
+        .web_container .sec_3 .benefits_container .benefits .s {
+          order: 1; }
+        .web_container .sec_3 .benefits_container .benefits .icons_cont {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: start;
+          width: 100%; }
+          .web_container .sec_3 .benefits_container .benefits .icons_cont .icon {
+            align-items: center;
+            margin: 10px auto; }
+            .web_container .sec_3 .benefits_container .benefits .icons_cont .icon img {
+              border-radius: 100%;
+              height: 70px;
+              width: 70px; }
+            .web_container .sec_3 .benefits_container .benefits .icons_cont .icon span {
+              text-align: center;
+              width: 80%;
+              font-weight: 600; }
+      .web_container .sec_3 .benefits_container .aligment {
+        align-items: center;
+        position: relative;
+        padding-bottom: 80px; }
+        .web_container .sec_3 .benefits_container .aligment a {
+          bottom: 0px;
+          position: absolute; }
 
-.searchDiv {
-  margin-top: 50px; }
+.link_btn {
+  min-width: 100px;
+  padding: 10px 40px;
+  border-radius: 5px;
+  background-color: #0c0c68;
+  color: white; }
 
-.i_bx_s {
-  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.623); }
+.link_btn:hover {
+  padding: 11px 42.5px;
+  background-color: #101082; }
 
-.icons_cont .icon {
-  margin: 40px auto !important;
+.col, .web_container section, .web_container .sec_3 .benefits_container, .web_container .sec_3 .benefits_container .benefits .text_container, .web_container .sec_3 .benefits_container .benefits .icons_cont .icon, .web_container .sec_3 .benefits_container .aligment {
   display: flex;
-  justify-content: center;
-  margin-top: 70px;
-  border-radius: 75px;
-  background: linear-gradient(225deg, #2d353c 0%, #0d0640 100%);
-  height: 120px;
-  width: 120px; }
-  .icons_cont .icon img {
-    height: 100px; }
+  flex-direction: column; }
 
-.indx_search_cont {
-  display: flex;
-  flex-wrap: wrap;
-  width: 40%;
-  position: relative; }
+@media (max-width: 900px) {
+  .showoff_image {
+    width: 100%; }
+  .text_container {
+    max-width: 700px; }
+  .f {
+    order: 1 !important; }
+  .s {
+    order: 2 !important; }
+  .text {
+    text-align: center !important; } }
 
-@keyframes display_list {
-  0% {
-    max-height: 10px; }
-  100% {
-    max-height: 300px; } }
+@media (max-width: 1000px) {
+  .benefits {
+    align-items: normal !important; }
+  .icons_cont {
+    justify-content: center !important; }
+    .icons_cont img {
+      height: 60px !important;
+      width: 60px !important; } }
 
-.search_btn {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center; }
-  .search_btn button {
-    padding: 20px 60px;
-    color: white;
-    background: linear-gradient(225deg, #2d353c 0%, #0d0640 100%);
-    border-radius: 15px;
-    box-shadow: 1px 1px 15px rgba(255, 255, 255, 0.248); }
-  .search_btn button:hover {
-    background: linear-gradient(225deg, #39444d 0%, #130b4a 100%); }
+@media (max-width: 650px) {
+  .benefits_container {
+    gap: 10dvh !important; }
+  .benefits {
+    height: auto !important; }
+  .icons_cont {
+    gap: 5px !important; }
+  .showoff_image {
+    width: 100%; }
+    .showoff_image img {
+      height: 175px !important;
+      width: 175px !important; } }
 
-@media (max-width: 840px) {
-  .searchDiv {
-    margin-top: 40px !important; }
-  .sbDiv {
-    flex-direction: column; }
-  .indx_search_cont .listDiv {
-    width: 340px !important; }
-  .indexText div {
-    font-size: 28px; }
-  .icon {
-    margin: 25px auto !important;
-    height: 100px !important;
-    width: 100px !important; }
-    .icon img {
-      height: 80px !important; }
-  .search_btn button {
-    padding: 15px 90px !important; } }
+@media (max-width: 576px) {
+  .web_container h1 {
+    font-size: 28px !important; }
+  .web_container .sec_2 p {
+    font-size: 18px; }
+  .web_container .sec_3 h2 {
+    font-size: 24px; }
+  .searchbar_container {
+    width: 95% !important;
+    padding: 20px 5px; } }
 
 /*# sourceMappingURL=index.css.map */
