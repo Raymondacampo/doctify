@@ -1,0 +1,24 @@
+{% extends 'web/layout.html' %}
+{% load static%}
+{% load sass_tags %}
+{% block title %}Claim profile | {{doctor.name}}{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="sign_body">
+        <div class="sign_cont bx_s" style="gap: 2rem; height: 350px;">
+            <div class="form_title"><h1 style="letter-spacing: 1.2px; font-weight: 100;">Claim profile</h1></div>
+            <div><h3 style="font-weight: 100;">Are you {{doctor.salutation}} {{doctor}}?</h3></div>
+            <div style="display: flex; justify-content: space-between; margin-top: auto; width: 95%;">
+                <a href="/" class="cancel" style="color: black; align-items: center; min-height: 10px; padding: 5px 13.5%;">Cancel</a>
+                <button class="accept" id="claim_button" data-target="{{doctor.id}}">Claim</button>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block script %}
+    <script type="module" src="{% static 'js-functions/claimProfile.js' %}"></script>
+      
+{% endblock %}

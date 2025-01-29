@@ -1,0 +1,41 @@
+{% extends 'myaccount/layout.html' %}
+{% block list %}
+    <li>
+        <a href="{% url 'personal' %}" >Datos personales</a>
+    </li>
+    <li class="selected_list">
+        <a href="{% url 'login_data' %}">Datos de sesion</a>
+    </li>
+    {% if request.user.is_doctor %}
+    <li>
+        <a href="{% url 'doc_prof' %}">Perfil de doctor</a>
+    </li>
+    {% endif %}
+{% endblock %}
+{% block pene %}<span>login data</span>{% endblock %}
+{% block form_title %} Datos de sesion {% endblock %}
+
+{% block form_content %}
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Username</h4></div>
+        <p class="small">{{ user.username }}</p>
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Email</h4></div>
+        <p class="small">{{ user.email }}</p>
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Phone number</h4></div>
+        {% if user.phone %}
+            <p class="small">{{ user.phone }}</p>
+        {% else %}
+            <p class="small"><a href="{% url 'personal_edit' %}">Add+</a></p>
+        {% endif %}
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Password</h4></div>
+        <p class="small">{{ user.password }}</p>
+        <a href="{% url 'account_change_password' %}">change</a>
+    </div>
+
+{% endblock%}

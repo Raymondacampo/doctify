@@ -1,0 +1,24 @@
+        <!-- <div class="ensurance_cont">
+            {% if u.ensurance %}
+                <div>
+                    {% for e in u.ensurance %}
+                        <div class="box_prof_ens">
+                            <img  src="{{e.logo}}" >
+                        </div>
+                    {% endfor %}                
+                </div>
+                <div>
+                    <button id="display_ensurances" style="color: rgb(0, 162, 255); font-weight: 700;">
+                            <h4>Manage ensurances</h4>
+                    </button>                    
+                </div>
+                <div id="ensurance_options"></div>
+            {% else %}
+                <button id="display_ensurances" style="color: rgb(0, 94, 255); font-weight: 700;">
+                        <h4>Add ensurance +</h4>
+                </button>
+
+                <div id="ensurance_options"></div>                    
+
+            {% endif %}
+        </div> -->

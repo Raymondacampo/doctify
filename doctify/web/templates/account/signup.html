@@ -1,0 +1,67 @@
+{% extends 'web/layout.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% load allauth i18n %}
+
+{% block body %}
+<div class="sign_body">
+    <div class="sign_cont bx_s">
+
+
+    {% block content %}
+        <div class="form_title">
+            {% element h1 %}
+                {% trans "Sign Up" %}
+            {% endelement %}        
+
+            {% setvar link %}
+                <a href="{{ login_url }}">
+                {% endsetvar %}
+                {% setvar end_link %}
+                </a>
+            {% endsetvar %}
+            {% element p %}
+                {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
+            {% endelement %}
+            <p><b>Eres doctor?</b> crea o reclama tu cuenta <a href="{% url 'doctor_signup' %}">aqui</a></p>
+        </div>
+        <div class="extra_container">
+            <form action="/accounts/google/login/?process=login" method="post">
+                {% csrf_token %}
+                    <button type="submit" >
+                        <div class='google_form'>
+                            <img src='/static/images/google.png'>
+                            <span>Continuar con Google</span>
+                        </div> 
+                    </button>
+                </form>                 
+        </div>
+        {% if not SOCIALACCOUNT_ONLY %}
+        <div class="form_inputs_container">
+            {% url 'account_signup' as action_url %}
+            {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+                {% slot body %}
+                <div class="dede">
+                    {% csrf_token %}
+                    {% element fields form=form unlabeled=True %}
+                    {% endelement %}
+                    {{ redirect_field }}                    
+                </div>
+
+                {% endslot %}
+                {% slot actions %}
+                    {% element button tags="prominent,signup" type="submit" %}
+                        {% trans "Sign Up" %}
+                    {% endelement %}
+                {% endslot %}
+            {% endelement %}
+        </div>
+
+        {% endif %}
+    {% endblock content %}
+    </div>
+</div>
+{% endblock %}

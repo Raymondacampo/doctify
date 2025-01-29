@@ -1,0 +1,21 @@
+{% extends "web/layout.html" %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% block body %}
+    {% load i18n %}
+    {% load allauth %}
+    <div class="password_reset_done_div">
+        {% block content %}
+            {% element h1 %}
+                {% trans "Verify Your Email Address" %}
+            {% endelement %}
+            {% element p %}
+                <h5>{% blocktrans %}We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.{% endblocktrans %}</h5>
+            {% endelement %}
+        {% endblock content %}        
+    </div>
+
+{% endblock %}

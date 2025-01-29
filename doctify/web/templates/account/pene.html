@@ -1,0 +1,75 @@
+{% extends 'web/layout.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="signup_body">
+        <div class="signup_cont bx_s">
+            <div class="form_title">
+                <h1>Sign up here!</h1>
+                <p>Crea tu cuenta para que puedas acceder a Doctify y manejar tus datos</p>
+            </div>
+            <div class="extra_container">
+                <form action="/accounts/google/login/?process=login" method="post">
+                    {% csrf_token %}
+                        <button type="submit" >
+                            <div class='google_form'>
+                                <img src='/static/images/google.png'>
+                                <span>Continuar con Google</span>
+                            </div> 
+                        </button>
+                    </form>                 
+            </div>
+            <form action="/accounts/signup/" method="post" class="login_div">
+            {%csrf_token %}
+                <div class="inputs_container">
+                    <div class="input_form ">
+                        {% if emessage %}
+                        
+                            <div id="email_div" class="wrong ">
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                                <h6 id="email_message">{{emessage}}</h6>
+                            </div>
+                        {% else %}
+                                <label for="email">Email:</label>
+                                {{ form.email }}
+                        {% endif %}
+                    </div>
+                    <div class="input_form">
+                        {% if pmessage %}
+                            <div id="password_div" class="wrong upc">
+                                <label for="password">Password:</label>
+                                {{ form.password1 }}
+                            </div>
+
+                        {% else %}
+                            <label for="password">Password:</label>
+                            <ul>
+                                <li>al menos 8 caracteres</li>
+                                <li>al menos 8 caracteres</li>
+                            </ul>
+                            {{ form.password1 }}
+
+                        {% endif %}
+                    </div>
+                    <div class="input_form">
+                            {{ form.password2 }}
+                    </div>
+
+                    <br>
+                    <div class="submit_btn">
+                        <input type="submit">
+                    </div>          
+                    
+                </div>
+            </form>
+        </div>
+    </div> 
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/form.js' %}"></script>      
+{% endblock %}

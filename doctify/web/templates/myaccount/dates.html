@@ -1,0 +1,150 @@
+{% extends 'web/layout.html' %}
+{% load static%}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/myprofile.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class='mydates' style="margin-bottom: 5rem;">
+        <div class="history_container">
+            <div><a href="{% url 'configurate' %}">My account</a> / dates</div>
+        </div>
+        <div id="mydates"></div>
+        <div class="mydates">
+            <h1>Mis citas</h1><p style="margin-bottom: 1.5rem">Estas son todas las citas que has creado con tu cuenta de Doctify.</p>
+
+            <!-- ACTIVE DATES -->
+            {% if active_dates %}
+            <h3>Active dates</h3><hr class="enmark"></hr>
+                {% for d in active_dates %}
+                    
+                    <div class='date active_div'>
+                            <div class='full'>
+                                {% if not request.user.is_doctor %}
+                                <div>
+                                    <img style="height: 70px; border-radius: 100px" src={{d.date_set.doctor.image}}></img> 
+                                </div>
+                                {% endif %}
+                                <div>
+                                    <span class='big'>Cita con 
+                                        {% if request.user.is_doctor %}
+                                            {{d.client.first_name}} {{d.client.last_name}}
+                                        {% else %}
+                                            {{d.date_set.doctor.name}}
+                                        {% endif %}
+                                    </span>
+                                    <div style="display: flex; flex-direction: column; margin-top: 5px">
+                                        <span class='small'>Fecha: <b>{{d.date}}</b></span>
+                                        <span class='small'>Hora: <b>{{d.time}}</b></span>                                        
+                                    </div>
+                                    <span class='small'>Lugar: 
+                                        {% if d.time in d.date_set.horas %}
+                                            {% if d.date_set.clinica %}
+                                                <b>{{d.date_set.clinica.name}}</b>
+                                            {% else %}
+                                                <b>{{d.date_set.modalidad}}</b>
+                                            {% endif %}
+                                        {% endif %}
+                                    </span>                                    
+                                </div>
+                            </div> 
+                        <button class='cancel' data-target="{{d.id}}, cancel date with {{d.client.first_name}} {{d.client.last_name}} on {{d.date}}">Cancel</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <div class='no_dates'>
+                    <b class='bigger'>No tienes ninguna cita pendiente!</b>
+                {% if not request.user.is_doctor %}
+                <div>
+                    <span class='med'>Utiliza nuestro buscador para encontrar el doctor que buscas!</span>
+                    <a href='/search'>Search</a>
+                </div>
+                {% endif %}
+            </div>  
+            {% endif %} 
+            <!-- END OF ACTIVE DATES -->
+            {% if a_pagination.has_other_pages%}
+            <div class="pagination_container">
+                {% if a_pagination.has_previous %}
+                    <a class="pagination-btn prev" style="margin-right: auto;" href="?a_page={{ a_pagination.previous_page_number }}&u_page={{ u_pagination.number }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        <span>previous</span>
+                    </a>
+                {% endif %}
+                {% if a_pagination.has_next %}
+                    <a class="pagination-btn next" style="margin-left: auto;" href="?a_page={{ a_pagination.next_page_number }}&u_page={{ u_pagination.number }}">
+                        <span>Next</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <!-- Right Arrow Icon -->
+                        <path d="M4.646 14.854a.5.5 0 0 1 0-.708L10.793 8 4.646 1.854a.5.5 0 1 1 .708-.708l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708 0z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+
+
+            <!-- UNACTIVE DATES -->
+            {% if unactive_dates %}
+                <h3 style="margin-top: '1.5rem'">Previous dates</h3><hr class="enmark"></hr>
+                {% for d in unactive_dates %}
+                    <div class='date unactive_div'>
+                        <div class="full">
+                            {% if not request.user.is_doctor %}
+                            <div>
+                                <img style="height: 70px; border-radius: 100px " src={{d.date_set.doctor.image}}></img> 
+                            </div>
+                            {% endif %}
+                            <div>
+                                <span class='big'>Cita con {{d.client.first_name}} {{d.client.last_name}}</span>
+                                <div style="display: 'flex'; flex-direction: 'column'; margin-top: '5px'">
+                                    <span class='small'>Fecha: <b>{{d.date}}</b></span>
+                                    <span class='small'>Hora: <b>{{d.time}}</b></span>                                        
+                                </div>
+                                <span class='small'>Lugar: 
+                                    {% if d.time in d.date_set.horas %}
+                                        {% if d.date_set.clinica %}
+                                            <b>{{d.date_set.clinica.name}}</b>
+                                        {% else %}
+                                            <b>{{d.date_set.modalidad}}</b>
+                                        {% endif %}
+                                    {% endif %}
+                                </span>                                    
+                            </div>
+
+                        </div>                          
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <!-- END OF UNACTIVE DATES -->
+            {% if u_pagination.has_other_pages%}
+            <div class="pagination_container">
+                {% if u_pagination.has_previous %}
+                    <a class="pagination-btn prev" style="margin-right: auto;" href="?a_page={{ a_pagination.number }}&u_page={{ u_pagination.previous_page_number }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        <span>previous</span>
+                    </a>
+                {% endif %}
+                {% if u_pagination.has_next %}
+                    <a class="pagination-btn next" style="margin-left: auto;" href="?a_page={{ a_pagination.number }}&u_page={{ u_pagination.next_page_number }}">
+                        <span>Next</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <!-- Right Arrow Icon -->
+                        <path d="M4.646 14.854a.5.5 0 0 1 0-.708L10.793 8 4.646 1.854a.5.5 0 1 1 .708-.708l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708 0z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div id="your-react-root-id"></div>
+{% endblock %}
+{% block script %}
+    <script type="module" src="{% static 'dist/myDates.bundle.js' %}"></script>
+{% endblock %}

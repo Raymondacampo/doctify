@@ -1,0 +1,49 @@
+{% extends 'web/layout.html'%}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/myprofile.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="info_body" style="margin-bottom: 5rem;">
+        <div class="info_container">
+            <div class="profile_list">
+                <ul>
+                    {% block list %}
+                    {% endblock %}
+                    <li>
+                        {% if request.user.is_doctor %}
+                            <a href="{% url 'recent'  %}?page=1">Mis clientes</a>
+                        {% else %}
+                            <a href="{% url 'recent' %}?page=1">>Doctores recientes</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if request.user.is_doctor %}
+                            <a href="{% url 'dates' %}">Citas pendientes</a>
+                        {% else %}
+                            <a href="{% url 'dates' %}">Mis citas</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="profile_form_body">
+                <div class="history_container" style="margin-bottom: 1rem;"><div>
+                <a href="{% url 'configurate' %}">My account</a> /
+                    {% block pene %}
+                    {% endblock %}
+                </div></div>
+                <h1>
+                    {% block form_title %}
+                    {% endblock %}                    
+                </h1>
+                <hr class="enmark">
+                <div class="profile_form_content">
+                    {% block form_content %}
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

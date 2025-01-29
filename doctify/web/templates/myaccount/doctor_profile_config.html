@@ -1,0 +1,147 @@
+{% extends 'myaccount/layout.html' %}
+{% load static %}
+{% block list %}
+    <li>
+        <a href="{% url 'personal' %}" >Datos personales</a>
+    </li>
+    <li>
+        <a href="{% url 'login_data' %}">Datos de sesion</a>
+    </li>
+    {% if request.user.is_doctor %}
+    <li class="selected_list">
+        <a href="{% url 'doc_prof' %}">Perfil de doctor</a>
+    </li>
+    {% endif %}
+{% endblock %}
+<div class="history_container">
+    <div><a href="{% url 'configurate' %}">My account</a> / recent </div>
+</div>
+{% block pene %}<span>doctor profile</span>{% endblock %}
+{% block form_title %} Perfil de doctor {% endblock %}
+
+{% block form_content %}
+{% if specialities and ensurances and doc.in_person or doc.virtually %}
+    <a href="{% url 'profile' doc.id%}">Ver mi perfil</a><br>
+{% else %}
+    <h4 style="color: red; font-weight: 100; margin-bottom: 5px;">Complete your profile to be shown to the public</h4>
+{% endif %}
+    <div class="docdata_div">
+        <div class="docdata_ttl"><h4>Especialidades</h4><div id="manage_specialities"></div></div>
+        <div class="doc_ensurances_body">    
+            {% if specialities %}
+                <ul>
+                {% for s in specialities %}
+                    <li>
+                        <div class="doc_ensurance">
+                            <p>{{s}}</p>
+                        </div>                    
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+            <h5>Add your specialty to complete your account</h5>
+            {% endif %}
+        </div>
+    </div>
+    <div class="docdata_div">
+        <div class="docdata_ttl"><h4>Ensurances</h4><div id="manage_ensurances"></div></div>
+        <div class="doc_ensurances_body">  
+            {% if ensurances %}  
+                <ul>
+                {% for e in ensurances %}
+                    <li>
+                        <div class="doc_ensurance">
+                            <img src="/static/images{{e.logo.url}}" alt="">
+                            <p>{{e}}</p>
+                        </div>                    
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h5>Add the ensurances you work with to complete your account</h5>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col" style="width: 100%; border-top: 1px solid rgba(179, 179, 179, 0.21); align-items: normal; gap: 10px; padding: 1rem 0px;">
+       <h4 style="margin-bottom: 0.5rem;">Locate</h4>
+        <div style="display: flex; gap: 1rem;">
+            <div>
+                <input type="checkbox" name="in_person" id="in_person" {% if doc.in_person %}checked{% endif %}>
+                <span>In person</span>
+            </div>
+            <div>
+                <input type="checkbox" name="virtually" id="virtually" {% if doc.virtually %}checked{% endif %}>
+                <span>Virtually</span>
+            </div>
+        </div>
+    </div>
+    {% if not doc.virtually and doc.in_person or doc.in_person %}
+    <div class="docdata_div">
+        <div class="docdata_ttl"><h4>Clinicas</h4><div id="manage_clinics"></div></div>
+        <div class="doc_ensurances_body">   
+            {% if clinics %}  
+                <ul>
+                {% for c in clinics %}
+                    <li>
+                        <div class="doc_ensurance">
+                            <p>{{c}}</p>
+                        </div>                    
+                    </li>
+                {% endfor %}
+                </ul>
+            {% elif not clinics and doc.in_person %}
+                <h5>Add the clinics you work in to complete your account</h5>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% if doc.virtually or doc.in_person %}
+        {% if doc.dates %}
+        <div class="docdata_div">
+            <div class="docdata_ttl"><h4>My dates schedules</h4><div id="manage_dates"></div></div>
+            <div style="display: flex; flex-direction: column; gap: 0.25rem; max-width: 400px; position: relative;">
+                {% for d in doc.dates.all %}
+                    {% if d.isActive %}
+                    <div style="position: relative;">
+                        {% if d.modalidad == 'virtually' %}
+                        <div class="date-scheduled"><div style="width: 90%;">Virtual date on {{d.days}} </div><span class="clickable-span" data-target="{{ d.id }}"><b>...</b></span><div id="root"></div></div>
+                        {% else %}
+                        <div class="date-scheduled">Date in {{d.clinica}} on {{d.days}} <span class="clickable-span"  data-target="{{ d.id }}"><b>...</b></span></div>
+                        {% endif %}
+                        <div id="react-root-{{ d.id }}"></div>                         
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-top: 1rem;"><div class="add_cont"><button id="createDivBtn" style="font-size: 14px; letter-spacing: 1px;">Create date schedule +</button></div></div>
+        </div>
+        {% else %}
+        <div class="col" style="width: 100%; border-top: 1px solid rgba(179, 179, 179, 0.21); align-items: normal; gap: 10px; padding: 1rem 0px;">
+            <h4 style="margin-bottom: 0.5rem;">My dates schedules</h4>
+             <div style="display: flex; gap: 1rem; align-items: center;"><div class="add_cont"><button id="createDivBtn" style="font-size: 14px; letter-spacing: 1px;">Create date schedule +</button></div></div>
+        </div>
+        {% endif %}
+    {% endif %}
+    <div class="docdata_div">
+        <div class="docdata_ttl"><h4>My schedule</h4><div id="manage_schedule"></div></div>
+        <p>{{doc.schedules}}</p>
+    </div>
+    <div class="docdata_div">
+        <div class="docdata_ttl"><h4>Descripcion</h4><div id="edit_description"></div></div>
+        <p class="description clamped" id="description_loc">{{ description }}</p>
+        <div class="toggle-div">
+            <button id="toggleBtn" style="display: none;">See More</button>           
+        </div>
+        
+    </div>
+    <div id="message_container"></div>
+{% endblock%}
+{% block script %}
+    <script type="module" src="{% static 'dist/manageSchedule.bundle.js' %}"></script>
+    <script type="module" src="{% static 'js-functions/seeMore.js' %}"></script>
+    <script type="module" src="{% static 'js-functions/postLocate.js' %}"></script>
+    <script type="module" src="{% static 'dist/manageSpecs.bundle.js' %}"></script>
+    <script type="module" src="{% static 'dist/dateSchedule.bundle.js' %}"></script>
+    <script type="module" src="{% static 'dist/editDescription.bundle.js' %}"></script>   
+    <script type="module" src="{% static 'dist/showMessages.bundle.js' %}"></script>   
+{% endblock %}

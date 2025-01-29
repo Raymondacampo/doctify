@@ -1,0 +1,43 @@
+{% extends 'web/layout.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+
+{% block body %}
+<div class="sign_body ">
+    <div class="sign_cont bx_s">
+        <div class="form_title">
+            <h1>Conviertete en doctor</h1>
+            <p>Completa el formulario para ser registrado como doctor.</p>
+        </div>
+        {% if not request.user.is_authenticated %}
+        <div class="extra_container">
+            <form action="/accounts/google/login/?next=/accounts/doctor_signup%3Fdoc_id%3D{{doc_id}}" method="post">
+                {% csrf_token %}
+                    <button type="submit">
+                        <div class='google_form'>
+                            <img src='/static/images/google.png'>
+                            <span>Continuar con Google</span>
+                        </div> 
+                    </button>
+                </form>                 
+        </div>
+        {% endif %}
+        <div class="form_inputs_container">
+            <form action="{% url 'doctor_signup' %}" method="post">
+                {% csrf_token %}                 
+
+                <div class="dede">
+                    {{form.as_p}}
+                    <div id="frender"></div>   
+                    <button type="submit">Crear</button>                    
+                </div>
+            </form>            
+        </div>
+    </div>
+</div>
+
+    
+{% endblock %}

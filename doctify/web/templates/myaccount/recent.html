@@ -1,0 +1,91 @@
+{% extends 'web/layout.html' %}
+{% load static%}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/myprofile.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="recent_doctors">
+        <div class="recent_doctors_div">
+            <div class="history_container" style="margin-bottom: 1rem;">
+                <div><a href="{% url 'configurate' %}">My account</a> / recent </div>
+            </div>
+            <div class="title">
+                {% if user.is_doctor %}
+                    <h2>Clientes recientes</h2><p>Estos son los clientes que han accedido anteriormente a uno de tus servicios.</p><hr class="enmark">
+                {% else %}
+                    <h2>Doctores recientes</h2><p>Estos son los doctores a los que has accedido anteriormente para obtener un servicio.</p><hr class="enmark">
+                {% endif %}
+            </div>
+            {% if request.user.is_doctor %}
+                <div class="management_buttons" id="add_patient_container"></div>
+            {% endif %}
+            <div class="doctors_container">
+                {% if recent_doctors %}
+                    {% if not user.is_doctor %}
+                        {% for d in recent_doctors %}
+                        <a class="doctor" href="{% url 'profile' d.id %}" >
+                            <img src="/{{d.image}}">
+                            {{d.docuser.gender.salutation}} {{d}}
+                        </a>
+                        {% endfor %} 
+                    {% else %}
+                        {% for d in recent_doctors %}
+                        {% if d.creator %}
+                        <a href="{% url 'profile' d.id%}?my_patient=True" class="doctor">
+                            <img src="/static/images/profile_picture.jpg">
+                                {{d.first_name}} {{d.last_name}}
+                        </a>
+                        {% else %}
+                        <a href="{% url 'profile' d.id%}" class="doctor">
+                            <img src="/static/images/profile_picture.jpg">
+                                {{d}}
+                        </a>
+                        {% endif %}
+                        {% endfor %}    
+                    {% endif %}      
+                {% else %}
+                    <div class='no_dates'>
+                        {% if user.is_doctor %}
+                            <b class="bigger">Aun no tienes pacientes</b>
+                        {% else %}
+                            <b class='bigger'>Aun no has visto ningun doctor!</b>
+                        <div>
+                            <span class='med'>Utiliza nuestro buscador para encontrar el doctor que buscas!</span>
+                            <a href='/search'>Search</a>
+                        </div>
+                        {% endif %}
+                    </div>    
+                {% endif %}    
+            </div>
+            {% if recent_doctors.has_other_pages%}
+            <div class="pagination_container">
+                {% if recent_doctors.has_previous %}
+                    <a class="pagination-btn prev" style="margin-right: auto;" href="?page={{ recent_doctors.previous_page_number }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.354 1.146a.5.5 0 0 1 0 .708L5.207 8l6.147 6.146a.5.5 0 0 1-.708.708l-6.5-6.5a.5.5 0 0 1 0-.708l6.5-6.5a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        <span>previous</span>
+                    </a>
+                {% endif %}
+                {% if recent_doctors.has_next %}
+                    <a class="pagination-btn next" style="margin-left: auto;" href="?page={{ recent_doctors.next_page_number }}">
+                        <span>Next</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <!-- Right Arrow Icon -->
+                        <path d="M4.646 14.854a.5.5 0 0 1 0-.708L10.793 8 4.646 1.854a.5.5 0 1 1 .708-.708l6.5 6.5a.5.5 0 0 1 0 .708l-6.5 6.5a.5.5 0 0 1-.708 0z"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block script %}
+    {% if request.user.is_doctor %}
+        <script type="module" src="{% static 'dist/PatientsManagement.bundle.js' %}"></script>
+    {% endif %}      
+{% endblock %}

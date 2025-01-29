@@ -1,0 +1,13 @@
+{% extends 'myaccount/layout.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/date_for_patient.scss' %}">
+{% endblock %}
+{% block body %}
+    <div id="select_patient_container"></div>
+
+{% endblock %}
+{% block script %}
+    <script type="module" src="{% static 'dist/SelectPatient.bundle.js' %}"></script>      
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'myaccount/layout.html' %}
+{% block list %}
+    <li class="selected_list">
+        <a href="{% url 'personal' %}" >Datos personales</a>
+    </li>
+    <li>
+        <a href="{% url 'login_data' %}">Datos de sesion</a>
+    </li>
+    {% if request.user.is_doctor %}
+    <li>
+        <a href="{% url 'doc_prof' %}">Perfil de doctor</a>
+    </li>
+    {% endif %}
+{% endblock %}
+
+
+{% block pene %}<span>personal data</span>{% endblock %}
+
+{% block form_title %} Datos personales {% endblock %}
+
+{% block form_content %}
+    <div class="edit">
+        <a href="{% url 'personal_edit' %}">Edit my data</a>
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>First name</h4></div>
+        <p class="small">{{ user.first_name }}</p>
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Last name</h4></div>
+        <p class="small">{{ user.last_name }}</p>
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Fecha de nacimiento</h4></div>
+        {% if user.bornDate %}
+            <p class="small">{{user.bornDate}}</p>
+        {% else %}
+            <p class="small"><a href="{% url 'personal_edit' %}">Add+</a></p>
+        {% endif %}
+    </div>
+    <div class="display_data_div">
+        <div class="data_ttl"><h4>Sexo</h4></div>
+        <p class="small">{{ user.gender }}</p>
+    </div>
+
+{% endblock%}

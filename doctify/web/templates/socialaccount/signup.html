@@ -1,0 +1,46 @@
+{% extends 'web/layout.html' %}
+{% load allauth i18n %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'scss/form_styles.scss' %}">
+{% endblock %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block body %}
+<div class="sign_body">
+    <div class="sign_cont bx_s">
+        {% block content %}
+        <div class="form_title">
+            {% element h1 %}
+                {% trans "Sign Up" %}
+            {% endelement %}
+            {% element p %}
+                {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+        {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}
+            {% endelement %}            
+        </div>
+
+        <div class="form_inputs_container">
+            {% url 'socialaccount_signup' as action_url %}
+            {% element form form=form method="post" action=action_url %}
+                {% slot body %}
+                <div class="dede">
+                    {% csrf_token %}
+                    {% element fields form=form unlabeled=True %}
+                    {% endelement %}
+                </div>
+                    {{ redirect_field }}
+                {% endslot %}
+                {% slot actions %}
+                    {% element button type="submit" %}
+                        {% trans "Sign Up" %}
+                    {% endelement %}
+                {% endslot %}
+            {% endelement %}
+        </div>
+        {% endblock content %}
+    </div>
+</div>
+{% endblock %}

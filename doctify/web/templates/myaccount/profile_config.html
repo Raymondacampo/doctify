@@ -1,0 +1,77 @@
+{% extends 'web/layout.html' %}
+{% load sass_tags %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% sass_src 'scss/myprofile.scss' %}">
+{% endblock %}
+{% block body %}
+    <div class="body_container">
+        <div class="container">
+            <div class="profile_picture">
+                {% if doctor %}
+                <img src="{{doctor.image}}" alt="">
+                {% endif %}
+                <h2>@{{user.username}}</h2>
+            </div>
+            <div class="options_container">
+                <a href="{% url 'personal' %}">
+                    <div class="link_cont">
+                        <div class="link_title">
+                            <svg className="svg-icon" viewBox="0 0 20 20">
+                                <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+                            </svg>
+                            <h4>Datos personales</h4>
+                        </div>
+                        <p class="medium">Mira o edita los datos personales de tu cuenta.</p>
+                    </div>
+                </a>
+                <a href="{% url 'login_data' %}">
+                    <div class="link_cont">
+                        <h4>Datos de sesion</h4>
+                        <p class="medium">Edita los datos de sesion de tu cuenta.</p>
+                    </div>
+                </a>
+                {% if user.is_doctor %}
+                    <a href="{% url 'doc_prof' %}">
+                        <div class="link_cont">
+                            <h4>Perfil de doctor</h4>
+                            <p class="medium">Edita la informacion mostrada al entrar a tu perfil.</p>
+                        </div>
+                    </a>
+                {% endif %}
+                <a href="{% url 'dates' %}?a_page=1&u_page=1">
+                    <div class="link_cont">
+                        {% if user.is_doctor %}
+                            <h4>Citas pendientes</h4>
+                            <p class="medium">Para ver todas las citas agendadas con usted.</p>
+                        {% else %}
+                            <h4>Mis citas</h4>
+                            <p class="medium">Ver todas mis citas agendadas.</p>
+                        {% endif %}
+                    </div>
+                </a>
+                <a href="{% url 'recent'%}?page=1">
+                    <div class="link_cont">
+                        {% if user.is_doctor %}
+                            <h4>Clientes recientes</h4>
+                            <p class="medium">Accede a la lista de todos tus clientes .</p>
+                        {% else %}
+                            <h4>Doctores recientes</h4>
+                            <p class="medium">Accede a la lista de todos los doctores a los cual has accedido a un servicio.</p>
+                        {% endif %}
+                    </div>
+                </a>
+            </div>
+            <div class="down_btns">
+                <a href="{% url 'logout' %}" class="lo_btn">Log out</a>
+                <button id="delete_button" class="cancel">Delete account</button>
+            </div>
+        </div>        
+    </div>
+    <div id="delete_content"></div>
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'dist/deleteAccount.bundle.js' %}"></script>
+      
+{% endblock %}

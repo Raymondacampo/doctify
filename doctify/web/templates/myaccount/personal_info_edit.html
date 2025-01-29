@@ -1,0 +1,30 @@
+{% extends 'myaccount/layout.html' %}
+{% block list %}
+    <li>
+        <a href="{% url 'personal' %}" class="selected_list">Datos personales</a>
+    </li>
+    <li>
+        <a href="{% url 'login_data' %}">Datos de sesion</a>
+    </li>
+    {% if request.user.is_doctor %}
+    <li>
+        <a href="{% url 'doc_prof' %}">Perfil de doctor</a>
+    </li>
+    {% endif %}
+{% endblock %}
+{% block form_title %} Datos personales {% endblock %}
+
+{% block form_content %}
+
+<div class="form_edit">
+    <form action="{% url 'personal_edit' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}  
+        <div class="form_btns">
+            <button type="submit">Actualizar</button>  
+            <a href="{% url 'personal' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock%}
