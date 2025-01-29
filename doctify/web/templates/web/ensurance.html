@@ -1,5 +1,6 @@
 {% extends 'web/layout.html' %}
 {% load static %}
+{% block title %}Ensurance | {{ensurance}}{% endblock %}
 {% block body %}
 <h1>{% for e in ensurance %}
     <h5>{{e}}</h5>

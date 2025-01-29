@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Speciality, Ensurance, Clinic, Doctor, DoctorDate, User, citiesList, ClientDate, Review, DoctorPatient
 from .serializers import UserSerializer, DoctorPatientSerializer, DoctorSerializer, ClientDateSerializer, DoctorDateSerializer, SpecialitySerializer, ClinicSerializer, EnsuranceSerializer, ReviewSerializer
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Avg
 from django.http import JsonResponse
 import datetime
 from django.contrib import messages
@@ -251,7 +251,8 @@ def personal_info_edit(request):
     initial_data = {
         'first_name': request.user.first_name,
         'last_name': request.user.last_name,
-        'born_date': request.user.bornDate
+        'born_date': request.user.bornDate,
+        'gender': request.user.gender
     }
     form = EditUser(initial=initial_data)
     return render(request, 'myaccount/personal_info_edit.html', {
@@ -310,47 +311,64 @@ def mydates(request):
 
 # Validate Doctor's credentials
 def doctor_signup(request):
-    print('si')
+    doc_id = request.GET.get('doc_id')
     if request.method == 'POST':
+
         if request.user.is_authenticated:
             form = sDocForm(request.POST)
 
             if form.is_valid():
                 form.save(request.user)
-                return redirect('index')
+                
             else:
                 return render(request, 'account/doctor_signup.html', {
                 'form': sDocForm(request.POST)
             })
+
+            if request.session['claim_profile_id']:
+                return redirect('claim', doctor_id=request.session['claim_profile_id'])
+            else:
+                return redirect('index')
+        
         else:
             form = uDocForm(request.POST)
 
             if form.is_valid():
-                form.save(request)
-                u = request.POST['username']
-                p = request.POST['password1']
-                user = authenticate(request, username=u, password=p)
-                user.is_doctor = True
-                user.save()
-                login(request, user)
-                return redirect('index')
+                user = form.save(request)
+                raw_password = form.cleaned_data.get('password1')  # or your password field name
+                user = authenticate(username=user.username, password=raw_password)
+
+                if user is not None:
+                    login(request, user)
             else:
                 return render(request, 'account/doctor_signup.html', {
                 'form': uDocForm(request.POST)
             })
+
+            if request.session['claim_profile_id']:
+                return redirect('claim', doctor_id=request.session['claim_profile_id'])
+            else:
+                return redirect('index')
     else:
+        if doc_id:
+            request.session['claim_profile_id'] = doc_id
+
         if request.user.is_authenticated:
             request.session['curr_page'] = 'doctor_signup'
+
             if request.user.is_doctor:
                 return redirect('index')
             
             form = sDocForm()
+
         else:
             form = uDocForm()
             request.session['curr_page'] = 'doctor_signup'
             request.session.save()
+
         return render(request, 'account/doctor_signup.html', {
-            'form': form
+            'form': form,
+            'doc_id': doc_id
         })
     
 # SPECS MANAGEMENT
@@ -525,7 +543,7 @@ def search(request):
         if data.get('spec')[1] != 'All':
             spec = data.get('spec')[1]
         request.session[f'{data.get("spec")[0]}_val'] = spec
-        return JsonResponse(True, safe=False)
+        return JsonResponse(data.get("spec")[0], safe=False)
 
     else:
         request.session['gender_val'] = None
@@ -586,6 +604,37 @@ def profile(request, doctor_id):
         'rating_data': reversed(rating_data)
         })
 
+def smart_searchbar(request, key):
+    results = []
+    specialties = Speciality.objects.filter(name__icontains=key)
+    for item in specialties:
+        results.append({'model': 'Speciality', 'id': item.id, 'name': item.name})
+
+    # Search in Clinics
+    clinics = Clinic.objects.filter(name__icontains=key)
+    for item in clinics:
+        results.append({'model': 'Clinic', 'id': item.id, 'name': item.name})
+
+    # Search in Insurances
+    insurances = Ensurance.objects.filter(name__icontains=key)
+    for item in insurances:
+        results.append({'model': 'Ensurance', 'id': item.id, 'name': item.name})
+
+    # # Search in Cities
+    # cities = citiesList.filter(name__icontains=key)
+    # for item in cities:
+    #     item.search_count += 1
+    # 
+    #     results.append({'model': 'Cities', 'id': item.id, 'name': item.name})
+
+    # Search in Doctors
+    doctors = Doctor.objects.filter(name__icontains=key)
+    for item in doctors:
+        results.append({'model': 'Doctor', 'id': item.id, 'name':f'Dr. {item.name}'})
+    # Sort results by search_count in descending order
+    results.sort(key=lambda x: x.get('search_count', 0), reverse=True)
+
+    return JsonResponse(results, safe=False)
 
 # GET ALL DOCTORS WITH FILTERS VALUES
 def doctor_results(request):
@@ -634,7 +683,7 @@ def doctor_results(request):
     }
 
     cleaned_filters = {key: value for key, value in filters.items() if value is not None}
-    doctores = Doctor.objects.filter(**cleaned_filters)
+    doctores = Doctor.objects.filter(**cleaned_filters).annotate(avg_rating=Avg('reviews__rate')).order_by('-avg_rating')
     doctores = DoctorSerializer(doctores, many=True)
 
     p = Paginator(doctores.data, 10)
@@ -778,7 +827,7 @@ def calendarView(request, doc_id):
 
 
             for date in doc_dates.data:
-                if virtually and date['modalidad'] == 'virtually' or not virtually and date['modalidad'] == 'in_person':
+                if virtually and date['modalidad'] == 'virtually' and doctor.virtually or not virtually and date['modalidad'] == 'in_person' and doctor.in_person:
                     doc_dates_list.append({"id": date['id'], "days": date['days'], "hours": date['horas']})
 
             for day_set in cal:
@@ -800,7 +849,7 @@ def calendarView(request, doc_id):
                                                     renday = day
                                                 if not ClientDate.objects.filter(date_set = date_list['id'], date = f'{y}-{m}-{renday}', time = h).exists():
                                                     hours_available.append(h)
-                                            elif day == t.day and datetime.strptime(h, "%H:%M:%S").time() > t.time() and selected_day:
+                                            elif day == t.day and datetime.strptime(h, "%H:%M:%S").time() > t.time():
                                                 if len(str(day)) < 2:
                                                     renday = f'0{day}'
                                                 else:
@@ -908,6 +957,7 @@ def create_review(request, doc_id):
     except:
         return JsonResponse({"success": False, "message": "Already made a review."}, status=200)
 
+# GET REVIEW
 def get_review(request, doc_id):
     page = int(request.GET.get('page'))
     doctor = Doctor.objects.get(pk=int(doc_id))
@@ -918,6 +968,18 @@ def get_review(request, doc_id):
     currentPage = p.page(page)
     return JsonResponse({'reviews':[r for r in currentPage], 'hasMore':currentPage.has_next()}, safe=False)
 
+# CLAIM PROFILE
+def claim_profile(request, doctor_id):
+    doctor = Doctor.objects.get(pk=int(doctor_id))
+    if request.method == 'POST':
+        if request.user.first_name in doctor.name and request.user.last_name in doctor.name:
+            return JsonResponse({'valid': True, 'message': f'Welcome to Doctify Dr. {doctor.name}.'}, safe=False)
+        else:
+            return JsonResponse({'valid': False, 'message': f'Your name dont match the doctor name.'}, safe=False)
+    else:
+        return render(request, 'web/claim_profile.html', {
+            'doctor': doctor
+        })
 # CANCEL DATE
 def canceldate(request, date_id):
     try:
@@ -934,7 +996,6 @@ def get_spec(request):
     for_search = json.loads(request.GET.get('for_search'))
     my_spec = json.loads(request.GET.get('my_spec'))
     specs_list = []
-
     if spec == 'speciality':
         specs = SpecialitySerializer(Speciality.objects.all(), many=True)
     elif spec == 'ensurance':
@@ -944,7 +1005,6 @@ def get_spec(request):
     elif spec == 'city':
         specs = citiesList
 
-
     if not for_search:
         doc = Doctor.objects.get(docuser = request.user)
         if spec == 'speciality':
@@ -953,11 +1013,19 @@ def get_spec(request):
             query_set = EnsuranceSerializer(doc.ensurances.all(), many=True)
         elif spec == 'clinic':
             query_set = ClinicSerializer(doc.clinics.all(), many=True)
+        elif spec == 'schedule':
+            query_set = doc.dates.all()
 
-        if spec != 'ensurance':
+        
+        if spec != 'ensurance' and spec !='schedule':
+            print('no seguro ni calendario', spec)
             specs_list = [s['name'] for s in query_set.data]
-        else:
+        elif spec != 'schedule':
+            print('no calendario', spec)
             specs_list = [[s['name'], f"/static/images{s['logo']}"] for s in query_set.data]
+        elif spec == 'schedule':
+            print('calendario', spec)
+            specs_list = [d for d in query_set]
 
         if not my_spec:
             if spec != 'ensurance':

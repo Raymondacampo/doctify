@@ -21,8 +21,6 @@ $bg_color:rgba(226, 231, 255, 0.13);
         justify-content: center;
 
         .searchbar_container{
-            height: 205px;
-            
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,33 +29,19 @@ $bg_color:rgba(226, 231, 255, 0.13);
             border: solid 2px black;
             border-radius: 10px;
             background-color: white;
-            width: clamp(550px, 80%, 750px);
+            width: clamp(550px, 80%, 900px);
             h2{
                 font-size: 22px;
             }
 
             .indx_search_cont{
-                width: 95%;
+                width: 90%;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 15px;
-                .search_bar{
-                    width: 100%;
-                    position: relative;
-                    input{
-                        height: 20px;
-                        font-size: 18px;
-                        padding: 10px 10px;
-                        width: 92%;
-                        border: 1px solid black;
-                        border-radius: 5px;
-                    }
-                    ul{
-                        width: 98%;
-                        z-index: 1000;
-                    }
-                }
+                
+
             }
 
         }
@@ -193,13 +177,13 @@ $bg_color:rgba(226, 231, 255, 0.13);
 
 .link_btn{
     min-width: 100px;
-    padding: 10px 40px;
+    padding: 15px 50px;
     border-radius: 5px;
     background-color: #0c0c68;
     color: white;
 }
 .link_btn:hover{
-    padding: 11px 42.5px;
+    padding: 15px 52.5px;
     background-color: #101082;
 }
 
@@ -257,6 +241,14 @@ $bg_color:rgba(226, 231, 255, 0.13);
             width: 175px !important;            
         }
 
+    }
+
+    .search_bar{
+        ul{
+            li{
+                font-size: 18px !important;
+            }
+        }
     }
 }
 @media(max-width: 576px){

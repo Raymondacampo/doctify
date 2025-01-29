@@ -819,30 +819,6 @@ button:disabled {
       width: 100%;
       gap: 1rem; }
 
-.cancel {
-  border: 2px solid black;
-  background-color: #33336916;
-  padding: 4.5px 13.5%;
-  border-radius: 5px;
-  height: 25px;
-  margin: auto 0px;
-  font-size: 18px; }
-
-.cancel:hover {
-  background-color: rgba(15, 10, 49, 0.482);
-  color: white; }
-
-.accept {
-  background-color: #00007d;
-  padding: 5px 15%;
-  color: white;
-  border-radius: 5px;
-  height: 25px;
-  margin: auto 0px; }
-
-.accept:hover {
-  background-color: #00009a; }
-
 .col, .info_body .info_container .profile_form_body .profile_form_content, .info_body .info_container .profile_form_body .profile_form_content .docdata_div .doc_ensurances_body .doc_ensurance, .info_body .info_container .profile_form_body .profile_form_content .form_edit form, .manage_body .manage_container .manage_content, .add_cont, .disabled, .confirm_remove .confirm_remove_div form, .confirm_remove .cr_info, .recent_doctors .doctors_container, .recent_doctors .doctors_container .doctor .btns_div, .no_dates, .no_dates div, .cont, .favdoctors_container .favdoctors, .cont form, .favdoctors_container .favdoctors form {
   display: flex;
   flex-direction: column;

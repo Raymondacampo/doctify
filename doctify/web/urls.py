@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("abou", views.about_us, name="about_us"),
+    path("about", views.about_us, name="about_us"),
     path("terms", views.terms_of_service, name="terms_of_service"),
     path("privacy", views.privacy_policy, name="privacy_policy"),
     path("contact", views.contact_us, name="contact_us"),
@@ -12,13 +12,14 @@ urlpatterns = [
     path("logout", views.logout_view, name='logout'),
     path('redirect', views.redirect_page, name='redirect'),
     path("search", views.search, name="search"),
+    path("smart/<str:key>", views.smart_searchbar, name="smart"),
     path('locateUser', views.locateUser, name='locateUser'),
     path("<int:doctor_id>/profile", views.profile, name="profile"),
     path('doctors', views.doctor_results, name='doctors'),
     path("<int:doc_id>/calendar", views.calendarView, name="calendar"),
     path("<int:doc_id>/create_review", views.create_review, name="create_review"),
     path("<int:doc_id>/get_review", views.get_review, name="get_review"),
-    # path('redirect', views.social_auth_redirect, name='redirect'),
+    path('claim/<int:doctor_id>', views.claim_profile, name='claim'),
 
     path('ensurance/<int:ens_id>', views.ensurance, name='ensurancebyid'),
     path('clinic/<str:clin_name>', views.clinic, name='clinic'),

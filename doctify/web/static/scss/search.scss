@@ -24,20 +24,22 @@
                 position: relative;
                 input{
                     height: 40px;
-                    border: 0px;
-                    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-                    border-radius: 5px;
+                    border: 1px solid rgb(197, 197, 197);
+                    border-radius: 10px;
                     font-size: 16px;
-                    padding-left: 10px;
+                    padding-left: 4%;
                     outline: none;
                 }
                 input:focus{
-                    border-radius: 5px 5px 0px 0px;
+                    border-radius: 10px 10px 0px 0px;
+                    border-bottom: none;
                 }
                 ul{
-                    width: 101%;
+                    width: 100%;
                     z-index: 1000;
-                    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.145)
+                    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.145);
+                    border: 1px solid rgb(197, 197, 197);
+                    border-top: none
                 }
             }
         }
@@ -90,6 +92,7 @@
 
     .doctor_render{
         width: 750px;
+        min-height: 60dvh;
         margin: 0px 1.5rem;
         letter-spacing: 0.7px;
         box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.055);
@@ -230,7 +233,8 @@
             }
         }
         .pagination{
-            margin-top: 20px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
             display: flex;
             justify-content: center;
             div{

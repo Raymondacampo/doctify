@@ -5,14 +5,28 @@
 <head>
     <meta name="description" http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}Doctify{% endblock %}</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <meta property="og:title" content="Doctify - Find and Book the Best Doctors">
+    <meta property="og:description" content="Easily find trusted doctors and book appointments with Doctify. The best healthcare platform in the Dominican Republic.">
+    <meta property="og:image" content="{% static 'images/social-preview.jpg' %}">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Doctify - Find and Book the Best Doctors">
+    <meta name="twitter:description" content="Easily find trusted doctors and book appointments with Doctify. The best healthcare platform in the Dominican Republic.">
+    <meta name="twitter:image" content="{% static 'images/social-preview.jpg' %}">
+    <meta name="twitter:site" content="@YourTwitterHandle"> <!-- Optional -->
+
+
     {% block style %}
     {% endblock %}
 </head>

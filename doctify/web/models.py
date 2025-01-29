@@ -35,7 +35,7 @@ for city in response['data']:
 class Ensurance(models.Model):
     name = models.CharField(max_length=200)
     logo = models.ImageField(blank=True)
-
+    search_count = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.name}"
     
@@ -63,7 +63,7 @@ class User(AbstractUser):
 
 class Speciality(models.Model):
     name = models.CharField(max_length=100)
-
+    search_count = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.name}"
 
@@ -75,13 +75,14 @@ class Clinic(models.Model):
     contact = models.CharField(max_length=100)
     map = models.CharField(max_length=500, default='hola')
     phone = PhoneNumberField(null=True, blank=True) 
+    search_count = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.name}"
     
 
 
 class Doctor(models.Model):
-    docuser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor')
+    docuser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor', blank=True, null=True)
     name = models.CharField(max_length=64, default='popo')
     specialities = models.ManyToManyField(Speciality, related_name="doctors", blank=True)
     clinics = models.ManyToManyField(Clinic, blank=True, related_name="doctors")
@@ -93,6 +94,8 @@ class Doctor(models.Model):
     in_person = models.BooleanField(default=False)
     virtually = models.BooleanField(default=False)
     image = models.ImageField(default='static/images/profile_picture.jpg',upload_to='static/images', blank=True)
+    phone_number = PhoneNumberField(null=True, blank=True)
+    search_count = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.name}"
     

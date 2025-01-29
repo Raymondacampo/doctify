@@ -1058,30 +1058,7 @@ button:disabled{
 }
 
 
-.cancel{
-    border: 2px solid black;
-    background-color: #33336916;
-    padding: 4.5px 13.5%;
-    border-radius: 5px;
-    height: 25px;
-    margin: auto 0px;
-    font-size: 18px;
-}
-.cancel:hover{
-    background-color: rgba(15, 10, 49, 0.482);
-    color: white;
-}
-.accept{
-    background-color: rgb(0, 0, 125);
-    padding: 5px 15%;
-    color: white;
-    border-radius: 5px;
-    height: 25px;
-    margin: auto 0px;
-}
 
-.accept:hover{
-    background-color: rgb(0, 0, 154);}
 
 .col{
     display: flex;

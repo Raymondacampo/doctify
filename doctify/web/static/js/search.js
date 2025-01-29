@@ -3,11 +3,19 @@ import SearchBar from "../js-components/searchBar";
 import GendersSelection from "../js-components/genders";
 import Equis from "../js-components/equis";
 import TakeDateSelection from "../js-components/takeDateFilter";
+import SmartBar from "../js-components/smartSearchbar";
+import { use } from "react";
 const { useEffect } = React;
 function App () {
     const [renderCount, setRenderCount] = React.useState(0);
     const [mobile, setMobile] = React.useState(false)
     const [filtersOpen, setFiltersOpen] = React.useState(false)
+    const [sbReload, setSbCount] = React.useState({
+        Speciality: 1,
+        Ensurance: 1,
+        Clinic: 1,
+        City: 1
+    })
     const breakpoint = 1200
     useEffect(() => {
         let handleSize =() => {
@@ -28,6 +36,18 @@ function App () {
         setRenderCount(prevCount => prevCount + 1);
       };
 
+    const sbReRender = (spec) => {
+        console.log(sbReload)
+        setSbCount((prevState) => ({
+            ...prevState,
+            [spec]: prevState[spec] + 1
+        }))
+        triggerReRender();
+    };
+
+    useEffect(() => {
+        console.log(sbReload)
+    }, [sbReload])
     return(
         <>  
             {mobile && 
@@ -50,19 +70,19 @@ function App () {
                 <hr></hr>
                 <div className="sb_cont">
                     <h3>Especialidad</h3>
-                    <SearchBar spec={'speciality'} update={triggerReRender} forSearch={true} forDoc={false} own={false}/>     
+                    <SearchBar spec={'speciality'} update={triggerReRender} forSearch={true} forDoc={false} own={false} reload={sbReload.Speciality}/>     
                 </div>
                 <div className="sb_cont">
                     <h3>Seguro</h3>
-                    <SearchBar spec={'ensurance'} update={triggerReRender} forSearch={true} forDoc={false} own={false}/>     
+                    <SearchBar spec={'ensurance'} update={triggerReRender} forSearch={true} forDoc={false} own={false} reload={sbReload.Ensurance}/>     
                 </div>
                 <div className="sb_cont">
                     <h3>Clinica</h3>
-                    <SearchBar spec={'clinic'} update={triggerReRender} forSearch={true} forDoc={false} own={false}/>     
+                    <SearchBar spec={'clinic'} update={triggerReRender} forSearch={true} forDoc={false} own={false} reload={sbReload.Clinic}/>     
                 </div>
                 <div className="sb_cont">
                     <h3>Ciudad</h3>
-                    <SearchBar spec={'city'} update={triggerReRender} forSearch={true} forDoc={false} own={false}/>     
+                    <SearchBar spec={'city'} update={triggerReRender} forSearch={true} forDoc={false} own={false} reload={sbReload.City}/>     
                 </div>
                 <hr></hr>
                 <div className="gender_cont">
@@ -75,9 +95,13 @@ function App () {
                 </div>
             </div>
 
+            <div style={{marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                {/* <div style={{width: '95%', maxWidth: '750px', margin: '0px auto'}}>
+                    <SmartBar onAction={sbReRender} index={false}/>   
+                </div> */}
+                <GetDoc reload={renderCount}/>                
+            </div>
 
- 
-            <GetDoc reload={renderCount}/>
         </>
     );
 }

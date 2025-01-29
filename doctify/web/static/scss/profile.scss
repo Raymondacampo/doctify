@@ -532,8 +532,8 @@ $mobileWidth: 320px;
     scrollbar-width: none;
     .calender_div{
         margin-top: 2rem;
+        margin-bottom: 2rem;
         width: 100%;
-        height: 100%;
         max-width: 500px;
         background-color: white;
         padding: 10px 20px;
@@ -597,13 +597,13 @@ $mobileWidth: 320px;
             font-size: 14px;
         }
     }
-    .calendar_header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 40px;
-        color: #121242;
-    }
+.calendar_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem !important;
+    color: #121242;
+}
 
     .clinics{
         display: flex;
