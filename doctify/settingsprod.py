@@ -127,7 +127,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'doctify_database',
-        'USER': 'doctify_user',
+        'USER': 'docty_user',
         'PASSWORD': 'rabomonounO123.a',
         'HOST': 'localhost',
         'PORT': '',
