@@ -21,7 +21,7 @@ $bg_color:rgba(226, 231, 255, 0.13);
         margin-top: 30px;
         gap: 60px;
         position: relative;
-        height: 50dvh;
+        min-height: 50dvh;
         justify-content: center;
 
         .searchbar_container{
