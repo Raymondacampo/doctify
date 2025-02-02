@@ -126,11 +126,11 @@ WSGI_APPLICATION = 'doctify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'doctify_database',
-        'USER': 'docty_user',
-        'PASSWORD': 'rabomonounO123.a',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': os.environ.get('DB_NAME', 'doctify_database'),
+        'USER': os.environ.get('DB_USER', 'docty_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'rabomonounO123.a'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', ''),
     }
 }
 
