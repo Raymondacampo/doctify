@@ -89,13 +89,11 @@ const GetDoc = ({reload}) => {
                     </div>
                 </>
                 :
-                <div className="no_results">
-                    <div>
-                        <img src="static/images/dclogo.png"></img>
-                        <h1>No results</h1>
-                        <p>Try searching something else</p>
-                    </div>
-                </div>
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '5rem'}}>
+                        <img src="static/images/dclogo.png" height={'100px'}></img>
+                        <h1>No resulsts</h1>
+                        <p>Try searching somethingd else</p>
+                    </div>  
                 } 
             </div> 
         )       
