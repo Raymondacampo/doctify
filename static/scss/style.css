@@ -1,6 +1,7 @@
 * {
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  all: unset !important; }
 
 a {
   text-decoration: none;

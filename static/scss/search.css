@@ -243,8 +243,6 @@
     max-width: 750px;
     min-height: 750px !important;
     margin: 0px auto !important; }
-    .doctor_render .no_results {
-      min-height: 750px; }
   .filters {
     position: fixed;
     left: 0px;

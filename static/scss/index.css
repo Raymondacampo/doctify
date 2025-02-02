@@ -1,3 +1,6 @@
+* {
+  all: unset !important; }
+
 .web_container {
   letter-spacing: 0.6px; }
   .web_container h1, .web_container h2, .web_container h3, .web_container h4, .web_container h5, .web_container h6 {
@@ -11,7 +14,7 @@
     margin-top: 30px;
     gap: 60px;
     position: relative;
-    height: 50dvh;
+    min-height: 50dvh;
     justify-content: center; }
     .web_container .sec_1 .searchbar_container {
       display: flex;
@@ -39,10 +42,10 @@
       background-color: #05052e;
       bottom: -170px; }
   .web_container .sec_2 {
-    padding-top: 5dvh;
+    padding-top: 4rem;
     background-color: #05052e;
     color: white;
-    padding-bottom: 8dvh; }
+    padding-bottom: 8rem; }
     .web_container .sec_2 h2 {
       margin-bottom: 25px;
       font-weight: 100;
