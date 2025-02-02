@@ -1,4 +1,8 @@
 $bg_color:rgba(226, 231, 255, 0.13);
+* {
+    all: unset !important;
+}
+
 .web_container{
     letter-spacing: 0.6px;
     h1, h2, h3, h4, h5, h6{
