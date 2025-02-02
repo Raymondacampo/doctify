@@ -30,11 +30,7 @@ SECRET_KEY = 'django-insecure-zfa!q1wf$&)g-vot1mki6@60(x0b=5w1mh$d4zi&z&&bw^u!*z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "doctify-18mi.onrender.com",  # Add your Render domain here
-]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
 
 
 # Application definition
