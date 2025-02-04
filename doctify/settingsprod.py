@@ -5,6 +5,11 @@ import environ
 
 load_dotenv()
 
+# Initialize environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
 
 
 # We need these lines below to allow the Google sign in popup to work.
@@ -17,6 +22,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Read the .env file
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
@@ -30,10 +37,13 @@ if not GOOGLE_OAUTH_CLIENT_ID or not GOOGLE_OAUTH_CLIENT_SECRET:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+# Allowed Hosts
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["yourdomain.com", "your-server-ip"])
 
+# Secret Key
+SECRET_KEY = env("SECRET_KEY")
 
 # Application definition
 
@@ -51,6 +61,7 @@ INSTALLED_APPS = [
     
     'django.contrib.auth',
     'django.contrib.messages',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -94,20 +105,23 @@ REST_FRAMEWORK = {
     )
 }
 
+# Google OAuth2 Settings
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'EMAIL_AUTHENTICATION': True,
-        'SCOPE': [
-            'profile',
-            'email',
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
         ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
+        "AUTH_PARAMS": {
+            "access_type": "online",
         },
-        'OAUTH_PKCE_ENABLED': True,
-        'FETCH_USERINFO': True
+        "OAUTH_PKCE_ENABLED": True,  # Ensures secure authentication
     }
 }
+
+# Use django-environ to store Google OAuth credentials
+SOCIAL_AUTH_GOOGLE_CLIENT_ID = env("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
+SOCIAL_AUTH_GOOGLE_SECRET = env("SOCIAL_AUTH_GOOGLE_SECRET")
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -117,20 +131,23 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+SITE_ID = 1
+
 WSGI_APPLICATION = 'doctify.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# Database Configuration
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'doctify_database'),
-        'USER': os.environ.get('DB_USER', 'docty_user'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'rabomonounO123.a'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', ''),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT", default="5432"),
     }
 }
 
@@ -180,9 +197,12 @@ STATICFILES_FINDERS = [
     'sass_processor.finders.CssFinder'
 ]
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 SASS_PROCESSOR_ROOT = STATIC_ROOT
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -199,11 +219,12 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = env("EMAIL_HOST", default="smtp.sendgrid.net")
+EMAIL_PORT = env("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'raymondacamposandoval@gmail.com'
-EMAIL_HOST_PASSWORD = 'crcu hjmv ntee ayez'
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 SOCIALACCOUNT_ADAPTER = 'populate_user'
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'

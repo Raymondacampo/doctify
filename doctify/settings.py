@@ -6,7 +6,7 @@ from pathlib import Path
 load_dotenv()
 
 
-GOOGLE_OAUTH_CLIENT_ID = os.environ.get('GOOGLE_OAUTH_CLIENT_ID')
+GOOGLE_OAUTH_CLIENT_ID = '952852806330-1mkoirrs7lhp2qoudgl43l72dltp8u43.apps.googleusercontent.com'
 if not GOOGLE_OAUTH_CLIENT_ID:
     raise ValueError(
         'GOOGLE_OAUTH_CLIENT_ID is missing.' 
