@@ -1,7 +1,46 @@
+# 🚀 Python
 *.pyc
-*/*.pyc
-*/*/*.pyc
+*.pyo
+__pycache__/
+*.swp
+*.swo
 
+# 🚀 Virtual Environment
+venv/
 .env
+*.venv
 
+# 🚀 Django Secrets & Environment Variables
+.env
+*.env
+
+# 🚀 Database (If using SQLite)
 db.sqlite3
+db.sqlite3-journal
+
+# 🚀 Logs
+logs/
+*.log
+
+# 🚀 Static & Media Files
+staticfiles/
+media/
+
+# 🚀 Compiled C files
+*.so
+
+# 🚀 Editor & IDE Files
+.vscode/
+.idea/
+*.iml
+
+# 🚀 OS-Specific Files
+.DS_Store
+Thumbs.db
+
+# 🚀 Node.js & Frontend (if using React/Vue)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
