@@ -11,7 +11,7 @@ env = environ.Env()
 
 
 # We need these lines below to allow the Google sign in popup to work.
-SECURE_REFERRER_POLICY = 'no-referrer-when-downgrade'
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "unsafe-none"
 
 
@@ -38,7 +38,7 @@ if not GOOGLE_OAUTH_CLIENT_ID or not GOOGLE_OAUTH_CLIENT_SECRET:
 DEBUG = env.bool("DEBUG", default=False)
 
 # Allowed Hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+ALLOWED_HOSTS = ["juanpabloduarte.com", "104.236.58.17"]
 
 # Secret Key
 SECRET_KEY = env("SECRET_KEY")
@@ -241,8 +241,9 @@ ACCOUNT_FORMS={
     'signup':'web.forms.CustomUser'
 }
 
-SECURE_REFERRER_POLICY= "strict-origin-when-cross-origin"
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'DENY'
 
 XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
+
+
+SECURE_SSL_REDIRECT = False
