@@ -6,9 +6,7 @@ import environ
 load_dotenv()
 
 # Initialize environ
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+env = environ.Env()
 
 
 
@@ -26,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
+SECRET_KEY = env("SECRET_KEY")
 
 GOOGLE_OAUTH_CLIENT_ID = os.environ.get("GOOGLE_OAUTH_CLIENT_ID", default=None)
 GOOGLE_OAUTH_CLIENT_SECRET = os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET", default=None)
@@ -37,10 +35,10 @@ if not GOOGLE_OAUTH_CLIENT_ID or not GOOGLE_OAUTH_CLIENT_SECRET:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 
 # Allowed Hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["yourdomain.com", "your-server-ip"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # Secret Key
 SECRET_KEY = env("SECRET_KEY")
@@ -107,21 +105,15 @@ REST_FRAMEWORK = {
 
 # Google OAuth2 Settings
 SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "online",
+    'google': {
+        'APP': {
+            'client_id': env("GOOGLE_OAUTH_CLIENT_ID"),
+            'secret': env("GOOGLE_OAUTH_CLIENT_SECRET"),
         },
-        "OAUTH_PKCE_ENABLED": True,  # Ensures secure authentication
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
     }
 }
-
-# Use django-environ to store Google OAuth credentials
-SOCIAL_AUTH_GOOGLE_CLIENT_ID = env("SOCIAL_AUTH_GOOGLE_CLIENT_ID")
-SOCIAL_AUTH_GOOGLE_SECRET = env("SOCIAL_AUTH_GOOGLE_SECRET")
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -141,13 +133,13 @@ WSGI_APPLICATION = 'doctify.wsgi.application'
 
 # Database Configuration
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST", default="localhost"),
-        "PORT": env("DB_PORT", default="5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
     }
 }
 
@@ -199,10 +191,14 @@ STATICFILES_FINDERS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 SASS_PROCESSOR_ROOT = STATIC_ROOT
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
+MEDIA_URL = env("MEDIA_URL", default="/media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -219,9 +215,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env("EMAIL_HOST", default="smtp.sendgrid.net")
-EMAIL_PORT = env("EMAIL_PORT", default=587)
-EMAIL_USE_TLS = True
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
@@ -238,8 +234,8 @@ SOCIALACCOUNT_STORE_TOKENS = True
 
 ACCOUNT_AUTHENTICATION_METHOD ='username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USERNAME_REQUIRED = 'optional'
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = 'True'
 ACCOUNT_FORMS={
     'signup':'web.forms.CustomUser'
